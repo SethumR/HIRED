@@ -1,111 +1,146 @@
-import { FaFacebook, FaInstagram, FaGlobe, FaMapPin, FaPhone, FaEnvelope, FaArrowUp } from 'react-icons/fa'
-import { Link } from "react-router-dom";  
+"use client"
 
-export default function HomePage() {
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' })
+import { useState } from "react"
+import { Instagram, Linkedin, MapPin, Phone, Mail } from "lucide-react"
+import { Link as ScrollLink } from 'react-scroll';
+
+export default function Footer() {
+  const [email, setEmail] = useState("")
+
+  const handleSubscribe = (e) => {
+    e.preventDefault()
+    // Add your subscription logic here
+    console.log("Subscribing email:", email)
+    setEmail("")
+    // You could add a success message or API call here
   }
 
   return (
-    <footer className="bg-[#0b0f1c] text-gray-300 py-12 px-6 relative ">
-      <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-24"> 
-          {/* Left Column */}
-          <div className="space-y-6">
-            <h2 className="text-white text-2xl font-semibold">HIRED</h2>
-            <p className="text-gray-400 leading-relaxed ">
-              At HIRED, we are committed to revolutionizing job preparation by providing comprehensive interview simulations and feedback. 
-              Our innovative AI-driven platform helps individuals refine their skills, boost confidence, and enhance their interview performance.
-              By combining personal ized real-time analysis of responses, body language, and appearance, HIRED empowers users to excel in interviews. 
-              Join us in our mission to help people achieve their career goals and succeed in a world where professionalism and preparedness lead to success.
-            </p>
-            <div className="flex gap-4">
-              <Link href="#" className="p-2 rounded-full border border-gray-700 hover:border-gray-500 transition-colors">
-                <FaFacebook className="w-5 h-5" />
-              </Link>
-              <Link href="#" className="p-2 rounded-full border border-gray-700 hover:border-gray-500 transition-colors">
-                <FaInstagram className="w-5 h-5" />
-              </Link>
-              <Link href="#" className="p-2 rounded-full border border-gray-700 hover:border-gray-500 transition-colors">
-                <FaGlobe className="w-5 h-5" />
-              </Link>
-            </div>
-          </div>
-
-          {/* Right Column */}
-          <div className="space-y-6 ml-4 md:ml-80"> 
-            <h2 className="text-white text-2xl font-semibold">Contact Info</h2>
-            <div className="space-y-4">
-              <div className="flex items-center gap-4">
-                <div className="p-2 rounded-full border border-gray-700">
-                  <FaMapPin className="w-5 h-5" />
-                </div>
-                <div>
-                  <p className="text-gray-400">Address:</p>
-                  <p>Colombo, Sri Lanka</p>
-                </div>
-              </div>
-              <div className="flex items-center gap-4">
-                <div className="p-2 rounded-full border border-gray-700">
-                  <FaPhone className="w-5 h-5" />
-                </div>
-                <div>
-                  <p className="text-gray-400">Mobile:</p>
-                  <p>+94 756413574</p>
-                </div>
-              </div>
-              <div className="flex items-center gap-4">
-                <div className="p-2 rounded-full border border-gray-700">
-                  <FaEnvelope className="w-5 h-5" />
-                </div>
-                <div>
-                  <p className="text-gray-400">Email:</p>
-                  <p>contact.Hired@gurus.club</p>
-                </div>
-              </div>
-              <div className="flex items-center gap-4">
-                <div className="p-2 rounded-full border border-gray-700">
-                  <FaGlobe className="w-5 h-5" />
-                </div>
-                <div>
-                  <p className="text-gray-400">Website:</p>
-                  <p>Hired.solutions</p>
-                </div>
-              </div>
-            </div>
+    <footer className="bg-[#0b0f1c] text-gray-300 py-12 px-6 md:px-12">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-20">
+        {/* Company Info */}
+        <div>
+          <h2 className="text-white text-xl font-bold mb-4">Hired</h2>
+          <p className="mb-6">"Your AI-powered mock interview companion. Prepare with real-time feedback, AI-driven insights, and personalized coaching to ace your next interview with confidence."</p>
+          <div className="flex space-x-4">
+            <a
+              href="https://www.instagram.com/hired.solutions/"
+              className="hover:text-white transition-colors p-2 rounded-full bg-slate-800"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <Instagram size={20} />
+            </a>
+            <a
+              href="https://www.linkedin.com/company/hired.solutions/posts/?feedView=all"
+              className="hover:text-white transition-colors p-2 rounded-full bg-slate-800"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <Linkedin size={20} />
+            </a>
           </div>
         </div>
 
-        {/* Copyright */}
-        <div className="mt-12 pt-8 border-t border-gray-800 text-center">
-          <p className="text-gray-400">Copyright © 2024 HIRED</p>
+        {/* Quick Links */}
+        <div>
+          <h3 className="text-white text-lg font-medium mb-4 ml-0 sm:ml-8">Quick Links</h3>
+          <ul className="space-y-3 ml-0 sm:ml-8">
+            <li>
+              <a href="#" className="hover:text-white transition-colors">
+                Home
+              </a>
+            </li>
+            <li>
+              <a href="#" className="hover:text-white transition-colors">
+                Features
+              </a>
+            </li>
+            <li>
+              <a href="#" className="hover:text-white transition-colors">
+                About Us
+              </a>
+            </li>
+            <li>
+              <a href="#" className="hover:text-white transition-colors">
+                Pricing
+              </a>
+            </li>
+            <li>
+              <a href="#" className="hover:text-white transition-colors">
+                Contact Us
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        {/* Contact */}
+        <div>
+          <h3 className="text-white text-lg font-medium mb-4">Contact</h3>
+          <ul className="space-y-3">
+            <li className="flex items-start">
+              <MapPin size={18} className="mr-2 mt-1 flex-shrink-0" />
+              <span>123, Hired Colombo, Srilanka</span>
+            </li>
+            <li className="flex items-center">
+              <Phone size={18} className="mr-2 flex-shrink-0" />
+              <span>+94 756413574</span>
+            </li>
+            <li className="flex items-center">
+              <Mail size={18} className="mr-2 flex-shrink-0" />
+              <span>hired.infous@gmail.com</span>
+            </li>
+          </ul>
+        </div>
+
+        {/* Updates */}
+        <div>
+          <h3 className="text-white text-lg font-medium mb-4">Updates</h3>
+          <p className="mb-4">Stay tuned for updates and special offers.</p>
+          <form onSubmit={handleSubscribe}>
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Enter your email"
+              className="w-full px-4 py-2 rounded-lg bg-[#1a2436] border border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 mb-3"
+              required
+            />
+            <button
+              type="submit"
+              className="w-full bg-white text-black font-medium py-2 px-4 rounded-lg transition-colors"
+            >
+              Subscribe
+            </button>
+          </form>
         </div>
       </div>
 
-      {/* <div class="fixed -bottom-6 -right-12 ">
-        <img 
-          src="Robot.gif" 
-          alt="example gif" 
-          class="w-50 h-40 "
-        />
-      </div> */}
+      <div className="fixed bottom-1 -right-2">
+  <ScrollLink
+    to="contact" // ID of the target section
+    smooth={true}
+    duration={500}
+    offset={-110}
+    className="cursor-pointer"
+  >
+    <img 
+      src="animated.gif" 
+      alt="example gif" 
+      className="w-30 h-[100px]" 
+    />
+  </ScrollLink>
+</div>
 
-      <div class="fixed bottom-1 -right-2 ">
-        <img 
-          src="animated.gif" 
-          alt="example gif" 
-          class="w-30 h-[100px] "
-        />
+     {/* Bottom Section */}
+      <div className="max-w-7xl mx-auto mt-16 pt-6 border-t border-gray-800  text-center mb-4">
+        <div className="flex flex-col md:flex-row justify-center items-center">
+          <p>© 2025 Hired. All rights reserved.</p>
+        </div>
       </div>
 
-      {/* Scroll to Top Button
-      <button
-        onClick={scrollToTop}
-        className="fixed bottom-6 right-6 p-3 bg-blue-950 text-white rounded-full hover:bg-blue-900 transition-colors"
-        aria-label="Scroll to top"
-      >
-        <FaArrowUp className="w-6 h-6" />
-      </button> */}
+
     </footer>
   )
 }
+
