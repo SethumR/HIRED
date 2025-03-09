@@ -839,7 +839,69 @@ export default function HomePage() {
       </div>
 
           
-      <ContactPage /> <br/><br/><br/><br/><br/><br/>
+      <ContactPage />
+
+      <div className="bg-[#0b0f1c] text-white text-center py-12 pt-32 pb-20">
+        {/* Headline Section */}
+        <h1 className="text-3xl md:text-4xl font-bold mb-4">
+          Take charge of your career
+        </h1>
+        <p className="text-gray-400 text-lg mb-6">
+          Get ready to become the best candidate for your dream job
+        </p>
+
+        {/* Call To Action Button */}
+        <button className="px-10 py-3 bg-gradient-to-r from-purple-600 to-pink-500 rounded-lg font-medium text-white mb-6 transition-transform transform hover:scale-105 active:scale-95 shadow-lg">
+          Try a Free Mock Interview Now
+        </button>
+        {/* Follow Our Journey */}
+        <h2 className="text-2xl font-semibold mt-6 mb-6">Follow Our Journey</h2>
+
+        {/* Social Icons */}
+        <div className="flex justify-center space-x-6">
+          {/* Facebook */}
+          <a
+            href="https://facebook.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="transition-transform transform hover:scale-110"
+          >
+            <img
+              src="https://cdn-icons-png.flaticon.com/512/124/124010.png"
+              alt="Facebook"
+              className="w-8 h-8"
+            />
+          </a>
+
+          {/* Instagram */}
+          <a
+            href="https://www.instagram.com/hired.solutions?igsh=MWpzY3gzbWtjanl0bQ=="
+            target="_blank"
+            rel="noopener noreferrer"
+            className="transition-transform transform hover:scale-110"
+          >
+            <img
+              src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png"
+              alt="Instagram"
+              className="w-8 h-8"
+            />
+          </a>
+
+          {/* LinkedIn */}
+          <a
+            href="https://www.linkedin.com/company/hired.solutions/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="transition-transform transform hover:scale-110"
+          >
+            <img
+              src="https://cdn-icons-png.flaticon.com/512/145/145807.png"
+              alt="LinkedIn"
+              className="w-8 h-8"
+            />
+          </a>
+        </div>
+      </div>
     </div>
   );
 }
