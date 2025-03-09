@@ -21,6 +21,7 @@ import JobRolesSetupPage from './Pages/Dashboard/Company/Jobrole';
 import ReportsPerformancePage from'./Pages/Dashboard/Company/ReportPerformance';
 import CandidatePerformancePage from'./Pages/Dashboard/Company/CandidatePerformance';
 import CompanyProfilePage from'./Pages/Dashboard/Company/EditProfile';
+import StartMock from './Pages/Dashboard/Candidate/Startmock';
 
 
 
@@ -48,6 +49,7 @@ const App = () => {
           <Route path="/reportperformancepage" element={<ReportsPerformancePage/>}/>
           <Route path="/candidateperformancepage" element={<CandidatePerformancePage/>}/>
           <Route path="/companyprofilepage" element={<CompanyProfilePage/>}/>
+          <Route path="/startmock" element={<StartMock/>}/>
           </Routes>
 
         <Footer />
