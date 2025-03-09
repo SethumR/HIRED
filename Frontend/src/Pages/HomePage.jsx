@@ -839,7 +839,22 @@ export default function HomePage() {
       </div>
 
           
-      <ContactPage /> <br/><br/><br/><br/><br/><br/>
+      <ContactPage />
+
+      <div className="bg-[#0b0f1c] text-white text-center py-12 pt-32">
+        {/* Headline Section */}
+        <h1 className="text-3xl md:text-4xl font-bold mb-4">
+          Take charge of your career
+        </h1>
+        <p className="text-gray-400 text-lg mb-6">
+          Get ready to become the best candidate for your dream job
+        </p>
+
+        {/* Call To Action Button */}
+        <button className="px-10 py-3 bg-gradient-to-r from-purple-600 to-pink-500 rounded-lg font-medium text-white mb-12 transition-transform transform hover:scale-105 active:scale-95 shadow-lg">
+          Try a Free Mock Interview Now
+        </button>
+      </div>
     </div>
   );
 }
