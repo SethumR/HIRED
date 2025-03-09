@@ -13,6 +13,7 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import { motion } from "framer-motion";
 import { TypeAnimation } from "react-type-animation";
+import { UserPlus, Calendar, MessageSquare, Award } from "lucide-react"
 
 // Animated Stat Component
 function AnimatedStat({ endValue, label, suffix = "+" }) {
@@ -161,7 +162,7 @@ export default function HomePage() {
     },
     {
       question:
-        "Can I practice for any interview round with Mock Interviewer AI?",
+        "Can I practice for any interview round with Hired?",
       answer:
         "Yes, you can practice for different types of interview rounds including technical, behavioral, and leadership interviews.",
     },
@@ -210,10 +211,12 @@ export default function HomePage() {
 
   const features =
     activeTab === "candidates" ? candidateFeatures : companyFeatures;
+    
 
   return (
     <div className="min-h-screen bg-[#0b0f1c] text-white">
       {/* Hero Section */}
+      <section id="home">
       <div className="container mx-auto px-6 pt-48 lg:pt-56 lg:pb-48 ">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Text Section */}
@@ -245,7 +248,7 @@ export default function HomePage() {
                 ensuring you're ready to land your dream job.
               </p>
             </div>
-            <div data-aos="fade-right">
+            <div data-aos="fade">
               <button className="bg-gradient-to-r from-purple-600 to-pink-500 hover:from-pink-500 hover:to-purple-600 text-white px-5 py-3 text-lg font-semibold rounded-xl transition duration-300 ease-in-out transform hover:scale-105 shadow-lg">
                 Try a Free Mock Interview
               </button>
@@ -351,7 +354,9 @@ export default function HomePage() {
           </div>
         </div>
       </div>
+    </section>
 
+    <section id="features">       
       <div
         className="flex flex-row justify-center -space-x-1 sm:space-x-4 mb-16 text-center"
         data-aos="fade"
@@ -389,7 +394,7 @@ export default function HomePage() {
             >
               <div className="flex flex-col items-center text-center h-full">
                 <motion.div
-                  className="w-12 h-12 mb-6 text-white flex items-center justify-center"
+                  className="w-12 h-12 mb-3 text-white flex items-center justify-center"
                   animate={{
                     x: [0, 10, 0],
                     transition: {
@@ -400,7 +405,7 @@ export default function HomePage() {
                     },
                   }}
                 >
-                  <feature.icon className="w-8 h-8" />
+                  <feature.icon className="w-7 h-7" />
                 </motion.div>
                 <h2 className="text-lg sm:text-xl md:text-2xl font-bold mb-3 sm:mb-4">
                   {feature.title}
@@ -413,8 +418,9 @@ export default function HomePage() {
           ))}
         </div>
       </div>
+    </section>     
 
-      {/* Animated Stats Section */}
+      {/* Animated Stats Section
       <div className="container mx-auto px-4 py-16 mb-28">
         <div className="shadow-lg rounded-lg p-10 bg-[#0d1221] shadow-cyan-500/10 border border-gray-900">
           <div className="flex flex-col space-y-8">
@@ -438,25 +444,26 @@ export default function HomePage() {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
 
-      <div data-aos="fade">
-        <h1 className="text-center text-3xl md:text-[40px] font-semibold mb-8 md:mb-12">
+      <div data-aos="fade" className="px-4 sm:px-6 lg:px-8">
+        <h1 className="text-center text-2xl sm:text-3xl md:text-[40px] font-semibold mb-6 sm:mb-8 md:mb-12">
           Try an Interactive Demo
         </h1>
-        <div className="w-full md:w-4/5 lg:w-3/4 mx-auto border border-gray-700  p-6 md:p-12 lg:p-20 rounded-lg mb-20 md:mb-40 h-96 md:h-[500px] lg:h-[560px]  shadow-slate-700 shadow-sm">
+        <div className="w-full max-w-5xl mx-auto border border-gray-700 p-4 sm:p-6 md:p-12 lg:p-20 rounded-lg mb-12 sm:mb-20 md:mb-40 h-auto sm:h-96 md:h-[500px] lg:h-[560px] shadow-slate-700 shadow-sm">
           <img
             src=""
             alt="Demo Screenshot"
-            className="w-full h-full object-cover rounded-lg "
+            className="w-full h-full object-cover rounded-lg"
           />
         </div>
       </div>
 
+
       {/* Interview */}
       <div className="min-h-screen  text-white p-8 ">
         <div data-aos="fade">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-semibold text-center mb-20 sm:mb-32">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-4xl font-semibold text-center mb-20 sm:mb-28">
             Ace Your Interviews with Confidence
           </h1>
         </div>
@@ -464,18 +471,15 @@ export default function HomePage() {
         <div data-aos="fade">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-7xl mx-auto mb-28 sm:mb-40">
             {/* Description Section */}
-            <div className="space-y-6">
-              <h2 className="text-2xl sm:text-3xl font-semibold">
+            <div className="space-y-10">
+              <h2 className="text-xl sm:text-2xl font-semibold">
                 {" "}
                 AI-Powered Mock Interviews for Any Job Role
               </h2>
-              <p className="text-gray-400 leading-relaxed ">
-                Prepare for any job role in any industry with real-time,
-                audio-based mock interviews that simulate an actual online
-                interview experience. Simply enter your job title and
-                description, select your interview type (Behavioral, Technical,
-                Leadership, or HR), and let AI generate tailored interview
-                questions to match your role. Gain confidence by practicing
+              <p className="text-gray-400 leading-relaxed text-base sm:text-lg md:text-[17px]">
+                Prepare for any job role in any industry with real-time, audio-based mock interviews that simulate an actual online
+                interview experience. Simply enter your job title and description, select your interview type (Behavioral, Technical,
+                Leadership, or HR), and let AI generate tailored interview questions to match your role. Gain confidence by practicing
                 authentic, role-specific interviews anytime, anywhere.
               </p>
             </div>
@@ -483,9 +487,9 @@ export default function HomePage() {
             {/* Interview List Image */}
             <div className="relative">
               <img
-                src="public/mockInterview.png"
+                src="https://www.mockinterviewer.ai/_next/image?url=%2Ffeature-screens%2Ffeature-custom-interviews.png&w=828&q=75"
                 alt="Interview list showing different job positions and their schedules"
-                className="rounded-xl w-full h-64 sm:h-80 lg:h-96 object-cover border border-purple-700 shadow-purple-900 shadow-lg"
+                className="rounded-xl w-full h-60 sm:h-80 lg:h-88 object-cover shadow-[0_0_15px_rgba(128,0,128,0.8)]"
               />
             </div>
           </div>
@@ -495,19 +499,38 @@ export default function HomePage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-7xl mx-auto mb-28 sm:mb-40">
             {/* Interview List Image */}
             <div className="relative">
-              <img
-                src="public/AI-Generated Feedback.png"
-                alt="Interview list showing different job positions and their schedules"
-                className="rounded-xl w-full h-64 sm:h-80 lg:h-96 object-cover border border-purple-700 shadow-purple-900 shadow-lg"
-              />
-            </div>
+            <img
+              src="https://www.mockinterviewer.ai/_next/image?url=%2Ffeature-screens%2Ffeature-overall-feedback.png&w=828&q=75"
+              alt="Interview list showing different job positions and their schedules"
+              className="rounded-xl w-full h-64 sm:h-80 lg:h-[400px] object-cover border border-opacity-60 border-white shadow-[0_0_13px_rgba(255,255,255,0.5)]"
+            />
+          </div>
+
 
             {/* Description Section */}
-            <div className="space-y-6">
-              <h2 className="text-2xl sm:text-3xl font-semibold">
+            <div className="space-y-10">
+              <h2 className="text-xl sm:text-2xl font-semibold">
+              Overall Performance Report with Score
+              </h2>
+              <p className="text-gray-400 leading-relaxed text-base sm:text-lg md:text-[17px]">
+              Transform your interview performance with unparalleled insights. Our GPT-4 based AI goes beyond simple evaluations. 
+              Receive a holistic performance score, detailed feedback on your strengths and areas for growth,
+              and specific insights on each answer you provide. Elevate your interview skills with personalized 
+              suggestions for crafting impactful responses. Prepare smarter, interview better.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div data-aos="fade">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-7xl mx-auto mb-28 sm:mb-40">
+            {/* Description Section */}
+            <div className="space-y-10">
+              <h2 className="text-xl sm:text-2xl font-semibold">
+                {" "}
                 AI-Generated Feedback & Learning Resources
               </h2>
-              <p className="text-gray-400 leading-relaxed">
+              <p className="text-gray-400 leading-relaxed text-base sm:text-lg md:text-[17px]">
                 After each interview, receive detailed AI-powered feedback on
                 your responses, including insights into communication, technical
                 accuracy, and confidence levels. Get personalized improvement
@@ -517,12 +540,21 @@ export default function HomePage() {
                 opportunity.
               </p>
             </div>
+
+            {/* Interview List Image */}
+            <div className="relative">
+              <img
+                src="https://www.mockinterviewer.ai/_next/image?url=%2Ffeature-screens%2Ffeature-answer-feedback.png&w=828&q=75"
+                alt="Interview list showing different job positions and their schedules"
+                className="rounded-xl w-full h-64 sm:h-80 lg:h-96 object-cover shadow-[0_0_15px_rgba(128,0,128,0.8)]"
+              />
+            </div>
           </div>
         </div>
 
         {/* Interview */}
           <div data-aos="fade">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-semibold text-center mb-2 sm:mb-40">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-4xl font-semibold text-center mb-12 sm:mb-28">
               Smarter, Faster, AI-Driven Hiring
             </h1>
           </div>
@@ -531,11 +563,11 @@ export default function HomePage() {
         <div data-aos="fade">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-7xl mx-auto mb-2 sm:mb-20 mt-2">
             {/* Description Section */}
-            <div className="space-y-6">
-              <h2 className="text-2xl sm:text-3xl font-semibold">
-              Master Your Hiring Process with AI
+            <div className="space-y-10">
+              <h2 className="text-xl sm:text-[26px] font-semibold">
+               Master Your Hiring Process with AI
               </h2>
-              <p className="text-gray-400 leading-relaxed">
+              <p className="text-gray-400 leading-relaxed text-base sm:text-lg md:text-[17px]">
                 Automate role-specific, audio-based interviews for any job
                 position across industries. Simply input the job title and
                 description, select the interview type (Behavioral, Technical,
@@ -549,9 +581,9 @@ export default function HomePage() {
             {/* Interview List Image */}
             <div className="relative">
               <img
-                src="mockInterview.png"
+                src="https://www.mockinterviewer.ai/_next/image?url=%2Ffeature-screens%2Ffeature-answer-audio.png&w=828&q=75"
                 alt="Interview list showing different job positions and their schedules"
-                className="rounded-xl w-full h-64 sm:h-80 lg:h-96 object-cover border border-purple-700 shadow-purple-900 shadow-lg mb-24"
+                className="rounded-xl w-full h-64 sm:h-80 lg:h-96 object-cover shadow-[0_0_15px_rgba(128,0,128,0.8)] mb-20"
               />
             </div>
           </div>
@@ -561,19 +593,19 @@ export default function HomePage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-7xl mx-auto mb-28 sm:mb-40">
             {/* Interview List Image */}
             <div className="relative">
-              <img
-                src="public/AI-Generated Feedback.png"
-                alt="Interview list showing different job positions and their schedules"
-                className="rounded-xl w-full h-64 sm:h-80 lg:h-96 object-cover border  border-gray-300 shadow-slate-500 shadow-md"
-              />
-            </div>
+            <img
+              src="https://www.mockinterviewer.ai/_next/image?url=%2Ffeature-screens%2Ffeature-skills-feedback.png&w=828&q=75"
+              alt="Interview list showing different job positions and their schedules"
+              className="rounded-xl w-full h-64 sm:h-80 lg:h-88 object-cover border border-opacity-60 border-white shadow-[0_0_13px_rgba(255,255,255,0.5)]"
+            />
+          </div>
 
             {/* Description Section */}
-            <div className="space-y-6">
-              <h2 className="text-2xl sm:text-3xl font-semibold">
+            <div className="space-y-10">
+              <h2 className="text-xl sm:text-2xl font-semibold">
                 AI-Powered Candidate Insights & Smart Shortlisting
               </h2>
-              <p className="text-gray-400 leading-relaxed">
+              <p className="text-gray-400 leading-relaxed text-base sm:text-lg md:text-[17px]">
                 Receive detailed AI-generated performance reports with insights
                 into technical skills, communication, and overall suitability.
                 Get automated scoring for each question, identify top candidates
@@ -586,7 +618,7 @@ export default function HomePage() {
       </div>
 
       <div data-aos="fade">
-        <h1 className="text-center text-3xl sm:text-4xl md:text-4xl font-semibold mb-8 sm:mb-10 md:mb-12">
+        <h1 className="text-center text-2xl sm:text-4xl md:text-4xl font-semibold mb-8 sm:mb-10 md:mb-12">
           Unleash Your Career Potential
         </h1>
         <p className="space-y-6 text-gray-400 leading-relaxed tracking-wide text-base sm:text-lg md:text-xl text-center mb-6 sm:mb-8 md:mb-10 max-w-3xl sm:max-w-4xl md:max-w-5xl mx-auto">
@@ -688,7 +720,7 @@ export default function HomePage() {
       </div>
 
       <div data-aos="fade">
-        <div className="max-w-3xl mx-auto p-4 space-y-4 mb-28">
+        <div className="max-w-3xl mx-auto p-4 space-y-4 mb-24">
           {faqData.map((item, index) => (
             <div
               key={index}
@@ -714,53 +746,100 @@ export default function HomePage() {
       </div>
 
       <div data-aos="fade">
-        <section className="max-w-7xl mx-auto px-4 py-16 sm:px-6 lg:px-8 mb-40">
-          <h1 className="text-3xl md:text-[42px] font-bold text-center mb-16">
-            Master the Interview Process
-          </h1>
+        <div className="w-full bg-[#0b0f1c] text-white py-16 px-4 overflow-hidden mb-24">
+          <div className="max-w-7xl mx-auto">
+            {/* Header */}
+            <div className="text-center text-sm mb-20">
+              <button className="bg-[#1c2438] hover:bg-[#2a3349] transition-colors duration-300 text-white font-medium py-2 px-8 rounded-lg mb-8 shadow-lg">
+                GETTING STARTED
+              </button>
+              <h2 className="text-3xl md:text-[38px] font-bold mb-6 tracking-tight">
+                Master the Interview{" "}
+                <span className="relative">
+                  Process
+                  <div className="h-1 w-24 md:w-36 bg-[#233257] absolute left-1/2 -translate-x-1/2 mt-1"></div>
+                </span>
+              </h2>
+              <p className="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto">
+                Get started with our platform in four simple steps and transform your interview preparation experience
+                forever.
+              </p>
+            </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <StepCard
-              step={1}
-              imageSrc="https://cdn.prod.website-files.com/62775a91cc3db44c787149de/67195c0b266b3b9cab514958_interview-step-2.webp"
-              title="Set Up Your Interview"
-              description="Select from different interview formats and let our AI interview coach customize the questions for your target role."
-            />
-            <StepCard
-              step={2}
-              imageSrc="https://cdn.prod.website-files.com/62775a91cc3db44c787149de/67195c0b266b3b9cab514958_interview-step-2.webp"
-              title="Practice Naturally"
-              description="Have realistic conversations with our AI interviewer in a pressure-free environment at your own pace."
-            />
-            <StepCard
-              step={3}
-              imageSrc="https://cdn.prod.website-files.com/62775a91cc3db44c787149de/67195c0b266b3b9cab514958_interview-step-2.webp"
-              title="Get Instant Feedback"
-              description="Receive detailed performance insights and actionable recommendations after each practice session."
-            />
-            <StepCard
-              step={4}
-              imageSrc="https://cdn.prod.website-files.com/62775a91cc3db44c787149de/67195c0b266b3b9cab514958_interview-step-2.webp"
-              title="Build Confidence"
-              description="Review your recorded sessions, track your improvement, and prepare effectively for real interviews."
-            />
+            {/* Steps with connecting line */}
+            <div className="relative">
+              {/* Single Connecting Line - Only visible on desktop */}
+              <div className="hidden lg:block absolute top-1/2 left-[10%] right-[10%] h-0.5 bg-gradient-to-r from-[#162040] via-[#4d7eff] to-[#162040] transform -translate-y-1/2 z-0"></div>
+
+              {/* Steps */}
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 relative z-10">
+                {/* Step 1 */}
+                <div className="bg-[#111827] border border-[#1f2b47] rounded-xl p-8 transition-all duration-300 hover:border-[#3b4f83] hover:-translate-y-2 hover:shadow-[0_10px_25px_-5px_rgba(77,126,255,0.3)] mx-auto w-[360px] min-h-[320px] sm:w-full flex flex-col">
+                  <div className="flex justify-center mb-6">
+                    <div className="bg-[#1e2b4d] rounded-full p-1 w-16 h-16 flex items-center justify-center shadow-[0_0_20px_rgba(30,43,77,0.5)] relative z-10 ">
+                      <UserPlus className="w-6 h-6 text-white" />
+                    </div>
+                  </div>
+                  <h3 className="text-center text-gray-400 mb-5 text-sm font-medium">Step 1</h3>
+                  <h4 className="text-center text-2xl font-bold mb-4">Create Account</h4>
+                  <p className="text-center text-gray-300 text-base flex-grow">
+                    Sign up with your email or social media accounts to get full access to all features.
+                  </p>
+                </div>
+
+
+                {/* Step 2 */}
+                <div className="bg-[#111827] border border-[#1f2b47] rounded-xl p-8 transition-all duration-300 hover:border-[#3b4f83] hover:-translate-y-2 hover:shadow-[0_10px_25px_-5px_rgba(77,126,255,0.3)] mx-auto w-[360px] min-h-[320px] sm:w-full flex flex-col">
+                  <div className="flex justify-center mb-6">
+                    <div className="bg-[#1e2b4d] rounded-full p-1 w-16 h-16  flex items-center justify-center shadow-[0_0_20px_rgba(30,43,77,0.5)] relative z-10">
+                      <Calendar className="w-6 h-6 text-white" />
+                    </div>
+                  </div>
+                  <h3 className="text-center text-gray-400 mb-5 text-sm font-medium">Step 2</h3>
+                  <h4 className="text-center text-2xl font-bold mb-4">Setup Your Interview</h4>
+                  <p className="text-center text-gray-300 text-base flex-grow">
+                    Choose your interview type, difficulty level, and schedule a time that works for you.
+                  </p>
+                </div>
+
+                {/* Step 3 */}
+                <div className="bg-[#111827] border border-[#1f2b47] rounded-xl p-8 transition-all duration-300 hover:border-[#3b4f83] hover:-translate-y-2 hover:shadow-[0_10px_25px_-5px_rgba(77,126,255,0.3)] mx-auto w-[360px] min-h-[320px] sm:w-full flex flex-col">
+                  <div className="flex justify-center mb-6">
+                    <div className="bg-[#1e2b4d] rounded-full p-1 w-16 h-16  flex items-center justify-center shadow-[0_0_20px_rgba(30,43,77,0.5)] relative z-10">
+                      <MessageSquare className="w-6 h-6 text-white" />
+                    </div>
+                  </div>
+                  <h3 className="text-center text-gray-400 mb-5 text-sm font-medium">Step 3</h3>
+                  <h4 className="text-center text-2xl font-bold mb-4">Get the Feedback</h4>
+                  <p className="text-center text-gray-300 text-base flex-grow">
+                    Receive detailed feedback on your performance with actionable insights for improvement.
+                  </p>
+                </div>
+
+                {/* Step 4 */}
+                <div className="bg-[#111827] border border-[#1f2b47] rounded-xl p-8 transition-all duration-300 hover:border-[#3b4f83] hover:-translate-y-2 hover:shadow-[0_10px_25px_-5px_rgba(77,126,255,0.3)] mx-auto w-[360px] min-h-[320px] sm:w-full flex flex-col">
+                  <div className="flex justify-center mb-6">
+                    <div className="bg-[#1e2b4d] rounded-full p-1 w-16 h-16  flex items-center justify-center shadow-[0_0_20px_rgba(30,43,77,0.5)] relative z-10">
+                      <Award className="w-6 h-6 text-white" />
+                    </div>
+                  </div>
+                  <h3 className="text-center text-gray-400 mb-5 text-sm font-medium">Step 4</h3>
+                  <h4 className="text-center text-2xl font-bold mb-4">Boost Your Confidence</h4>
+                  <p className="text-center text-gray-300 text-base flex-grow">
+                    Practice with our platform regularly to build confidence and ace your real interviews.
+                  </p>
+                </div>
+              </div>
+
+              {/* Mobile step connector (vertical line) */}
+              <div className="lg:hidden absolute left-1/2 top-20 bottom-20 w-0.5 bg-gradient-to-b from-[#162040] via-[#4d7eff] to-[#162040] transform -translate-x-1/2 z-0 md:hidden"></div>
+            </div>
           </div>
-        </section>
+        </div>
       </div>
 
-      {/* <div>
-        <h1 className='text-center text-5xl font-semibold mb-12'>Unleash Your Career Potential</h1>
-        <p className='text-gray-400 text-xl leading-relaxed text-center mb-16'>Maximizing your skills and talents to achieve professional success and personal growth. 
-          It’s about taking charge of your career, embracing new opportunities, and striving for 
-          continuous improvement to reach your fullest potential.</p>
-          <div className="flex justify-center">
-            <button className="mb-32 bg-gradient-to-r from-purple-600 to-pink-500 hover:from-pink-500 hover:to-purple-600 text-white px-6 py-4 text-lg font-semibold rounded-xl transition duration-300 ease-in-out transform hover:scale-105 shadow-lg">
-              Try a Free Mock Interview
-            </button>
-          </div>
-      </div> */}
-
-      <ContactPage />
+          
+      <ContactPage /> <br/><br/><br/><br/><br/><br/>
     </div>
   );
 }
