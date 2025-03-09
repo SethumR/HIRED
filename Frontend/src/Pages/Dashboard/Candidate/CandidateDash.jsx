@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Bell, ChevronRight, Settings } from "lucide-react";
 import { HiOutlineMicrophone } from "react-icons/hi"; 
 import { Star } from "lucide-react";
@@ -10,6 +10,14 @@ import { VscRobot } from "react-icons/vsc";
 
 const Dashboard = () => {
   const navigate = useNavigate();
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+    }
+  }, []);
 
   const performanceData = [
     { skill: "Technical", score: 85, icon: <FaChartBar className="w-6 h-6 text-purple-500" /> },
@@ -18,7 +26,7 @@ const Dashboard = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-[#0b0f1c] text-white mt-[92px]">
+    <div className="min-h-screen bg-[#0b0f1c] text-white py-[85px]">
       {/* Header */}
       <header className="flex items-center justify-between border-b border-gray-800 bg-[#0d1221] px-6 py-4 mb-5">
         <div className="flex items-center gap-3">
@@ -28,8 +36,8 @@ const Dashboard = () => {
             className="h-12 w-12 rounded-full"
           />
           <div>
-            <h2 className="font-semibold text-white">Sarah Wilson</h2>
-            <p className="text-sm text-gray-400">Software Engineer</p>
+            <h2 className="font-semibold text-white">{user ? user.name : "User Name"}</h2>
+            <p className="text-sm text-gray-400">{user ? user.email : "User Email"}</p>
           </div>
         </div>
         <div className="flex items-center gap-4">

@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
 import GitHubLogin from 'react-github-login'; 
 import { FaGithub } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 
 const ErrorMessage = ({ message }) => (
@@ -20,10 +21,13 @@ const EmailStep = ({ email, setEmail, error, handleNext }) => {
   const [isHoveringGoogle, setIsHoveringGoogle] = useState(false);
   const [isHoveringGithub, setIsHoveringGithub] = useState(false);
   const [googleResponse, setGoogleResponse] = useState(null); // Add missing state initialization
+  const [loading, setLoading] = useState(false); // Add loading state
+  const navigate = useNavigate();
 
   const handleGoogleSuccess = (response) => {
     console.log("Google Token:", response.credential);
     setGoogleResponse(response); // Correct the function call
+    setLoading(true); // Set loading to true
 
     fetch("http://localhost:8000/auth/google", {
       method: "POST",
@@ -39,13 +43,15 @@ const EmailStep = ({ email, setEmail, error, handleNext }) => {
       .then((data) => {
         if (data.message === "Login successful") {
           alert("Login successful! Welcome, " + data.user.name);
-        } else {
-          alert("Login failed. Please try again.");
+          localStorage.setItem("user", JSON.stringify({ name: data.user.name, email: data.user.email })); // Store user info in local storage
+          window.dispatchEvent(new Event("storage")); // Trigger storage event to update navbar
+          navigate("/dashboard"); // Redirect to dashboard
         }
       })
       .catch((err) => {
         console.error("Error:", err);
         alert("An error occurred during login.");
+        setLoading(false); // Set loading to false on error
       });
   };
 
@@ -85,6 +91,13 @@ const EmailStep = ({ email, setEmail, error, handleNext }) => {
         exit={{ opacity: 0, x: -50 }}
         transition={{ duration: 0.3 }}
       >
+        {/* Loading Animation */}
+        {loading && (
+          <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+            <div className="loader"></div>
+          </div>
+        )}
+
         <h1 className="text-[27px] font-bold text-center mb-8">
           Unlock Your Access
         </h1>
