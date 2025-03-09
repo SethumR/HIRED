@@ -27,7 +27,7 @@ app.add_middleware(
 # Connect to MongoDB (using Motor for async support)
 mongo_uri = os.getenv("MONGO_URI", "mongodb+srv://Hired:hired123@hired.pni4x.mongodb.net/?retryWrites=true&w=majority&appName=Hired")
 client = AsyncIOMotorClient(mongo_uri)
-db = client["mydatabase"]  # Specify the database name
+db = client["Company"]  # Specify the database name
 collection = db["users"]
 
 # Configure logging
