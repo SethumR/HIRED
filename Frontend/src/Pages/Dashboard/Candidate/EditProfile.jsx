@@ -87,18 +87,18 @@ export default function EditProfile() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Left Column - Profile Image and Basic Info */}
           <div className="space-y-6">
-            <div className="text-center">
-              <div className="relative inline-block">
-                <img
-                  src="https://via.placeholder.com/120"
-                  alt="Profile"
-                  className="rounded-full w-24 h-24 mx-auto border-2 border-purple-500"
-                />
-                <button className="absolute bottom-0 right-0 p-2 bg-gradient-to-r from-purple-600 to-pink-500 rounded-full">
+            <div className="flex justify-center items-center">
+              <div className="relative">
+                <div className="w-24 h-24 rounded-full border-2 border-purple-500 bg-[#0d1221] flex justify-center items-center overflow-hidden">
+                  <span className="text-white text-sm">Profile</span>
+                </div>
+                <button className="absolute bottom-0 right-0 p-2 bg-gradient-to-r from-purple-600 to-pink-500 rounded-full flex items-center justify-center">
                   <Camera className="w-4 h-4 text-white" />
                 </button>
               </div>
-              <button className="text-purple-500 text-sm mt-2 hover:text-pink-500 transition duration-300">
+            </div>
+            <div className="flex justify-center">
+              <button className="text-purple-500 text-sm hover:text-pink-500 transition duration-300">
                 Change Photo
               </button>
             </div>
