@@ -20,7 +20,7 @@ function Upgrade() {
         "Basic tips & tricks",
         "Interview progress tracking",
         "24/7 priority support",
-        "Resume formatting tips",
+        "Resume formatting ",
       ],
     },
     {
@@ -41,7 +41,7 @@ function Upgrade() {
         "Priority email support",
         "24/7 priority support",
         "Role-specific interview sets",
-        "AI-powered voice tone analysis",
+        "AI-powered voice  analysis",
       ],
     },
     {
