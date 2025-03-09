@@ -150,7 +150,6 @@ const Dashboard = () => {
               </div>
             </section>
 
-            /* Action Buttons */{'}'}
                   <button
                     onClick={() => navigate("/interview")}
                     className="w-full bg-gradient-to-r from-purple-600 to-pink-500 hover:from-pink-500 hover:to-purple-600 text-white py-3 px-4 rounded-xl transition duration-300 flex items-center justify-center gap-4 font-semibold"
