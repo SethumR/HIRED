@@ -5,6 +5,10 @@ const InterviewAI = () => {
   const [jobRole, setJobRole] = useState('');
   const [experienceLevel, setExperienceLevel] = useState('');
   const [questionDifficulty, setQuestionDifficulty] = useState('Medium');
+  const [formTouched, setFormTouched] = useState(false);
+
+  // Form validation
+  const isFormValid = industry && jobRole && experienceLevel;
 
   // Mock data
   const industries = [
@@ -17,6 +21,15 @@ const InterviewAI = () => {
   
   const difficultyLevels = ['Easy', 'Medium', 'Hard'];
 
+  // Handle form submission
+  const handleStartInterview = () => {
+    setFormTouched(true);
+    
+    if (isFormValid) {
+      window.location.href = '/mockinterview';
+    }
+  };
+
   return (
     <div className="flex flex-col items-center min-h-screen bg-[#0b0f1c] text-white py-8 px-4" style={{ marginTop: '92px' }}>
       <div className="w-full max-w-2xl mx-auto bg-[#0d1221] rounded-lg shadow-cyan-500/20 shadow-lg p-6 mb-8 border border-gray-800">
@@ -26,9 +39,11 @@ const InterviewAI = () => {
         <div className="space-y-6">
           {/* Industry Selection */}
           <div>
-            <label className="block text-white mb-2">Industry</label>
+            <label className="block text-white mb-2">
+              Industry <span className="text-red-500">*</span>
+            </label>
             <select 
-              className="w-full p-3 border border-gray-800 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 bg-[#0b0f1c] text-white"
+              className={`w-full p-3 border ${!industry && formTouched ? 'border-red-500' : 'border-gray-800'} rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 bg-[#0b0f1c] text-white`}
               value={industry}
               onChange={(e) => setIndustry(e.target.value)}
             >
@@ -37,23 +52,33 @@ const InterviewAI = () => {
                 <option key={ind} value={ind}>{ind}</option>
               ))}
             </select>
+            {!industry && formTouched && (
+              <p className="text-red-500 text-sm mt-1">Please select an industry</p>
+            )}
           </div>
           
           {/* Job Role */}
           <div>
-            <label className="block text-white mb-2">Job Role</label>
+            <label className="block text-white mb-2">
+              Job Role <span className="text-red-500">*</span>
+            </label>
             <input 
               type="text" 
               placeholder="e.g. Software Engineer, Data Scientist" 
-              className="w-full p-3 border border-gray-800 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 bg-[#0b0f1c] text-white"
+              className={`w-full p-3 border ${!jobRole && formTouched ? 'border-red-500' : 'border-gray-800'} rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 bg-[#0b0f1c] text-white`}
               value={jobRole}
               onChange={(e) => setJobRole(e.target.value)}
             />
+            {!jobRole && formTouched && (
+              <p className="text-red-500 text-sm mt-1">Please enter your job role</p>
+            )}
           </div>
           
           {/* Experience Level */}
           <div>
-            <label className="block text-white mb-2">Level of Experience</label>
+            <label className="block text-white mb-2">
+              Level of Experience <span className="text-red-500">*</span>
+            </label>
             <div className="grid grid-cols-3 gap-4">
               {['Entry Level', 'Mid Level', 'Senior Level'].map((level) => (
                 <button
@@ -61,6 +86,8 @@ const InterviewAI = () => {
                   className={`p-4 rounded-md flex flex-col items-center justify-center border ${
                     experienceLevel === level 
                       ? 'bg-gradient-to-r from-purple-600/30 to-pink-500/30 border-purple-500' 
+                      : !experienceLevel && formTouched
+                      ? 'border-red-500 hover:bg-[#0b0f1c]'
                       : 'border-gray-800 hover:bg-[#0b0f1c]'
                   }`}
                   onClick={() => setExperienceLevel(level)}
@@ -89,6 +116,9 @@ const InterviewAI = () => {
                 </button>
               ))}
             </div>
+            {!experienceLevel && formTouched && (
+              <p className="text-red-500 text-sm mt-1">Please select your experience level</p>
+            )}
           </div>
           
           {/* Question Difficulty */}
@@ -107,11 +137,20 @@ const InterviewAI = () => {
 
           {/* Start Button */}
           <button 
-            className="w-full py-3 px-4 bg-gradient-to-r from-purple-600 to-pink-500 hover:from-pink-500 hover:to-purple-600 text-white font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 transition-colors"
-            onClick={() => window.location.href = '/mockinterview'}
+            className={`w-full py-3 px-4 ${
+              isFormValid 
+                ? "bg-gradient-to-r from-purple-600 to-pink-500 hover:from-pink-500 hover:to-purple-600" 
+                : "bg-gray-600 cursor-not-allowed"
+            } text-white font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 transition-colors`}
+            onClick={handleStartInterview}
+            disabled={!isFormValid}
           >
-            Start Mock Interview
+            {isFormValid ? "Start Mock Interview" : "Please Complete All Fields"}
           </button>
+          
+          {formTouched && !isFormValid && (
+            <p className="text-red-500 text-center text-sm">Please fill in all required fields marked with *</p>
+          )}
         </div>
       </div>
       
