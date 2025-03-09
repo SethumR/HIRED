@@ -29,16 +29,15 @@ app.add_middleware(
 # Connect to MongoDB (using Motor for async support)
 mongo_uri = os.getenv("MONGO_URI", "mongodb+srv://Hired:hired123@hired.pni4x.mongodb.net/?retryWrites=true&w=majority&appName=Hired")
 client = AsyncIOMotorClient(mongo_uri)
-db = client["mydatabase"]
+db = client["Contact"]
 collection = db["users"]
 
-# Define Pydantic model for request validatio
+# Define Pydantic model for request validation
 class User(BaseModel):
-    firstName: str
-    lastName: str
     email: EmailStr  # Email validation
     message: str
 
+# API Route to get all users
 # API Route to create a new user
 @app.post("/register")
 async def register_user(user: User):
@@ -46,7 +45,7 @@ async def register_user(user: User):
     user_data = user.dict()  # Convert model to dictionary with all fields
     try:
         result = await collection.insert_one(user_data)
-        logger.info(f"User {user_data['firstName']} {user_data['lastName']} registered successfully with ID {result.inserted_id}.")
+        logger.info(f"User with email {user_data['email']} registered successfully with ID {result.inserted_id}.")
         return {"message": "User registered successfully", "user_id": str(result.inserted_id)}
     except Exception as e:
         logger.error(f"Error inserting user: {str(e)}")
