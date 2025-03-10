@@ -265,7 +265,7 @@ export default function DashboardPage() {
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-base font-medium">
                         <Link
-                          to={`/candidate-performance?id=${candidate.id}`}
+                          to="/reportperformancepage"
                           className="text-white hover:text-purple-300 transition-colors flex items-center gap-1"
                         >
                           View Report
