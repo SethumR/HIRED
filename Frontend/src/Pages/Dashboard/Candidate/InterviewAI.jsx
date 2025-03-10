@@ -18,9 +18,9 @@ const InterviewAI = () => {
   const difficultyLevels = ['Easy', 'Medium', 'Hard'];
 
   return (
-    <div className="flex flex-col items-center min-h-screen bg-[#0b0f1c] text-white py-8 px-4" style={{ marginTop: '92px' }}>
-      <div className="w-full max-w-2xl mx-auto bg-[#0d1221] rounded-lg shadow-cyan-500/20 shadow-lg p-6 mb-8 border border-gray-800">
-        <h1 className="text-3xl font-bold text-center mb-2 bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">Customize Your Mock Interview</h1>
+    <div className="flex flex-col items-center min-h-screen bg-[#0b0f1c] text-white py-8 px-4" style={{ marginTop: '50px', width: '100%', backgroundColor: '#0b0f1c' }}>
+      <div className="w-full max-w-2xl mx-auto bg-[#0d1221] rounded-lg p-6 mb-8 border border-gray-800">
+        <h1 className="text-3xl font-bold text-center mb-2 bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-white">Customize Your Mock Interview</h1>
         <p className="text-center text-gray-400 mb-8">Fill in the details below to generate a personalized interview experience</p>
         
         <div className="space-y-6">
@@ -61,7 +61,7 @@ const InterviewAI = () => {
                   className={`p-4 rounded-md flex flex-col items-center justify-center border ${
                     experienceLevel === level 
                       ? 'bg-gradient-to-r from-purple-600/30 to-pink-500/30 border-purple-500' 
-                      : 'border-gray-800 hover:bg-[#0b0f1c]'
+                      : 'border-gray-800 hover:bg-[#1a1f2e]'
                   }`}
                   onClick={() => setExperienceLevel(level)}
                 >
@@ -117,12 +117,12 @@ const InterviewAI = () => {
       
       {/* What to Expect Section */}
       <div className="w-full max-w-6xl mx-auto mb-8">
-        <h2 className="text-2xl font-bold text-center mb-8 bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">What to Expect</h2>
+        <h2 className="text-4xl font-bold text-center mb-8 text-white">What to Expect</h2>
         
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="bg-[#0d1221] p-6 rounded-lg shadow-cyan-500/20 shadow-lg text-center border border-gray-800">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+          <div className="bg-[#0d1221] p-6 rounded-lg text-center border border-gray-800">
             <div className="w-12 h-12 bg-gradient-to-r from-purple-600/30 to-pink-500/30 rounded-full flex items-center justify-center mx-auto mb-4">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-purple-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
               </svg>
             </div>
@@ -130,9 +130,9 @@ const InterviewAI = () => {
             <p className="text-gray-400">Questions tailored to your experience level and industry</p>
           </div>
           
-          <div className="bg-[#0d1221] p-6 rounded-lg shadow-cyan-500/20 shadow-lg text-center border border-gray-800">
+          <div className="bg-[#0d1221] p-6 rounded-lg text-center border border-gray-800">
             <div className="w-12 h-12 bg-gradient-to-r from-purple-600/30 to-pink-500/30 rounded-full flex items-center justify-center mx-auto mb-4">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-purple-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
             </div>
@@ -140,9 +140,9 @@ const InterviewAI = () => {
             <p className="text-gray-400">Instant feedback on your responses and performance</p>
           </div>
           
-          <div className="bg-[#0d1221] p-6 rounded-lg shadow-cyan-500/20 shadow-lg text-center border border-gray-800">
+          <div className="bg-[#0d1221] p-6 rounded-lg text-center border border-gray-800">
             <div className="w-12 h-12 bg-gradient-to-r from-purple-600/30 to-pink-500/30 rounded-full flex items-center justify-center mx-auto mb-4">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-purple-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
               </svg>
             </div>
@@ -152,50 +152,7 @@ const InterviewAI = () => {
         </div>
       </div>
       
-      {/* Success Stories Section */}
-      <div className="w-full max-w-6xl mx-auto">
-        <h2 className="text-2xl font-bold text-center mb-8 bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">Success Stories</h2>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="bg-[#0d1221] p-6 rounded-lg shadow-cyan-500/20 shadow-lg border border-gray-800">
-            <div className="flex items-start space-x-4">
-              <div className="w-16 h-16 bg-gradient-to-r from-purple-600/50 to-pink-500/50 rounded-full flex items-center justify-center">
-                <img 
-                  src="/api/placeholder/64/64" 
-                  alt="Sarah Chen" 
-                  className="w-14 h-14 rounded-full object-cover"
-                />
-              </div>
-              <div>
-                <h3 className="text-lg font-semibold text-white">Sarah Chen</h3>
-                <p className="text-purple-500 mb-3">Software Engineer at Tech Co</p>
-                <p className="text-gray-400 italic">
-                  "MockMaster helped me prepare for my dream job interview. The personalized questions were spot-on!"
-                </p>
-              </div>
-            </div>
-          </div>
-          
-          <div className="bg-[#0d1221] p-6 rounded-lg shadow-cyan-500/20 shadow-lg border border-gray-800">
-            <div className="flex items-start space-x-4">
-              <div className="w-16 h-16 bg-gradient-to-r from-purple-600/50 to-pink-500/50 rounded-full flex items-center justify-center">
-                <img 
-                  src="/api/placeholder/64/64" 
-                  alt="Michael Rodriguez" 
-                  className="w-14 h-14 rounded-full object-cover"
-                />
-              </div>
-              <div>
-                <h3 className="text-lg font-semibold text-white">Michael Rodriguez</h3>
-                <p className="text-purple-500 mb-3">Data Scientist at Analytics Inc</p>
-                <p className="text-gray-400 italic">
-                  "The platform's feedback system helped me identify and improve my weak points. Highly recommended!"
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      
     </div>
   );
 };
