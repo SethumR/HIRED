@@ -34,100 +34,8 @@ const SignInCompany = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 to-black text-white flex flex-col items-center justify-center px-4 py-8 mt-16 relative">
-      {/* Modern Loading Animation */}
-      <AnimatePresence>
-        {isLoading && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/50 backdrop-blur-md z-50 flex items-center justify-center"
-          >
-            <motion.div
-              className="relative flex flex-col items-center"
-              initial={{ scale: 0.8, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ duration: 0.3 }}
-            >
-              {/* Animated Circles */}
-              <svg className="w-24 h-24" viewBox="0 0 100 100">
-                <motion.circle
-                  cx="50"
-                  cy="50"
-                  r="45"
-                  stroke="url(#gradient1)"
-                  strokeWidth="8"
-                  fill="none"
-                  initial={{ pathLength: 0 }}
-                  animate={{ pathLength: 1 }}
-                  transition={{ duration: 1.5, repeat: Infinity, ease: "linear" }}
-                />
-                <motion.circle
-                  cx="50"
-                  cy="50"
-                  r="30"
-                  stroke="url(#gradient2)"
-                  strokeWidth="6"
-                  fill="none"
-                  initial={{ pathLength: 0 }}
-                  animate={{ pathLength: 1 }}
-                  transition={{ duration: 1.5, repeat: Infinity, ease: "linear", delay: 0.2 }}
-                />
-                <defs>
-                  <linearGradient id="gradient1" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%" stopColor="#8B5CF6" />
-                    <stop offset="100%" stopColor="#EC4899" />
-                  </linearGradient>
-                  <linearGradient id="gradient2" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%" stopColor="#EC4899" />
-                    <stop offset="100%" stopColor="#8B5CF6" />
-                  </linearGradient>
-                </defs>
-              </svg>
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 to-black text-white flex flex-col items-center justify-center px-4 py-8 relative">
 
-              {/* Pulsing Dot */}
-              <motion.div
-                className="absolute w-4 h-4 bg-purple-500 rounded-full"
-                animate={{
-                  scale: [1, 1.5, 1],
-                  opacity: [1, 0.5, 1],
-                }}
-                transition={{
-                  duration: 1,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
-              />
-
-              {/* Loading Text */}
-              <motion.p 
-                className="mt-8 text-xl font-medium bg-gradient-to-r from-purple-400 to-pink-400 text-transparent bg-clip-text"
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3 }}
-              >
-                Authenticating
-              </motion.p>
-              <motion.div className="flex space-x-1 mt-2">
-                {[0, 1, 2].map((index) => (
-                  <motion.span
-                    key={index}
-                    className="w-2 h-2 bg-purple-500 rounded-full"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: [0, 1, 0] }}
-                    transition={{
-                      duration: 1,
-                      repeat: Infinity,
-                      delay: index * 0.2,
-                    }}
-                  />
-                ))}
-              </motion.div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
 
       <motion.div
         initial={{ opacity: 0, y: 20 }}
@@ -135,7 +43,7 @@ const SignInCompany = () => {
         transition={{ duration: 0.5, delay: 0.2 }}
         className="w-full max-w-sm bg-gray-800/30 backdrop-blur-xl p-8 rounded-2xl shadow-2xl border border-gray-700/50"
       >
-        <h1 className="text-3xl font-bold text-center mb-8 bg-gradient-to-r from-purple-400 to-pink-400 text-transparent bg-clip-text">
+        <h1 className="text-xl font-bold text-center mb-8 text-white bg-clip-text">
           Unlock Your Access
         </h1>
 
@@ -179,9 +87,8 @@ const SignInCompany = () => {
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.97 }}
             className="w-full bg-gradient-to-r from-purple-500 to-pink-500 font-semibold py-2 rounded-lg hover:from-pink-500 hover:to-purple-500 transition-all duration-300 ease-in-out shadow-lg"
-            disabled={isLoading}
           >
-            {isLoading ? "Signing In..." : "Sign In"}
+            Sign In
           </motion.button>
         </form>
 

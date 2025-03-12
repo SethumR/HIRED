@@ -98,7 +98,7 @@ const EmailStep = ({ email, setEmail, error, handleNext }) => {
           </div>
         )}
 
-        <h1 className="text-[27px] font-bold text-center mb-8">
+        <h1 className="text-2xl font-bold text-center mb-8">
           Unlock Your Access
         </h1>
         <div className="mb-6">
