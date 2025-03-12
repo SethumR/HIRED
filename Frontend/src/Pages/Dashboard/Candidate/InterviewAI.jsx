@@ -5,16 +5,6 @@ const InterviewAI = () => {
   const [jobRole, setJobRole] = useState('');
   const [experienceLevel, setExperienceLevel] = useState('');
   const [questionDifficulty, setQuestionDifficulty] = useState('Medium');
-  
-  // Add validation state
-  const [errors, setErrors] = useState({
-    industry: '',
-    jobRole: '',
-    experienceLevel: ''
-  });
-   
-  // Add form submission state
-  const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Mock data
   const industries = [
@@ -27,119 +17,53 @@ const InterviewAI = () => {
   
   const difficultyLevels = ['Easy', 'Medium', 'Hard'];
 
-  // Validation function
-  const validateForm = () => {
-    let valid = true;
-    const newErrors = {
-      industry: '',
-      jobRole: '',
-      experienceLevel: ''
-    };
-    
-    // Validate industry
-    if (!industry) {
-      newErrors.industry = 'Please select an industry';
-      valid = false;
-    }
-    
-    // Validate job role
-    if (!jobRole.trim()) {
-      newErrors.jobRole = 'Please enter a job role';
-      valid = false;
-    }
-    
-    // Validate experience level
-    if (!experienceLevel) {
-      newErrors.experienceLevel = 'Please select an experience level';
-      valid = false;
-    }
-    
-    setErrors(newErrors);
-    return valid;
-  };
-
-  // Handle form submission
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    
-    if (validateForm()) {
-      // If form is valid, proceed with submission
-      window.location.href = '/startmock';
-    } else {
-      setIsSubmitting(false);
-    }
-  };
-
   return (
     <div className="flex flex-col items-center min-h-screen bg-[#0b0f1c] text-white py-8 px-4" style={{ marginTop: '50px', width: '100%', backgroundColor: '#0b0f1c' }}>
       <div className="w-full max-w-2xl mx-auto bg-[#0d1221] rounded-lg p-6 mb-8 border border-gray-800">
-       <h1 className="text-3xl font-bold text-center mb-2 bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-white">Customize Your Mock Interview</h1>
+        <h1 className="text-3xl font-bold text-center mb-2 bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-white">Customize Your Mock Interview</h1>
         <p className="text-center text-gray-400 mb-8">Fill in the details below to generate a personalized interview experience</p>
         
-        <form onSubmit={handleSubmit} className="space-y-6">
+        <div className="space-y-6">
           {/* Industry Selection */}
           <div>
-            <label className="block text-white mb-2">Industry <span className="text-red-500">*</span></label>
+            <label className="block text-white mb-2">Industry</label>
             <select 
-              className={`w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 bg-[#0b0f1c] text-white ${
-                errors.industry ? 'border-red-500' : 'border-gray-800'
-              }`}
+              className="w-full p-3 border border-gray-800 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 bg-[#0b0f1c] text-white"
               value={industry}
-              onChange={(e) => {
-                setIndustry(e.target.value);
-                if (e.target.value) {
-                  setErrors({...errors, industry: ''});
-                }
-              }}
+              onChange={(e) => setIndustry(e.target.value)}
             >
               <option value="">Select an industry</option>
               {industries.map((ind) => (
                 <option key={ind} value={ind}>{ind}</option>
               ))}
             </select>
-            {errors.industry && <p className="mt-1 text-red-500 text-sm">{errors.industry}</p>}
           </div>
           
           {/* Job Role */}
           <div>
-            <label className="block text-white mb-2">Job Role <span className="text-red-500">*</span></label>
+            <label className="block text-white mb-2">Job Role</label>
             <input 
               type="text" 
               placeholder="e.g. Software Engineer, Data Scientist" 
-              className={`w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 bg-[#0b0f1c] text-white ${
-                errors.jobRole ? 'border-red-500' : 'border-gray-800'
-              }`}
+              className="w-full p-3 border border-gray-800 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 bg-[#0b0f1c] text-white"
               value={jobRole}
-              onChange={(e) => {
-                setJobRole(e.target.value);
-                if (e.target.value.trim()) {
-                  setErrors({...errors, jobRole: ''});
-                }
-              }}
+              onChange={(e) => setJobRole(e.target.value)}
             />
-            {errors.jobRole && <p className="mt-1 text-red-500 text-sm">{errors.jobRole}</p>}
           </div>
           
           {/* Experience Level */}
           <div>
-            <label className="block text-white mb-2">Level of Experience <span className="text-red-500">*</span></label>
+            <label className="block text-white mb-2">Level of Experience</label>
             <div className="grid grid-cols-3 gap-4">
               {['Entry Level', 'Mid Level', 'Senior Level'].map((level) => (
                 <button
-                  type="button"
                   key={level}
                   className={`p-4 rounded-md flex flex-col items-center justify-center border ${
                     experienceLevel === level 
                       ? 'bg-gradient-to-r from-purple-600/30 to-pink-500/30 border-purple-500' 
-                      : errors.experienceLevel 
-                        ? 'border-red-500 hover:bg-[#1a1f2e]'
-                        : 'border-gray-800 hover:bg-[#1a1f2e]'
+                      : 'border-gray-800 hover:bg-[#1a1f2e]'
                   }`}
-                  onClick={() => {
-                    setExperienceLevel(level);
-                    setErrors({...errors, experienceLevel: ''});
-                  }}
+                  onClick={() => setExperienceLevel(level)}
                 >
                   <div className={`mb-2 ${experienceLevel === level ? 'text-purple-500' : 'text-gray-400'}`}>
                     {level === 'Entry Level' && (
@@ -165,7 +89,6 @@ const InterviewAI = () => {
                 </button>
               ))}
             </div>
-            {errors.experienceLevel && <p className="mt-1 text-red-500 text-sm">{errors.experienceLevel}</p>}
           </div>
           
           {/* Question Difficulty */}
@@ -184,20 +107,12 @@ const InterviewAI = () => {
 
           {/* Start Button */}
           <button 
-            type="submit"
-            disabled={isSubmitting}
-            className="w-full py-3 px-4 bg-gradient-to-r from-purple-600 to-pink-500 hover:from-pink-500 hover:to-purple-600 text-white font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 transition-colors disabled:opacity-70"
+            className="w-full py-3 px-4 bg-gradient-to-r from-purple-600 to-pink-500 hover:from-pink-500 hover:to-purple-600 text-white font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 transition-colors"
+            onClick={() => window.location.href = '/startmock'}
           >
-            {isSubmitting ? 'Validating...' : 'Start Mock Interview'}
+            Start Mock Interview
           </button>
-          
-          {/* Form validation message */}
-          {(errors.industry || errors.jobRole || errors.experienceLevel) && (
-            <div className="p-3 bg-red-500/20 border border-red-500 rounded-md text-white text-sm">
-              Please fill in all required fields marked with *
-            </div>
-          )}
-        </form>
+        </div>
       </div>
       
       {/* What to Expect Section */}
@@ -236,6 +151,8 @@ const InterviewAI = () => {
           </div>
         </div>
       </div>
+      
+      
     </div>
   );
 };
