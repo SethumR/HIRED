@@ -14,12 +14,12 @@ const Startmock = () => {
               <rect x="7" y="15" width="10" height="3" rx="1.5" fill="white" />
             </svg>
           </div>
-          <span className="font-semibold text-lg">InterviewAI</span>
+          <span className="font-semibold text-lg text-white">InterviewAI</span>
         </div>
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-2 text-gray-400">
             <Clock size={16} />
-            <span>Duration: 12:45</span>
+            <span className="text-white">Duration: 12:45</span>
           </div>
           <button className="bg-gradient-to-r from-purple-600 to-pink-500 hover:from-pink-500 hover:to-purple-600 text-white px-3 py-1 rounded-xl flex items-center gap-1 transition duration-300">
             <X size={16} />
@@ -56,7 +56,7 @@ const Startmock = () => {
           </div>
 
           <div className="mb-8">
-            <h3 className="font-medium text-lg mb-4 bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">Can you describe a challenging project you've worked on and how you handled it?</h3>
+            <h3 className="font-medium text-lg mb-4 bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-white">Can you describe a challenging project you've worked on and how you handled it?</h3>
             
             <div className="flex items-center gap-2 text-gray-400 mb-4">
               <div className="p-1">
@@ -66,21 +66,20 @@ const Startmock = () => {
                   <rect x="7" y="15" width="10" height="3" rx="1.5" stroke="currentColor" strokeWidth="2" fill="none" />
                 </svg>
               </div>
-              <span>AI is speaking...</span>
+              <span className="text-white">AI is speaking...</span>
             </div>
 
-            <div className="bg-[#0d1221] p-4 rounded-lg mb-4 border border-gray-800 shadow-cyan-500/20 shadow-lg">
-              <h4 className="text-purple-500 font-medium mb-2">Real-time Feedback</h4>
+            <div className="bg-[#0d1221] p-4 rounded-lg mb-4 border border-gray-800">
+              <h4 className="text-white font-medium mb-2">Real-time Feedback</h4>
               <p className="text-gray-400">Try structuring your answer using the STAR method: Situation, Task, Action, and Result.</p>
             </div>
           </div>
         </div>
 
-        {/* Right Panel - User */}
         <div className="w-1/3 flex flex-col pl-6">
-          <div className="flex-1 flex flex-col bg-[#0d1221] rounded-lg border border-gray-800 shadow-cyan-500/20 shadow-lg p-6">
+          <div className="flex-1 flex flex-col bg-[#0d1221] rounded-lg border border-gray-800 p-6">
             <div className="flex-1 flex items-center justify-center">
-              <div className="w-32 h-32 bg-gradient-to-r from-purple-600 to-pink-500 rounded-full flex items-center justify-center shadow-cyan-500/20 shadow-lg">
+              <div className="w-32 h-32 bg-gradient-to-r from-purple-600 to-pink-500 rounded-full flex items-center justify-center">
                 <Mic size={56} className="text-white" />
               </div>
             </div>
@@ -91,8 +90,8 @@ const Startmock = () => {
               </div>
             </div>
             <div className="flex justify-between">
-              <button className="border border-gray-800 rounded-lg px-4 py-2 flex items-center gap-2 text-gray-400 bg-[#0b0f1c] hover:bg-[#0d1221]">
-                <RotateCw size={16} />
+              <button className="bg-gradient-to-r from-purple-600 to-pink-500 hover:from-pink-500 hover:to-purple-600 text-white px-4 py-2 rounded-xl flex items-center gap-2 transition duration-300">
+                
                 Retry Answer
               </button>
               <div className="flex gap-2">
@@ -110,24 +109,8 @@ const Startmock = () => {
             </div>
           </div>
           
-          {/* Interview Tips */}
-          <div className="mt-6 p-6 bg-[#0d1221] rounded-lg border border-gray-800 shadow-cyan-500/20 shadow-lg">
-            <h3 className="text-center font-medium text-lg mb-4 bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">Interview Tips</h3>
-            <div className="grid grid-cols-3 gap-4">
-              <div className="px-4">
-                <h4 className="font-medium mb-2 text-white">Speak Clearly</h4>
-                <p className="text-sm text-gray-400">Maintain a steady pace and enunciate your words</p>
-              </div>
-              <div className="px-4">
-                <h4 className="font-medium mb-2 text-white">Be Specific</h4>
-                <p className="text-sm text-gray-400">Use concrete examples to support your answers</p>
-              </div>
-              <div className="px-4">
-                <h4 className="font-medium mb-2 text-white">Stay Focused</h4>
-                <p className="text-sm text-gray-400">Keep your answers relevant to the question</p>
-              </div>
-            </div>
-          </div>
+         
+        
         </div>
       </div>
     </div>
