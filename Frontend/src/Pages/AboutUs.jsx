@@ -102,7 +102,7 @@ export default function AboutUs() {
         initial="hidden"
         animate={isAboutInView ? "visible" : "hidden"}
       >
-        <div className="text-center mb-12">
+        <div className="text-center mt-4">
           <h1 className="text-5xl font-semibold text-white mb-8">
             What our Solution focuses on
           </h1>
@@ -111,33 +111,72 @@ export default function AboutUs() {
             Get to know more about us
           </button>
         </div>
-
-        <div>
-          <div className="bg-[#1d2638] rounded-3xl p-12 flex flex-col relative shadow-xl h-[450px] hover:shadow-blue-500/10 transition-all duration-300">
-            <div className="pr-24">
-              <h2 className="text-white text-4xl font-bold mb-4">
-                Have you heard about our AI mock interview platform?
-              </h2>
-              <p className="text-white/90 text-lg">
-                Discover how our project aims to revolutionize interview
-                preparation through AI-powered simulations, personalized
-                feedback, and innovative tools. From enhancing your
-                communication skills to analyzing body language and building
-                confidence, we provide everything you need to succeed in your
-                career journey.
-              </p>
-            </div>
-
-            <div className="absolute bottom-0 right-0 w-80 h-80">
-              <img
-                src=""
-                alt="Contact"
-                className="w-full h-full object-contain rounded-full"
-              />
-            </div>
-          </div>
-        </div>
       </motion.div>
+      {/* Vision and Mission Section - Enhanced with elements from second file */}
+      <section 
+        ref={visionMissionRef}
+        className="relative overflow-hidden  "
+      >       
+
+        <motion.div
+          className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10"
+          initial={{ opacity: 0 }}
+          animate={isVisionInView ? { opacity: 1 } : { opacity: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          <div className="text-center mb-16">
+            <motion.div
+              initial={{ y: 20, opacity: 0 }}
+              animate={isVisionInView ? { y: 0, opacity: 1 } : { y: 20, opacity: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+            >
+          
+            </motion.div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+            <motion.div
+              initial={{ x: -50, opacity: 0 }}
+              animate={isVisionInView ? { x: 0, opacity: 1 } : { x: -50, opacity: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="group"
+            >
+              <div className="bg-slate-800/50 backdrop-blur-sm p-8 rounded-2xl border border-slate-700/50 h-full transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/10 hover:border-blue-500/50">
+                <div className="flex items-center mb-6">
+                  <div className="p-3 bg-blue-500/10 rounded-xl mr-4 group-hover:bg-blue-500/20 transition-all duration-300">
+                    <Lightbulb className="h-8 w-8 text-blue-400" />
+                  </div>
+                  <h3 className="text-3xl font-bold text-white">Vision</h3>
+                </div>
+                <p className="text-xl leading-relaxed text-slate-300">
+                To be the leading AI-powered platform that empowers individuals worldwide to confidently pursue and
+                successfully achieve their career aspirations.
+                </p>
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ x: 50, opacity: 0 }}
+              animate={isVisionInView ? { x: 0, opacity: 1 } : { x: 50, opacity: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="group"
+            >
+              <div className="bg-slate-800/50 backdrop-blur-sm p-8 rounded-2xl border border-slate-700/50 h-full transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/10 hover:border-purple-500/50">
+                <div className="flex items-center mb-6">
+                  <div className="p-3 bg-purple-500/10 rounded-xl mr-4 group-hover:bg-purple-500/20 transition-all duration-300">
+                    <Target className="h-8 w-8 text-purple-400" />
+                  </div>
+                  <h3 className="text-3xl font-bold text-white">Mission</h3>
+                </div>
+                <p className="text-xl leading-relaxed text-slate-300">
+                To revolutionize interview preparation by providing accessible, personalized, and innovative AI-driven
+                tools that enhance communication skills, build confidence, and unlock numerous career opportunities for all.
+                </p>
+              </div>
+            </motion.div>
+          </div>
+        </motion.div>
+      </section>
 
       {/* Our Team Section */}
       <motion.div 
@@ -226,80 +265,6 @@ export default function AboutUs() {
           </button>
         </div>
       </motion.div>
-
-      {/* Vision and Mission Section - Enhanced with elements from second file */}
-      <section 
-        ref={visionMissionRef}
-        className="relative overflow-hidden py-24 bg-gradient-to-b from-slate-900 to-slate-950"
-      >
-        {/* Decorative elements */}
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-0 left-0 w-96 h-96 bg-blue-500 rounded-full filter blur-[100px] -translate-x-1/2 -translate-y-1/2"></div>
-          <div className="absolute bottom-0 right-0 w-96 h-96 bg-purple-500 rounded-full filter blur-[100px] translate-x-1/2 translate-y-1/2"></div>
-        </div>
-
-        <motion.div
-          className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10"
-          initial={{ opacity: 0 }}
-          animate={isVisionInView ? { opacity: 1 } : { opacity: 0 }}
-          transition={{ duration: 0.5 }}
-        >
-          <div className="text-center mb-16">
-            <motion.div
-              initial={{ y: 20, opacity: 0 }}
-              animate={isVisionInView ? { y: 0, opacity: 1 } : { y: 20, opacity: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-            >
-              <h2 className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500 inline-block mb-4">
-                Our Vision & Mission
-              </h2>
-              <div className="h-1 w-20 bg-gradient-to-r from-blue-400 to-purple-500 mx-auto rounded-full"></div>
-            </motion.div>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-            <motion.div
-              initial={{ x: -50, opacity: 0 }}
-              animate={isVisionInView ? { x: 0, opacity: 1 } : { x: -50, opacity: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="group"
-            >
-              <div className="bg-slate-800/50 backdrop-blur-sm p-8 rounded-2xl border border-slate-700/50 h-full transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/10 hover:border-blue-500/50">
-                <div className="flex items-center mb-6">
-                  <div className="p-3 bg-blue-500/10 rounded-xl mr-4 group-hover:bg-blue-500/20 transition-all duration-300">
-                    <Lightbulb className="h-8 w-8 text-blue-400" />
-                  </div>
-                  <h3 className="text-3xl font-bold text-white">Vision</h3>
-                </div>
-                <p className="text-xl leading-relaxed text-slate-300">
-                To be the leading AI-powered platform that empowers individuals worldwide to confidently pursue and
-                successfully achieve their career aspirations.
-                </p>
-              </div>
-            </motion.div>
-
-            <motion.div
-              initial={{ x: 50, opacity: 0 }}
-              animate={isVisionInView ? { x: 0, opacity: 1 } : { x: 50, opacity: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              className="group"
-            >
-              <div className="bg-slate-800/50 backdrop-blur-sm p-8 rounded-2xl border border-slate-700/50 h-full transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/10 hover:border-purple-500/50">
-                <div className="flex items-center mb-6">
-                  <div className="p-3 bg-purple-500/10 rounded-xl mr-4 group-hover:bg-purple-500/20 transition-all duration-300">
-                    <Target className="h-8 w-8 text-purple-400" />
-                  </div>
-                  <h3 className="text-3xl font-bold text-white">Mission</h3>
-                </div>
-                <p className="text-xl leading-relaxed text-slate-300">
-                To revolutionize interview preparation by providing accessible, personalized, and innovative AI-driven
-                tools that enhance communication skills, build confidence, and unlock numerous career opportunities for all.
-                </p>
-              </div>
-            </motion.div>
-          </div>
-        </motion.div>
-      </section>
     </div>
   );
 }
