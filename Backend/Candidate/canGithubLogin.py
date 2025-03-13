@@ -1,68 +1,110 @@
-import requests
-from fastapi import FastAPI, HTTPException
-from fastapi.middleware.cors import CORSMiddleware
+import os
+from fastapi import FastAPI, HTTPException, Depends
+import httpx
+from fastapi.responses import RedirectResponse
+from dotenv import load_dotenv
 from pydantic import BaseModel
+from motor.motor_asyncio import AsyncIOMotorClient
+from fastapi.middleware.cors import CORSMiddleware
+import logging
 
+# Load environment variables
+load_dotenv()
+
+# GitHub OAuth credentials
+GITHUB_CLIENT_ID = os.getenv("GITHUB_CLIENT_ID")
+GITHUB_CLIENT_SECRET = os.getenv("GITHUB_CLIENT_SECRET")
+GITHUB_API_URL = "https://api.github.com/user"
+GITHUB_OAUTH_URL = "https://github.com/login/oauth/authorize"
+GITHUB_ACCESS_TOKEN_URL = "https://github.com/login/oauth/access_token"
+
+# Initialize FastAPI app
 app = FastAPI()
 
+# Add CORS middleware (allow your frontend domain)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Adjust this to your frontend's URL
+    allow_origins=["*"],  # Replace with your actual frontend domain
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-# GitHub OAuth constants
-GITHUB_CLIENT_ID = "Ov23liujKfeX3V2GnVZs"  # Your GitHub client ID
-GITHUB_CLIENT_SECRET = "f25e76d3327c9556209e2f6eb636a0889f28f32a"  # Your GitHub client secret
-GITHUB_API_URL = "https://api.github.com/user"  # GitHub API to fetch user data
+# MongoDB connection using Motor (async)
+mongo_uri = os.getenv("MONGO_URI")
+client = AsyncIOMotorClient(mongo_uri)
+db = client["mydatabase"]
+users_collection = db["users"]
 
-class GitHubAuthRequest(BaseModel):
-    code: str
+# Configure logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
-@app.post('/auth/github')
-async def github_login(auth_request: GitHubAuthRequest):
-    code = auth_request.code
-    if not code:
-        raise HTTPException(status_code=400, detail="Code is required")
+# Pydantic model for User
+class User(BaseModel):
+    username: str
+    email: str
+    github_id: str
+    picture: str
 
-    # Step 1: Exchange the code for an access token
-    url = "https://github.com/login/oauth/access_token"
-    params = {
-        'client_id': GITHUB_CLIENT_ID,
-        'client_secret': GITHUB_CLIENT_SECRET,
-        'code': code,  # The code received from GitHub login response
-    }
-    headers = {
-        'Accept': 'application/json'
-    }
+# Function to check if the user already exists
+async def user_exists(email: str) -> bool:
+    user = await users_collection.find_one({"email": email})
+    return user is not None
 
-    # Step 2: Get access token from GitHub
-    response = requests.post(url, data=params, headers=headers)
-    data = response.json()
+# Redirect user to GitHub OAuth page
+@app.get("/auth/github")
+async def github_login():
+    github_oauth_url = f"{GITHUB_OAUTH_URL}?client_id={GITHUB_CLIENT_ID}&scope=user:email"
+    return RedirectResponse(url=github_oauth_url)
 
-    if 'access_token' not in data:
-        raise HTTPException(status_code=400, detail="Failed to get access token")
+# GitHub OAuth callback endpoint
+@app.get("/auth/github/callback")
+async def github_callback(code: str):
+    # Exchange code for access token
+    async with httpx.AsyncClient() as client:
+        token_response = await client.post(
+            GITHUB_ACCESS_TOKEN_URL,
+            params={
+                "client_id": GITHUB_CLIENT_ID,
+                "client_secret": GITHUB_CLIENT_SECRET,
+                "code": code,
+            },
+            headers={"Accept": "application/json"},
+        )
+        token_data = token_response.json()
+        access_token = token_data.get("access_token")
+        
+        if not access_token:
+            raise HTTPException(status_code=400, detail="GitHub authentication failed")
 
-    # Step 3: Use the access token to get user data
-    access_token = data['access_token']
-    user_response = requests.get(GITHUB_API_URL, headers={
-        'Authorization': f'token {access_token}'
-    })
+        # Use the access token to fetch user info
+        user_response = await client.get(
+            GITHUB_API_URL, headers={"Authorization": f"Bearer {access_token}"}
+        )
+        user_data = user_response.json()
+        
+        # Extract user info
+        user_email = user_data.get("email")
+        github_id = user_data.get("id")
+        username = user_data.get("login")
+        picture = user_data.get("avatar_url")
 
-    user_data = user_response.json()
+        if not user_email:
+            raise HTTPException(status_code=400, detail="No email found from GitHub")
 
-    if user_response.status_code != 200:
-        raise HTTPException(status_code=400, detail="Failed to fetch user data")
+        # Check if user already exists
+        if await user_exists(user_email):
+            raise HTTPException(status_code=400, detail="User already exists with this email")
 
-    # Step 4: Return user data (you can store user info in your DB if needed)
-    return {
-        "message": "Login successful",
-        "user": {
-            "name": user_data.get('name', 'No name'),
-            "email": user_data.get('email', 'No email'),
-            "avatar_url": user_data.get('avatar_url', 'No avatar URL'),
-            "login": user_data.get('login', 'No login')
+        # Create a new user in the database
+        new_user = {
+            "username": username,
+            "email": user_email,
+            "github_id": github_id,
+            "picture": picture,
         }
-    }
+        await users_collection.insert_one(new_user)
+
+        return {"message": "GitHub login successful", "user": new_user}
+
