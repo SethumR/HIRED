@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { ArrowRight, Upload, Bot, Edit, Check, Loader2, FileText, Download, RefreshCw, Sparkles, Target, Trophy } from 'lucide-react';
 import { jsPDF } from 'jspdf';
 import { Link } from 'react-router-dom'; // Assuming you're using react-router-dom for navigation
+import Sidebar from './SideBar';
 
 export default function CVUpload() {
   const [cvFile, setCvFile] = useState(null);
@@ -244,38 +245,7 @@ export default function CVUpload() {
 
   return (
     <div className="min-h-screen bg-[#0b0f1c] flex">
-      {/* Sidebar */}
-      <aside className="w-64 h-full p-4 flex flex-col max-h-screen overflow-y-auto border-r border-opacity-30 border-white">
-        <div className="flex items-center mb-6">
-          <div className="w-12 h-12 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 flex items-center justify-center text-white text-xl mr-4 mt-6">
-            {userProfile.initials}
-          </div>
-          <div>
-            <h3 className="font-semibold mt-6">{userProfile.name}</h3>
-            <p className="text-gray-400 text-sm">{userProfile.title}</p>
-          </div>
-        </div>
-        <nav className="flex-1 mb-6">
-          {["Dashboard", "Start Mock Interview", "Interview History", "Generate Script", "Settings"].map((item, index) => (
-            <Link
-              key={item}
-              to={
-                item === "Dashboard" ? "/dashboard" :
-                item === "Start Mock Interview" ? "/startmock" :
-                item === "Interview History" ? "/interview-history" :
-                item === "Generate Script" ? "/uploadcv" :
-                item === "Settings" ? "/editprofile" : "#"
-              }
-              className={`block px-4 py-3 mb-2 rounded-md transition-colors font-medium text-base tracking-wide ${
-                index === 0 ? "bg-[#1e293b] text-white" : "text-gray-300 hover:bg-gray-700"
-              }`}
-            >
-              {item}
-            </Link>
-          ))}
-        </nav>
-      </aside>
-
+      <Sidebar userProfile={userProfile}/>
       {/* Main Content */}
       <main className="flex-1">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
