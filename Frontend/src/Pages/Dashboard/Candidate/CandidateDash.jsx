@@ -1,5 +1,6 @@
+"use client"
+
 import React from "react";
-import { Link } from "react-router-dom";
 import {
   LineChart,
   Line,
@@ -11,16 +12,21 @@ import {
   BarChart,
   Bar,
 } from "recharts";
+import Sidebar from "./SideBar"; // Import the Sidebar component
+import { Code, MessageSquare, Zap, BarChart4, TrendingUp } from "lucide-react";
 
 const colors = {
   background: "#0b0f1c",
   foreground: "#fdfdfd",
   card: "#0a2635",
   border: "#1a3545",
-  purplePinkFrom: "#8B5CF6",
-  purplePinkTo: "#EC4899",
-  accentPurple: "#9333EA",
-  accentPink: "#EC4899",
+  purpleAccent: "#9333EA",
+  purple: {
+    600: "#8B5CF6"
+  },
+  pink: {
+    500: "#EC4899"
+  }
 };
 
 const userProfile = {
@@ -30,9 +36,24 @@ const userProfile = {
 };
 
 const performanceMetrics = [
-  { title: "Technical", value: "85%" },
-  { title: "Communication", value: "92%" },
-  { title: "Confidence", value: "78%" },
+  { 
+    title: "Technical", 
+    value: "85%", 
+    description: "Strong problem-solving skills",
+    icon: <Code className="h-6 w-6 text-purple-400" />,
+  },
+  { 
+    title: "Communication", 
+    value: "92%", 
+    description: "Excellent verbal skills",
+    icon: <MessageSquare className="h-6 w-6 text-purple-400" />,
+  },
+  { 
+    title: "Confidence", 
+    value: "78%", 
+    description: "Good presence in interviews",
+    icon: <Zap className="h-6 w-6 text-purple-400" />,
+  },
 ];
 
 const overallGrowth = [
@@ -54,72 +75,96 @@ const skillImprovement = [
 
 const Dashboard = () => {
   return (
-    <div className="flex h-screen text-white font-sans bg-[#0b0f1c] py-24 ">
-      <aside className="w-64 h-full  p-4 flex flex-col max-h-screen overflow-y-auto border-r border-opacity-30 border-white">
-        <div className="flex items-center mb-6">
-          <div className="w-12 h-12 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 flex items-center justify-center text-white text-xl mr-4 mt-6">
-            {userProfile.initials}
-          </div>
+    <div className="flex min-h-screen text-white font-sans bg-[#0b0f1c]">
+      {/* Include the Sidebar component */}
+      <Sidebar userProfile={userProfile} />
+      <main className="flex-1 container mx-auto pt-36 pb-12 px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between items-center mb-10">
           <div>
-            <h3 className="font-semibold mt-6">{userProfile.name}</h3>
-            <p className="text-gray-400 text-sm">{userProfile.title}</p>
+            <h1 className="text-3xl font-bold text-white tracking-tight">
+              Performance Overview
+            </h1>
+            <p className="text-gray-400 mt-1">Tracking your progress and improvement</p>
           </div>
         </div>
-        <nav className="flex-1 mb-6">
-          {["Dashboard", "Start Mock Interview", "Interview History", "Generate Script", "Settings"].map((item, index) => (
-            <Link
-              key={item}
-              to={
-                item === "Dashboard" ? "/dashboard" :
-                item === "Start Mock Interview" ? "/startmock" :
-                item === "Interview History" ? "/interview-history" :
-                item === "Generate Script" ? "/uploadcv" :
-                item === "Settings" ? "/editprofile" : "#"
-              }
-              className={`block px-4 py-3 mb-2 rounded-md transition-colors font-medium text-base tracking-wide ${
-                index === 0 ? "bg-[#1e293b]  text-white" : "text-gray-300 hover:bg-gray-700"
-              }`}
-            >
-              {item}
-            </Link>
-          ))}
-        </nav>
-      </aside>
-      <main className="flex-1 p-6 overflow-y-auto">
-        <h1 className="text-2xl font-bold mb-8 mt-6">Performance Overview</h1>
-        <div className="grid grid-cols-3 gap-4 mb-12">
+
+        {/* Performance Metrics Cards - Styled like company dashboard */}
+        <div className="grid gap-6 md:grid-cols-3">
           {performanceMetrics.map((metric, index) => (
-            <div key={index} className="bg-[#0a2635] rounded-lg p-6 shadow-md flex flex-col items-center">
-              <h3 className="text-sm font-medium text-gray-300">{metric.title}</h3>
-              <p className="text-2xl font-bold mt-2 text-white">{metric.value}</p>
+            <div
+              key={index}
+              className="bg-gray-900/80 backdrop-blur-sm rounded-xl shadow-lg p-5 flex flex-col justify-between transition duration-300 hover:translate-y-1 hover:shadow-xl border border-purple-500/20"
+            >
+              <div>
+                <div className="flex items-center justify-between mb-3">
+                  <h3 className="text-sm font-medium text-gray-300">{metric.title}</h3>
+                  <div className="p-2 rounded-lg bg-purple-900/30">{metric.icon}</div>
+                </div>
+                <div className="text-3xl font-bold text-white">{metric.value}</div>
+              </div>
+              <p className="text-xs text-gray-400 mt-2">{metric.description}</p>
             </div>
           ))}
         </div>
-        <div className="flex gap-6">
-          <section className="flex-1 bg-[#0a2635] rounded-lg p-6 shadow-md">
-            <h2 className="text-lg font-semibold mb-4">Overall Growth</h2>
+
+        <div className="flex flex-col lg:flex-row gap-6 mt-10">
+          <section className="flex-1 bg-gray-900/80 backdrop-blur-sm rounded-xl shadow-lg p-6 border border-purple-500/20 mb-6 lg:mb-0">
+            <div className="flex items-center gap-4 mb-4">
+              <div className="p-2 rounded-lg bg-purple-900/30">
+                <TrendingUp className="h-5 w-5 text-purple-400" />
+              </div>
+              <h2 className="text-lg font-bold text-white tracking-tight">Overall Growth</h2>
+            </div>
             <div className="h-64">
               <ResponsiveContainer width="100%" height="100%">
                 <LineChart data={overallGrowth}>
-                  <CartesianGrid strokeDasharray="3 3" stroke={colors.border} />
-                  <XAxis dataKey="date" stroke={colors.foreground} />
-                  <YAxis stroke={colors.foreground} />
-                  <Tooltip contentStyle={{ backgroundColor: colors.card, border: `1px solid ${colors.border}` }} />
-                  <Line type="monotone" dataKey="score" stroke={colors.accentPurple} strokeWidth={2} />
+                  <CartesianGrid strokeDasharray="3 3" stroke="rgba(255, 255, 255, 0.1)" />
+                  <XAxis dataKey="date" stroke="#9ca3af" />
+                  <YAxis stroke="#9ca3af" />
+                  <Tooltip 
+                    contentStyle={{ 
+                      backgroundColor: "#1f2937", 
+                      border: "1px solid rgba(147, 51, 234, 0.2)",
+                      borderRadius: "0.5rem" 
+                    }} 
+                  />
+                  <Line 
+                    type="monotone" 
+                    dataKey="score" 
+                    stroke="#07ed7a" 
+                    strokeWidth={2}
+                    dot={{ fill: "#EC4899", strokeWidth: 0 }}
+                    activeDot={{ r: 6, fill: "#EC4899" }}
+                  />
                 </LineChart>
               </ResponsiveContainer>
             </div>
           </section>
-          <section className="flex-1 bg-[#0a2635] rounded-lg p-6 shadow-md">
-            <h2 className="text-lg font-semibold mb-4">Skill Improvement</h2>
+
+          <section className="flex-1 bg-gray-900/80 backdrop-blur-sm rounded-xl shadow-lg p-6 border border-purple-500/20">
+            <div className="flex items-center gap-4 mb-4">
+              <div className="p-2 rounded-lg bg-purple-900/30">
+                <BarChart4 className="h-5 w-5 text-purple-400" />
+              </div>
+              <h2 className="text-lg font-bold text-white tracking-tight">Skill Improvement</h2>
+            </div>
             <div className="h-64">
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={skillImprovement}>
-                  <CartesianGrid strokeDasharray="3 3" stroke={colors.border} />
-                  <XAxis dataKey="skill" stroke={colors.foreground} />
-                  <YAxis stroke={colors.foreground} />
-                  <Tooltip contentStyle={{ backgroundColor: colors.card, border: `1px solid ${colors.border}` }} />
-                  <Bar dataKey="improvement" fill="white" />
+                  <CartesianGrid strokeDasharray="3 3" stroke="rgba(255, 255, 255, 0.1)" />
+                  <XAxis dataKey="skill" stroke="#9ca3af" />
+                  <YAxis stroke="#9ca3af" />
+                  <Tooltip 
+                    contentStyle={{ 
+                      backgroundColor: "#1f2937", 
+                      border: "1px solid rgba(147, 51, 234, 0.2)",
+                      borderRadius: "0.5rem" 
+                    }} 
+                  />
+                  <Bar 
+                    dataKey="improvement" 
+                    fill="white"
+                  />
                 </BarChart>
               </ResponsiveContainer>
             </div>
