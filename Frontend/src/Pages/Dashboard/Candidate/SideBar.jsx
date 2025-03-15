@@ -21,7 +21,7 @@ const Sidebar = ({ userProfile }) => {
   // Navigation items with their routes and icons
   const navItems = [
     { name: "Dashboard", route: "/dashboard", icon: <RiDashboardLine className="text-xl" /> },
-    { name: "Start Mock Interview", route: "/startmock", icon: <RiVideoAddLine className="text-xl" /> },
+    { name: "Start Mock Interview", route: "/interview", icon: <RiVideoAddLine className="text-xl" /> },
     { name: "Interview History", route: "/interview-history", icon: <RiHistoryLine className="text-xl" /> },
     { name: "Generate Script", route: "/uploadcv", icon: <RiFileTextLine className="text-xl" /> },
     { name: "Settings", route: "/editprofile", icon: <RiSettings4Line className="text-xl" /> }
