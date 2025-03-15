@@ -175,7 +175,8 @@ export default function EditProfile() {
               </h3>
               <div className="flex flex-wrap gap-2 mt-2">
                 {profileData.skills.map((skill) => (
-                  <span key={skill} className="px-3 py-1 bg-[#0b0f1c] text-purple-500 border border-purple-500 rounded-full text-sm">
+                  <span key={skill} 
+                        className="px-3 py-1 bg-[#0b0f1c] text-purple-500 border border-purple-500 rounded-full text-sm hover:bg-purple-500 hover:text-white transition-colors duration-200 cursor-pointer">
                     {skill}
                   </span>
                 ))}
@@ -185,7 +186,7 @@ export default function EditProfile() {
               </div>
             </div>
 
-            <div className="bg-[#0d1221] p-6 rounded-lg border border-gray-800 shadow-cyan-500/20 shadow-lg">
+            <div className="bg-[#0d1221] p-6 rounded-lg border border-gray-800 shadow-cyan-500/20 shadow-lg" style={{ minHeight: '200px', width: '100%' }}> {/* Adjust minHeight and width as needed */}
               <h3 className="text-lg font-semibold bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent mb-4">
                 Resume
               </h3>
@@ -200,7 +201,7 @@ export default function EditProfile() {
                 <label htmlFor="resume" className="cursor-pointer">
                   <div className="flex flex-col items-center">
                     <div className="p-4 bg-[#0d1221] rounded-full border border-gray-700">
-                      <svg className="w-6 h-6 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg className="w-6 h-6 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
                       </svg>
                     </div>
@@ -212,7 +213,7 @@ export default function EditProfile() {
               </div>
             </div>
 
-            <div className="bg-[#0d1221] p-6 rounded-lg border border-gray-800 shadow-cyan-500/20 shadow-lg">
+            <div className="bg-[#0d1221] p-6 rounded-lg border border-gray-800 shadow-cyan-500/20 shadow-lg" style={{ minHeight: '150px', width: '100%' }}> {/* Adjust minHeight and width as needed */}
               <h3 className="text-lg font-semibold bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent mb-4">
                 Social Links
               </h3>
