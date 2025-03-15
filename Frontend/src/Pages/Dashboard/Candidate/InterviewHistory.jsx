@@ -1,25 +1,9 @@
 "use client"
-import React, { useState } from "react"
-import { Link } from "react-router-dom"
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import { FileDown, Filter, ChevronRight, Download } from "lucide-react";
+import Sidebar from "./SideBar";  // Importing your custom Sidebar component
 
-const colors = {
-  background: "#0b0f1c",
-  foreground: "#fdfdfd",
-  card: "#0a2635",
-  border: "#1a3545",
-  purplePinkFrom: "#8B5CF6",
-  purplePinkTo: "#EC4899",
-  accentPurple: "#9333EA",
-  accentPink: "#EC4899",
-}
-
-const userProfile = {
-  name: "Sarah Wilson",
-  title: "Software Engineer",
-  initials: "SW",
-}
-
-// Update the mock data dates to numeric format
 const interviewHistory = [
   {
     id: 1,
@@ -61,117 +45,159 @@ const interviewHistory = [
     date: "04/05/2023",
     score: 89,
   },
-]
+];
+
+// Define user profile for the sidebar
+const userProfile = {
+  name: "Sarah Wilson",
+  title: "Software Engineer",
+  initials: "SW",
+};
+
+// Score badge component to match the Dashboard style
+const ScoreBadge = ({ score }) => {
+  let color = "green";
+  if (score < 60) color = "red";
+  else if (score < 80) color = "yellow";
+
+  const colorClasses = {
+    green: "bg-green-900/50 text-green-400 border border-green-600/30",
+    yellow: "bg-yellow-900/50 text-yellow-400 border border-yellow-600/30",
+    red: "bg-red-900/50 text-red-400 border border-red-600/30",
+  };
+
+  return (
+    <span className={`px-3 py-1 rounded-full text-sm font-medium ${colorClasses[color]}`}>
+      {score}%
+    </span>
+  );
+};
 
 const InterviewHistory = () => {
-  const [filterStatus, setFilterStatus] = useState("All Interviews")
+  const [filterStatus, setFilterStatus] = useState("All Interviews");
 
   // Filter interviews based on selected status
   const filteredInterviews = interviewHistory.filter((interview) => {
-    if (filterStatus === "All Interviews") return true
-    if (filterStatus === "High Scores" && interview.score >= 80) return true
-    if (filterStatus === "Medium Scores" && interview.score >= 60 && interview.score < 80) return true
-    if (filterStatus === "Low Scores" && interview.score < 60) return true
-    return false
-  })
+    if (filterStatus === "All Interviews") return true;
+    if (filterStatus === "High Scores" && interview.score >= 80) return true;
+    if (filterStatus === "Medium Scores" && interview.score >= 60 && interview.score < 80) return true;
+    if (filterStatus === "Low Scores" && interview.score < 60) return true;
+    return false;
+  });
 
   return (
-    <div className="flex h-screen text-white font-sans bg-[#0b0f1c]" style={{ marginTop: "6rem" }}>
-      <aside className="w-64 h-full  p-4 flex flex-col max-h-screen overflow-y-auto border-r border-opacity-30 border-white">
-        <div className="flex items-center mb-6">
-          <div className="w-12 h-12 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 flex items-center justify-center text-white text-xl mr-4 mt-6">
-            {userProfile.initials}
+    <div className="flex min-h-screen bg-[#0b0f1c] text-white font-sans">
+      {/* Include the Sidebar component */}
+      <Sidebar userProfile={userProfile} />
+      
+      <div className="flex-1 flex flex-col">
+        <main className="flex-1 container mx-auto pt-36 pb-12 px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center mb-10">
+            <div>
+              <h1 className="text-3xl font-bold text-white tracking-tight">
+                Interview History
+              </h1>
+              <p className="text-gray-400 mt-1">View and analyze your past interview results</p>
+            </div>
+            
+            <div className="flex gap-4">
+              <div className="relative">
+                <select
+                  className="bg-gray-900/80 backdrop-blur-sm border border-purple-500/20 rounded-lg px-4 py-2.5 text-sm text-white appearance-none pr-10 focus:outline-none focus:ring-2 focus:ring-purple-500 transition-colors"
+                  value={filterStatus}
+                  onChange={(e) => setFilterStatus(e.target.value)}
+                >
+                  <option>All Interviews</option>
+                  <option>High Scores</option>
+                  <option>Medium Scores</option>
+                  <option>Low Scores</option>
+                </select>
+                <Filter className="absolute right-3 top-3 h-4 w-4 text-gray-400 pointer-events-none" />
+              </div>
+              <button className="px-4 py-2.5 bg-gradient-to-r from-purple-600 to-pink-500 text-white rounded-lg font-medium transition-transform duration-300 hover:scale-105 shadow-lg flex items-center gap-2">
+                <FileDown className="h-4 w-4" />
+                Export Results
+              </button>
+            </div>
           </div>
-          <div>
-            <h3 className="font-semibold mt-6">{userProfile.name}</h3>
-            <p className="text-gray-400 text-sm">{userProfile.title}</p>
-          </div>
-        </div>
-        <nav className="flex-1 mb-6 ">
-          {["Dashboard", "Start Mock Interview", "Interview History", "Generate Script", "Settings"].map(
-            (item, index) => (
-              <Link
-                key={item}
-                to={
-                  item === "Dashboard" ? "/dashboard" :
-                  item === "Start Mock Interview" ? "/startmock" :
-                  item === "Interview History" ? "/interview-history" :
-                  item === "Generate Script" ? "/uploadcv" :
-                  item === "Settings" ? "/editprofile" : "#"
-                }
-                className={`block px-4 py-3 mb-2 rounded-md transition-colors font-medium text-base tracking-wide ${
-                  index === 2
-                    ? "bg-[#1e293b] text-white"
-                    : "text-gray-300 hover:bg-gray-700"
-                }`}
-              >
-                {item}
-              </Link>
-            ),
-          )}
-        </nav>
-      </aside>
-      <main className="flex-1 p-6 overflow-y-auto">
-        <div className="flex justify-between items-center mb-8 mt-6">
-          <h1 className="text-2xl font-bold text-white">Interview History</h1>
-          <div className="flex gap-3">
-            <select
-              className="bg-[#0a2635] border border-[#1a3545] rounded-md px-3 py-2 text-sm text-white"
-              value={filterStatus}
-              onChange={(e) => setFilterStatus(e.target.value)}
-            >
-              <option>All Interviews</option>
-              <option>High Scores</option>
-              <option>Medium Scores</option>
-              <option>Low Scores</option>
-            </select>
-            <button className="bg-gradient-to-r from-purple-500 to-pink-500 px-4 py-2 rounded-md text-sm font-medium text-white">
-              Export Results
-            </button>
-          </div>
-        </div>
 
-        <div className="bg-[#0a2635] rounded-lg shadow-md overflow-hidden">
-          <table className="w-full">
-            <thead>
-              <tr className="border-b border-[#1a3545]">
-                <th className="text-left p-4 font-medium text-white">Job Industry</th>
-                <th className="text-left p-4 font-medium text-white">Job Role</th>
-                <th className="text-left p-4 font-medium text-white">Experience Level</th>
-                <th className="text-left p-4 font-medium text-white">Date</th>
-                <th className="text-left p-4 font-medium text-white">Score</th>
-                <th className="text-left p-4 font-medium text-white">Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {filteredInterviews.length > 0 ? (
-                filteredInterviews.map((interview) => (
-                  <tr key={interview.id} className="border-b border-[#1a3545] hover:bg-[#0d2c3d] transition-colors">
-                    <td className="p-4 text-white">{interview.industry}</td>
-                    <td className="p-4 text-white">{interview.role}</td>
-                    <td className="p-4 text-white">{interview.experience}</td>
-                    <td className="p-4 text-white">{interview.date}</td>
-                    <td className="p-4 text-white">{interview.score}%</td>
-                    <td className="p-4 text-white flex gap-3">
-                      <button className="text-sm text-white hover:text-purple-300">View Details</button>
-                      <button className="text-sm text-white hover:text-purple-300">Download</button>
-                    </td>
+          {/* Results Table */}
+          <div className="overflow-hidden rounded-xl shadow-lg border border-purple-500/20">
+            <div className="overflow-x-auto">
+              <table className="w-full border-collapse">
+                <thead className="bg-gray-900 text-gray-300">
+                  <tr>
+                    <th className="px-6 py-4 text-left text-sm font-semibold uppercase tracking-wider">
+                      Job Industry
+                    </th>
+                    <th className="px-6 py-4 text-left text-sm font-semibold uppercase tracking-wider">
+                      Job Role
+                    </th>
+                    <th className="px-6 py-4 text-left text-sm font-semibold uppercase tracking-wider">
+                      Experience Level
+                    </th>
+                    <th className="px-6 py-4 text-left text-sm font-semibold uppercase tracking-wider">
+                      Date
+                    </th>
+                    <th className="px-6 py-4 text-left text-sm font-semibold uppercase tracking-wider">
+                      Score
+                    </th>
+                    <th className="px-6 py-4 text-left text-sm font-semibold uppercase tracking-wider">
+                      Actions
+                    </th>
                   </tr>
-                ))
-              ) : (
-                <tr>
-                  <td colSpan={6} className="p-8 text-center text-white">
-                    No interviews found matching the selected filter.
-                  </td>
-                </tr>
-              )}
-            </tbody>
-          </table>
-        </div>
-      </main>
+                </thead>
+                <tbody className="bg-gray-900/50 divide-y divide-gray-800/30">
+                  {filteredInterviews.length > 0 ? (
+                    filteredInterviews.map((interview) => (
+                      <tr key={interview.id} className="hover:bg-gray-800/20 transition-colors">
+                        <td className="px-6 py-4 whitespace-nowrap">
+                          <div className="text-base text-white">{interview.industry}</div>
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap">
+                          <div className="text-base text-gray-300">{interview.role}</div>
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap">
+                          <div className="text-base text-gray-300">{interview.experience}</div>
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap">
+                          <div className="text-base text-gray-300">{interview.date}</div>
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap">
+                          <ScoreBadge score={interview.score} />
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-base font-medium">
+                          <div className="flex items-center gap-4">
+                            <Link
+                              to={`/interviews/${interview.id}`}
+                              className="text-white hover:text-purple-300 transition-colors flex items-center gap-1"
+                            >
+                              View Details
+                              <ChevronRight className="h-4 w-4" />
+                            </Link>
+                            <button className="text-white hover:text-purple-300 transition-colors flex items-center gap-1">
+                              <Download className="h-4 w-4" />
+                              Download
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                    ))
+                  ) : (
+                    <tr>
+                      <td colSpan={6} className="px-6 py-10 text-center text-gray-400">
+                        No interviews found matching the selected filter.
+                      </td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </main>
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default InterviewHistory
-
+export default InterviewHistory;

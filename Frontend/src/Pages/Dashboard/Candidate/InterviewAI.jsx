@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Sidebar from './SideBar';
 
 const InterviewAI = () => {
   const [industry, setIndustry] = useState('');

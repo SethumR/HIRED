@@ -1,187 +1,210 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { Clock, X, Mic, RotateCw, HelpCircle, FileText, ArrowRight } from 'lucide-react';
+import React, { useState, useEffect, useRef } from "react";
+import { Mic, ArrowRight, RotateCcw, HelpCircle, FileText, X, MicOff } from "lucide-react";
+import Sidebar from "./SideBar";  // Importing your custom Sidebar component
 
-const colors = {
-  background: "#0b0f1c",
-  foreground: "#fdfdfd",
-  card: "#0a2635",
-  border: "#1a3545",
-  purplePinkFrom: "#8B5CF6",
-  purplePinkTo: "#EC4899",
-  accentPurple: "#9333EA",
-  accentPink: "#EC4899",
-};
+export default function InterviewAI() {
+  const [isSpeaking, setIsSpeaking] = useState(false);
+  const [duration, setDuration] = useState(0);
+  const [isSessionActive, setIsSessionActive] = useState(true);
+  const timerRef = useRef(null);
 
-const userProfile = {
-  name: "Sarah Wilson",
-  title: "Software Engineer",
-  initials: "SW",
-};
+  // User profile data for the sidebar
+  const userProfile = {
+    name: "Sarah Wilson",
+    title: "Software Engineer",
+    initials: "SW",
+  };
 
-const Startmock = () => {
+  // Format seconds to MM:SS format
+  const formatTime = (seconds) => {
+    const minutes = Math.floor(seconds / 60);
+    const remainingSeconds = seconds % 60;
+    return `${minutes.toString().padStart(2, "0")}:${remainingSeconds.toString().padStart(2, "0")}`;
+  };
+
+  // Toggle speaking state
+  const handleSpeakToggle = () => {
+    if (!isSessionActive) return;
+    setIsSpeaking((prev) => !prev);
+  };
+
+  // End the session
+  const handleEndSession = () => {
+    setIsSessionActive(false);
+    setIsSpeaking(false);
+  };
+
+  // Timer effect
+  useEffect(() => {
+    if (isSpeaking && isSessionActive) {
+      timerRef.current = setInterval(() => {
+        setDuration((prev) => prev + 1);
+      }, 1000);
+    } else {
+      clearInterval(timerRef.current);
+    }
+
+    return () => clearInterval(timerRef.current);
+  }, [isSpeaking, isSessionActive]);
+
   return (
-    <div className="flex h-screen text-white font-sans bg-[#0b0f1c] py-24">
-      <aside className="w-64 h-full p-4 flex flex-col max-h-screen overflow-y-auto border-r border-opacity-30 border-white">
-        <div className="flex items-center mb-6">
-          <div className="w-12 h-12 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 flex items-center justify-center text-white text-xl mr-4 mt-6">
-            {userProfile.initials}
-          </div>
-          <div>
-            <h3 className="font-semibold mt-6">{userProfile.name}</h3>
-            <p className="text-gray-400 text-sm">{userProfile.title}</p>
-          </div>
-        </div>
-        <nav className="flex-1 mb-6">
-          {["Dashboard", "Start Mock Interview", "Interview History", "Generate Script", "Settings"].map((item, index) => (
-            <Link
-              key={item}
-              to={
-                item === "Dashboard" ? "/dashboard" :
-                item === "Start Mock Interview" ? "/startmock" :
-                item === "Interview History" ? "/interview-history" :
-                item === "Generate Script" ? "/uploadcv" :
-                item === "Settings" ? "/editprofile" : "#"
-              }
-              className={`block px-4 py-3 mb-2 rounded-md transition-colors font-medium text-base tracking-wide ${
-                index === 1 ? "bg-[#1e293b] text-white" : "text-gray-300 hover:bg-gray-700"
-              }`}
-            >
-              {item}
-            </Link>
-          ))}
-        </nav>
-      </aside>
-      <main className="flex-1 p-6 overflow-y-auto">
-        {/* Header */}
-        <header className="flex justify-between items-center px-6 py-4 border-b border-gray-800 bg-[#0d1221] mb-5">
-          <div className="flex items-center gap-3">
-            <div className="text-purple-500">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect x="3" y="3" width="18" height="18" rx="2" fill="#8B5CF6" />
-                <circle cx="12" cy="10" r="3" fill="white" />
-                <rect x="7" y="15" width="10" height="3" rx="1.5" fill="white" />
-              </svg>
-            </div>
-            <span className="font-semibold text-lg">InterviewAI</span>
-          </div>
-          <div className="flex items-center gap-4">
-            <div className="flex items-center gap-2 text-gray-400">
-              <Clock size={16} />
-              <span>Duration: 12:45</span>
-            </div>
-            <button className="bg-gradient-to-r from-purple-600 to-pink-500 hover:from-pink-500 hover:to-purple-600 text-white px-3 py-1 rounded-xl flex items-center gap-1 transition duration-300">
-              <X size={16} />
-              End Interview
-            </button>
-          </div>
-        </header>
+    // Main container - adjusted to account for site header and footer
+    <div className="flex flex-1 bg-[#0b0f1c] text-white min-h-[calc(100vh-120px)]">
+      {/* Include the Sidebar component */}
+      <Sidebar userProfile={userProfile} />
+      
+      {/* Main content area */}
+      <div className="flex-1 flex flex-col overflow-y-auto py-20">
+        {/* Session controls - made more prominent and fixed at the top of the content area */}
+        <div className="sticky top-0 z-20 w-full bg-[#0b0f1c] border-b border-gray-800 px-4 py-4 flex justify-center items-center shadow-lg">
+      {/* Comment: This header contains session controls and stays visible when scrolling */}
+      <div className="bg-gray-800/70 px-4 py-2 rounded-md text-gray-300 text-base flex items-center mr-4">
+        <span className="mr-2 font-semibold">Duration:</span> {formatTime(duration)}
+      </div>
+      <button
+       className="flex items-center gap-2 bg-red-500 hover:bg-red-600 text-white text-sm h-10 px-5 rounded-md font-medium"
+       onClick={handleEndSession}
+       disabled={!isSessionActive}
+      >
+      <X className="h-4 w-4" />
+      <span>End Session</span>
+      </button>
+      </div>
 
-        <div className="mx-auto max-w-7xl p-6 flex">
-          {/* Left Panel - Interviewer */}
-          <div className="w-2/3 pr-6 border-r border-gray-800">
+        {/* Main content with interview interface */}
+        <div className="flex flex-col md:flex-row flex-1 max-w-7xl mx-auto gap-6 p-4">
+          {/* Left panel - Question area */}
+          <div className="w-full md:w-1/2 p-6 border-b md:border-b-0 md:border-r border-gray-800">
             <div className="flex items-center gap-4 mb-6">
-              <div className="w-16 h-16 bg-[#0d1221] rounded-full flex items-center justify-center border border-gray-800">
-                <div className="w-8 h-8 text-purple-500">
-                  <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect x="3" y="3" width="18" height="18" rx="2" fill="#8B5CF6" />
-                    <circle cx="12" cy="10" r="3" fill="white" />
-                    <rect x="7" y="15" width="10" height="3" rx="1.5" fill="white" />
-                  </svg>
+              <div className="flex items-center space-x-2">
+                <img 
+                  src="animated.gif" 
+                  alt="GIF Icon" 
+                  className="w-16 h-16"
+                />
+                <div>
+                  <h2 className="text-xl font-bold">Hired</h2>
+                  <p className="text-sm text-gray-400">Technical Interview Specialist</p>
                 </div>
-              </div>
-              <div>
-                <h2 className="font-semibold text-lg text-white">AI Interviewer</h2>
-                <p className="text-gray-400">Technical Interview Specialist</p>
               </div>
             </div>
 
-            <div className="mb-4">
-              <p className="text-sm text-gray-400 mb-1">Progress</p>
-              <div className="w-full h-2 bg-gray-800 rounded-full overflow-hidden">
-                <div className="h-full bg-gradient-to-r from-purple-500 to-pink-500 rounded-full" style={{ width: '40%' }} />
+            <div className="mb-6">
+              <div className="flex justify-between mb-2">
+                <span className="text-sm text-gray-400">Progress</span>
+                <span className="text-sm text-blue-400">Question 2 of 5</span>
               </div>
-              <div className="flex justify-end text-purple-500 text-sm mt-1">Question 2 of 5</div>
+              <div className="relative h-2 bg-gray-800 rounded-full overflow-hidden">
+                <div
+                  className="absolute left-0 top-0 h-full bg-gradient-to-r from-blue-600 to-blue-400 rounded-full"
+                  style={{ width: "40%" }}
+                ></div>
+              </div>
             </div>
 
-            <div className="mb-8">
-              <h3 className="font-medium text-lg mb-4 bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">Can you describe a challenging project you've worked on and how you handled it?</h3>
-              
-              <div className="flex items-center gap-2 text-gray-400 mb-4">
-                <div className="p-1">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" strokeWidth="2" fill="none" />
-                    <circle cx="12" cy="10" r="3" stroke="currentColor" strokeWidth="2" fill="none" />
-                    <rect x="7" y="15" width="10" height="3" rx="1.5" stroke="currentColor" strokeWidth="2" fill="none" />
+            <div className="mb-6">
+              <h3 className="text-lg font-medium mb-4 text-gray-100">
+                Can you describe a challenging project you've worked on and how you handled it?
+              </h3>
+              {!isSpeaking && (
+                <div className="items-center gap-2 text-gray-400 mb-4 bg-gray-800/50 p-3 rounded-lg inline-flex">
+                  <svg
+                    className="w-5 h-5 text-blue-400 animate-pulse"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <rect x="4" y="4" width="16" height="16" rx="2" stroke="currentColor" strokeWidth="2" />
+                    <rect x="9" y="9" width="6" height="6" rx="1" fill="currentColor" />
                   </svg>
+                  <span className="text-base">AI is speaking...</span>
                 </div>
-                <span>AI is speaking...</span>
-              </div>
+              )}
+            </div>
 
-              <div className="bg-[#0d1221] p-4 rounded-lg mb-4 border border-gray-800 shadow-cyan-500/20 shadow-lg">
-                <h4 className="text-purple-500 font-medium mb-2">Real-time Feedback</h4>
-                <p className="text-gray-400">Try structuring your answer using the STAR method: Situation, Task, Action, and Result.</p>
-              </div>
+            <div className="bg-blue-900/30 p-5 rounded-xl mb-6 border border-blue-800/50">
+              <h4 className="text-blue-300 font-medium mb-2 text-base">Real-time Feedback</h4>
+              <p className="text-gray-300 text-base">
+                Try structuring your answer using the STAR method: Situation, Task, Action, and Result.
+              </p>
             </div>
           </div>
 
-          {/* Right Panel - User */}
-          <div className="w-1/3 flex flex-col pl-6">
-            <div className="flex-1 flex flex-col bg-[#0d1221] rounded-lg border border-gray-800 shadow-cyan-500/20 shadow-lg p-6">
-              <div className="flex-1 flex items-center justify-center">
-                <div className="w-32 h-32 bg-gradient-to-r from-purple-600 to-pink-500 rounded-full flex items-center justify-center shadow-cyan-500/20 shadow-lg">
-                  <Mic size={56} className="text-white" />
+          {/* Right panel - Answer area */}
+          <div className="w-full md:w-1/2 p-6 flex flex-col">
+            <div className="flex-1 flex flex-col items-center justify-start pt-10">
+              <button
+                className={`w-20 h-20 rounded-full flex items-center justify-center mb-4 shadow-lg transition-all duration-300 ${
+                  isSpeaking
+                    ? "bg-red-500 shadow-red-900/30 scale-105 sm:scale-110"
+                    : "bg-gradient-to-br from-blue-500 to-blue-700 shadow-blue-900/30"
+                } ${!isSessionActive ? "opacity-50 cursor-not-allowed" : "cursor-pointer"}`}
+                onClick={handleSpeakToggle}
+                disabled={!isSessionActive}
+              >
+                {isSpeaking ? (
+                  <MicOff className="w-8 h-8 text-white" />
+                ) : (
+                  <Mic className="w-8 h-8 text-white" />
+                )}
+              </button>
+              <p className="text-base text-gray-400 mb-2">{isSpeaking ? "Tap to pause" : "Tap to speak"}</p>
+
+              <div className="flex items-center gap-2 mb-6">
+                <div
+                  className={`h-2 w-2 rounded-full ${isSpeaking ? "bg-red-500 animate-pulse" : "bg-gray-600"}`}
+                ></div>
+                <div className="bg-gray-800/70 px-3 py-1 rounded-md text-gray-300 text-base">
+                  {formatTime(duration)}
                 </div>
+                <div
+                  className={`h-2 w-2 rounded-full ${isSpeaking ? "bg-red-500 animate-pulse" : "bg-gray-600"}`}
+                ></div>
               </div>
-              <div className="text-center mb-8">
-                <p className="font-medium mb-2 text-white">Hold to Speak</p>
-                <div className="bg-[#0b0f1c] p-3 rounded-lg border border-gray-800">
-                  <p className="text-gray-400">"In my previous role, I was tasked with leading a team of five developers to deliver a critical client project. The main challenge was..."</p>
-                </div>
-              </div>
-              <div className="flex justify-between">
-                <button className="border border-gray-800 rounded-lg px-4 py-2 flex items-center gap-2 text-gray-400 bg-[#0b0f1c] hover:bg-[#0d1221]">
-                  <RotateCw size={16} />
-                  Retry Answer
-                </button>
-                <div className="flex gap-2">
-                  <button className="border border-gray-800 rounded-full w-10 h-10 flex items-center justify-center text-gray-400 bg-[#0b0f1c] hover:bg-[#0d1221]">
-                    <HelpCircle size={16} />
-                  </button>
-                  <button className="border border-gray-800 rounded-full w-10 h-10 flex items-center justify-center text-gray-400 bg-[#0b0f1c] hover:bg-[#0d1221]">
-                    <FileText size={16} />
-                  </button>
-                </div>
-                <button className="bg-gradient-to-r from-purple-600 to-pink-500 hover:from-pink-500 hover:to-purple-600 text-white px-4 py-2 rounded-xl flex items-center gap-2 transition duration-300">
-                  Next Question
-                  <ArrowRight size={16} />
-                </button>
+
+              <div className="w-full bg-gray-800/50 p-5 rounded-xl mb-6 border border-gray-700/50 shadow-md">
+                <p className="text-gray-300 text-base">
+                  "In my previous role, I was tasked with leading a team of five developers to deliver a critical client
+                  project. The main challenge was..."
+                </p>
               </div>
             </div>
-            
-            {/* Interview Tips */}
-            <div className="mt-6 p-6 bg-[#0d1221] rounded-lg border border-gray-800 shadow-cyan-500/20 shadow-lg">
-              <h3 className="text-center font-medium text-lg mb-4 bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">Interview Tips</h3>
-              <div className="grid grid-cols-3 gap-4">
-                <div className="px-4">
-                  <h4 className="font-medium mb-2 text-white">Speak Clearly</h4>
-                  <p className="text-sm text-gray-400">Maintain a steady pace and enunciate your words</p>
-                </div>
-                <div className="px-4">
-                  <h4 className="font-medium mb-2 text-white">Be Specific</h4>
-                  <p className="text-sm text-gray-400">Use concrete examples to support your answers</p>
-                </div>
-                <div className="px-4">
-                  <h4 className="font-medium mb-2 text-white">Stay Focused</h4>
-                  <p className="text-sm text-gray-400">Keep your answers relevant to the question</p>
-                </div>
+
+            {/* Bottom buttons row - added extra spacing at bottom for footer clearance */}
+            {/* Comment: Extra padding and margin added to prevent buttons from being covered by footer */}
+            <div className="flex flex-col sm:flex-row justify-between gap-3 mt-4 mb-16">
+              <button
+                className="flex items-center justify-center gap-2 border border-gray-700 text-gray-300 hover:bg-gray-800 text-base h-10 px-4 rounded-md"
+                disabled={!isSessionActive}
+              >
+                <RotateCcw className="w-4 h-4" />
+                Retry Answer
+              </button>
+              <div className="flex justify-center sm:justify-end gap-2">
+                <button
+                  className="text-gray-400 hover:bg-gray-800 h-10 w-10 flex items-center justify-center rounded-md"
+                  disabled={!isSessionActive}
+                >
+                  <HelpCircle className="w-5 h-5" />
+                </button>
+                <button
+                  className="text-gray-400 hover:bg-gray-800 h-10 w-10 flex items-center justify-center rounded-md"
+                  disabled={!isSessionActive}
+                >
+                  <FileText className="w-5 h-5" />
+                </button>
+                <button
+                  className="bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 text-white flex items-center gap-2 border-0 text-base h-10 px-4 rounded-md"
+                  disabled={!isSessionActive}
+                >
+                  Next Question
+                  <ArrowRight className="w-4 h-4" />
+                </button>
               </div>
             </div>
           </div>
         </div>
-      </main>
+      </div>
     </div>
   );
-};
-
-export default Startmock;
+}
