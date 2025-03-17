@@ -90,7 +90,7 @@ export default function AboutUs() {
               <span className="text-sm font-medium text-gray-300">Get to know us better</span>
             </div>
           </div>
-          <h2 className="text-5xl font-semibold text-white mb-4 leading-tight">What our Solution focuses on</h2>
+          <h2 className="text-[42px] font-semibold text-white mb-4 leading-tight">What our Solution focuses on</h2>
         </div>
       </div>
 {/* Vision and Mission Section */}
@@ -133,7 +133,7 @@ export default function AboutUs() {
       {/* Our Team Section */}
       <div className="max-w-7xl mx-auto px-4 py-16 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <h1 className="text-5xl font-semibold text-white mb-12">Meet Our Team</h1>
+          <h1 className="text-[42px] font-semibold text-white mb-12">Meet Our Team</h1>
           <p className="text-xl mb-10 leading-9 font-light text-slate-200 text-left">
             We are second-year undergraduate students at the Institute of
             Information Technology (IIT), University of Westminster, pursuing
