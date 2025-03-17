@@ -364,7 +364,7 @@ const NewsletterForm = () => {
   };
 
   return (
-    <div className="w-96 max-w-[76rem] mx-auto p-8 rounded-xl bg-[#101827] text-white sm:w-full">
+    <div className="w-88 max-w-[76rem] mx-auto p-8 rounded-xl bg-[#101827] text-white sm:w-full">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
         <div>
           <h2 className="text-2xl md:text-xl font-bold mb-2">Contact Support Team</h2>
