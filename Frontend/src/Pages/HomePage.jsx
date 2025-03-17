@@ -256,7 +256,16 @@ export default function HomePage() {
             </div>
           </div>
 
-        
+          {/* Image Section */}
+          <div className="hidden lg:block relative">
+            <img
+               src="Ani.mp4"
+              alt="AI Interview Assistant"
+              className="w-full max-w-[500px] mx-auto transform transition duration-700 hover:scale-105"
+              data-aos="zoom-in"
+            />
+            <div className="absolute -z-10 inset-0 bg-purple-500 blur-[100px] opacity-30"></div>
+          </div>
 
           <div data-aos="fade">
             <div className="max-w-xs sm:max-w-lg overflow-hidden mx-auto ml-1 -mt-2 bg-[#0d1221] shadow-lg shadow-cyan-500/20 h-20 sm:h-24 rounded-xl sm:mb-1 mb-28">
