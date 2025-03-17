@@ -259,7 +259,7 @@ export default function HomePage() {
           {/* Image Section */}
           <div className="hidden lg:block relative">
             <img
-              // src="HIRED.png"
+              src="animated_robot.png"
               alt="AI Interview Assistant"
               className="w-full max-w-[500px] mx-auto transform transition duration-700 hover:scale-105"
               data-aos="zoom-in"
