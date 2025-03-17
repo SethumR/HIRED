@@ -218,7 +218,7 @@ export default function HomePage() {
     <div className="min-h-screen bg-[#0b0f1c] text-white">
       {/* Hero Section */}
       <section id="home">
-      <div className="container mx-auto px-6 pt-48 lg:pt-56 lg:pb-48 ">
+      <div className="container mx-auto px-6 pt-30 lg:pt-56 lg:pb-48 ">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Text Section */}
           <div className="space-y-8">
@@ -257,14 +257,16 @@ export default function HomePage() {
           </div>
 
           {/* Image Section */}
-          <div className="hidden lg:block relative">
-            <img
-               src="Ani.mp4"
-              alt="AI Interview Assistant"
-              className="w-full max-w-[500px] mx-auto transform transition duration-700 hover:scale-105"
-              data-aos="zoom-in"
-            />
-            <div className="absolute -z-10 inset-0 bg-purple-500 blur-[100px] opacity-30"></div>
+          <div className="relative flex justify-center">
+            <div className="relative w-full max-w-[500px] sm:max-w-[400px] xs:max-w-[300px]">
+              <img
+                src="animated_robot.png"
+                alt="AI Interview Assistant"
+                className="w-full transform transition duration-700 hover:scale-105"
+                data-aos="zoom-in"
+              />
+              <div className="absolute -z-10 inset-0 bg-purple-500 blur-[80px] sm:blur-[60px] opacity-30"></div>
+            </div>
           </div>
 
           <div data-aos="fade">

@@ -91,7 +91,7 @@ const InterviewHistory = () => {
       <Sidebar userProfile={userProfile} />
       
       <div className="flex-1 flex flex-col">
-        <main className="flex-1 container mx-auto pt-36 pb-12 px-4 sm:px-6 lg:px-8">
+        <main className="flex-1 container mx-auto pt-[7.5rem] pb-12 px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center mb-10">
             <div>
               <h1 className="text-3xl font-bold text-white tracking-tight">
