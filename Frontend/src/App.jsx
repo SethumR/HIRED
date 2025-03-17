@@ -30,26 +30,36 @@ import CompanyProfilePage from'./Pages/Dashboard/Company/EditProfile';
 import StartMock from './Pages/Dashboard/Candidate/Startmock';
 import InterviewHistory from './Pages/Dashboard/Candidate/InterviewHistory';
 
-
 const Layout = ({ children }) => {
   const location = useLocation();
   
   // Convert pathname to lowercase to avoid case sensitivity issues
   const currentPath = location.pathname.toLowerCase();
 
-  const hideHeaderFooter = ["/signin", "/signup","/create-account","/create-account/email","/create-account-company","/create-account/otp", "/create-account-company/email","/signincompany","/create-account-company/otp", "/signupcompany"].includes(currentPath);
+  const hideHeaderFooter = [
+    "/signin", 
+    "/signup",
+    "/create-account",
+    "/create-account/email",
+    "/create-account-company",
+    "/create-account/otp", 
+    "/create-account-company/email",
+    "/signincompany",
+    "/create-account-company/otp", 
+    "/signupcompany",
+    "/interview" 
+  ];
 
   return (
     <div className="bg-[#0a0b14] min-h-screen">
-      {!hideHeaderFooter && <Navbar />}
+      {!hideHeaderFooter.includes(currentPath) && <Navbar />}
       
       {children}
 
-      {!hideHeaderFooter && <Footer />}
+      {!hideHeaderFooter.includes(currentPath) && <Footer />}
     </div>
   );
 };
-
 
 const App = () => {
   return (
@@ -75,13 +85,12 @@ const App = () => {
           <Route path="/companyprofilepage" element={<CompanyProfilePage/>}/>
           <Route path="/startmock" element={<StartMock/>}/>
           <Route path="/create-account" element={<AccountStep />} />
-        <Route path="/create-account/otp" element={<OtpStep />} />
-        <Route path="/create-account/email" element={<EmailStep />} />
-        <Route path="/create-account-company" element={<AccountStepC />} />
-        <Route path="/create-account-company/otp" element={<OtpStepC />} />
-        <Route path="/create-account-company/email" element={<EmailStepC />} />
-        <Route path="/interview-History" element={<InterviewHistory/>} />
-          
+          <Route path="/create-account/otp" element={<OtpStep />} />
+          <Route path="/create-account/email" element={<EmailStep />} />
+          <Route path="/create-account-company" element={<AccountStepC />} />
+          <Route path="/create-account-company/otp" element={<OtpStepC />} />
+          <Route path="/create-account-company/email" element={<EmailStepC />} />
+          <Route path="/interview-History" element={<InterviewHistory/>} />
         </Routes>
       </Layout>
     </Router>
