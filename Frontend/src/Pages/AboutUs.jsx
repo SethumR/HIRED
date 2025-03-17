@@ -152,64 +152,64 @@ export default function AboutUs() {
           </p>
         </div>
 
-        {/* Team Member Cards with original styling */}
-        <div className="flex justify-center items-stretch space-x-8 mb-24">
-          <button
-            onClick={prevSlide}
-            className="bg-gray-600 text-white rounded-full p-3 hover:bg-gray-700 h-fit self-center transition-colors duration-300"
-          >
-            <FaChevronLeft size={22} />
-          </button>
+{/* Team Member Cards with original styling */}
+<div className="flex justify-center items-stretch space-x-2 md:space-x-8 mb-24">
+  <button
+    onClick={prevSlide}
+    className="bg-gray-600 text-white rounded-full p-2 md:p-3 hover:bg-gray-700 h-fit self-center transition-colors duration-300"
+  >
+    <FaChevronLeft size={16} className="md:w-6 md:h-6" />
+  </button>
 
-          {displayedMembers.map((member, index) => (
-            <div
-              key={index}
-              className={`bg-[#1d2638] rounded-lg p-8 shadow-xl w-[420px] h-[550px] flex flex-col transform transition-all duration-300 hover:scale-105 hover:shadow-blue-500/10 hover:border-blue-500/50 ${
-                index === 0 ? "block" : "hidden md:block"
-              }`}
-            >
-              <div className="w-full h-[320px] mb-6">
-                <img
-                  src={member.image}
-                  alt={`Team member ${member.name}`}
-                  className="w-full h-full object-cover rounded-lg"
-                />
-              </div>
-              <div className="flex flex-col flex-grow">
-                <h3 className="text-2xl font-semibold text-white mb-2">
-                  {member.name}
-                </h3>
-                <p className="text-sm text-white/70 mb-2">{member.position}</p>
-                <p className="text-white/90">{member.description}</p>
-                <div className="flex justify-center space-x-6 mt-auto pt-4">
-                  <a
-                    href={member.linkedin}
-                    className="text-white transform hover:scale-110 transition duration-200"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <FaLinkedin size={22} />
-                  </a>
-                  <a
-                    href={member.github}
-                    className="text-white transform hover:scale-110 transition duration-200"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <FaGithub size={22} />
-                  </a>
-                </div>
-              </div>
-            </div>
-          ))}
-
-          <button
-            onClick={nextSlide}
-            className="bg-gray-600 text-white rounded-full p-3 hover:bg-gray-700 h-fit self-center transition-colors duration-300"
+  {displayedMembers.map((member, index) => (
+    <div
+      key={index}
+      className={`bg-[#1d2638] rounded-lg p-4 md:p-8 shadow-xl w-full md:w-[420px] h-auto md:h-[550px] flex flex-col transform transition-all duration-300 hover:scale-105 hover:shadow-blue-500/10 hover:border-blue-500/50 ${
+        index === 0 ? "block" : "hidden md:block"
+      }`}
+    >
+      <div className="w-full h-[250px] md:h-[320px] mb-4 md:mb-6">
+        <img
+          src={member.image}
+          alt={`Team member ${member.name}`}
+          className="w-full h-full object-cover rounded-lg"
+        />
+      </div>
+      <div className="flex flex-col flex-grow">
+        <h3 className="text-xl md:text-2xl font-semibold text-white mb-1 md:mb-2">
+          {member.name}
+        </h3>
+        <p className="text-sm text-white/70 mb-1 md:mb-2">{member.position}</p>
+        <p className="text-white/90">{member.description}</p>
+        <div className="flex justify-center space-x-6 mt-auto pt-4">
+          <a
+            href={member.linkedin}
+            className="text-white transform hover:scale-110 transition duration-200"
+            target="_blank"
+            rel="noopener noreferrer"
           >
-            <FaChevronRight size={22} />
-          </button>
+            <FaLinkedin size={22} />
+          </a>
+          <a
+            href={member.github}
+            className="text-white transform hover:scale-110 transition duration-200"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <FaGithub size={22} />
+          </a>
         </div>
+      </div>
+    </div>
+  ))}
+
+  <button
+    onClick={nextSlide}
+    className="bg-gray-600 text-white rounded-full p-2 md:p-3 hover:bg-gray-700 h-fit self-center transition-colors duration-300"
+  >
+    <FaChevronRight size={16} className="md:w-6 md:h-6" />
+  </button>
+</div>
         
         {/* Progress indicator */}
         <div className="flex justify-center space-x-2 -mt-16 mb-8">
