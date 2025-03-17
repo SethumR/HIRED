@@ -36,19 +36,7 @@ const Layout = ({ children }) => {
   // Convert pathname to lowercase to avoid case sensitivity issues
   const currentPath = location.pathname.toLowerCase();
 
-  const hideHeaderFooter = [
-    "/signin", 
-    "/signup",
-    "/create-account",
-    "/create-account/email",
-    "/create-account-company",
-    "/create-account/otp", 
-    "/create-account-company/email",
-    "/signincompany",
-    "/create-account-company/otp", 
-    "/signupcompany",
-    "/interview" // Add the Interview AI page path here
-  ];
+  const hideHeaderFooter = ["/signin","/interview", "/signup","/create-account","/create-account/email","/create-account-company","/create-account/otp", "/create-account-company/email","/signincompany","/create-account-company/otp", "/signupcompany"].includes(currentPath);
 
   return (
     <div className="bg-[#0a0b14] min-h-screen">
@@ -86,11 +74,11 @@ const App = () => {
           <Route path="/companyprofilepage" element={<CompanyProfilePage/>}/>
           <Route path="/startmock" element={<StartMock/>}/>
           <Route path="/create-account" element={<AccountStep />} />
-          <Route path="/create-account/email" element={<EmailStep />} />
-          <Route path="/create-account-company" element={<AccountStepC />} />
-          <Route path="/create-account-company/otp" element={<OtpStepC />} />
-          <Route path="/create-account-company/email" element={<EmailStepC />} />
-          <Route path="/interview-History" element={<InterviewHistory/>} />
+        <Route path="/create-account/email" element={<EmailStep />} />
+        <Route path="/create-account-company" element={<AccountStepC />} />
+        <Route path="/create-account-company/otp" element={<OtpStepC />} />
+        <Route path="/create-account-company/email" element={<EmailStepC />} />
+        <Route path="/interview-History" element={<InterviewHistory/>} />
           
         </Routes>
       </Layout>
