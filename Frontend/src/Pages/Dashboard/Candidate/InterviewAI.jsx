@@ -183,6 +183,7 @@ const InterviewAI = () => {
               )}
             </button>
           </div>
+<<<<<<< Updated upstream
 
           {/* Form Fields */}
 
@@ -193,6 +194,46 @@ const InterviewAI = () => {
                   className="w-full p-3 border border--800 rounded-md focus:outline-none focus:ring-2 focus:ring-white bg-[#0b0f1c] text-white"
                   value={industry}
                   onChange={(e) => setIndustry(e.target.value)}
+=======
+          {/* Industry Selection */}
+          <div>
+            <label className="block text-white mb-2">Industry</label>
+            <select 
+              className="w-full p-3 border border-gray-800 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 bg-[#0b0f1c] text-white"
+              value={industry}
+              onChange={(e) => setIndustry(e.target.value)}
+            >
+              <option value="" disabled>Select Industry</option>
+              {industries.map((ind) => (
+                <option key={ind} value={ind}>{ind}</option>
+              ))}
+            </select>
+          </div>
+          {/* Job Role */}
+          <div>
+            <label className="block text-white mb-2">Job Role</label>
+            <input 
+              type="text" 
+              placeholder="e.g. Software Engineer, Data Scientist" 
+              className="w-full p-3 border border-gray-800 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 bg-[#0b0f1c] text-white"
+              value={jobRole}
+              onChange={(e) => setJobRole(e.target.value)}
+            />
+          </div>
+          {/* Experience Level */}
+          <div>
+            <label className="block text-white mb-2">Level of Experience</label>
+            <div className="grid grid-cols-3 gap-4">
+              {['Entry Level', 'Mid Level', 'Senior Level'].map((level) => (
+                <button
+                  key={level}
+                  className={`p-4 rounded-md flex flex-col items-center justify-center border ${
+                    experienceLevel === level 
+                      ? 'bg-gradient-to-r from-purple-600/30 to-pink-500/30 border-purple-500' 
+                      : 'border-gray-800 hover:bg-[#1a1f2e]'
+                  }`}
+                  onClick={() => setExperienceLevel(level)}
+>>>>>>> Stashed changes
                 >
                   <option value="" disabled>Select Industry</option>
                   {industries.map((ind) => (
