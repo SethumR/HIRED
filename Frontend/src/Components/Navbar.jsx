@@ -24,9 +24,12 @@ const Navbar = () => {
 
   // Handle user authentication
   useEffect(() => {
-    const storedUser = localStorage.getItem("user")
+    const storedUser = localStorage.getItem("user");
+    const storedFirstName = localStorage.getItem("firstName"); // Get first name from local storage
     if (storedUser) {
-      setUser(JSON.parse(storedUser))
+      setUser(JSON.parse(storedUser));
+    } else if (storedFirstName) {
+      setUser({ name: storedFirstName }); // Set user with first name if user is not available
     }
 
     const handleStorageChange = () => {
@@ -69,9 +72,10 @@ const Navbar = () => {
   }, [])
 
   const handleLogout = () => {
-    localStorage.removeItem("user")
-    setUser(null)
-    navigate("/") // Navigate to home page after logout
+    localStorage.removeItem("user");
+    localStorage.removeItem("firstName"); // Remove first name from local storage
+    setUser(null);
+    navigate("/"); // Navigate to home page after logout
   }
 
   const toggleDarkMode = () => {

@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 import EmailStep from "./Emailsteps";
 import AccountStep from "./AccountStep";
-import OtpStep from "./OtpStep";
 
 const Signup = () => {
   const [currentStep, setCurrentStep] = useState(1);
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: "",
     firstName: "",
@@ -14,9 +15,9 @@ const Signup = () => {
     username: "",
     password: "",
     Repassword: "",
-    otp: ["", "", "", "", "", ""],
   });
   const [errors, setErrors] = useState({});
+  const [showLoadingBox, setShowLoadingBox] = useState(false); // Add state for loading box
 
   const validateStep = () => {
     const newErrors = {};
@@ -35,9 +36,6 @@ const Signup = () => {
       if (formData.password !== formData.Repassword) {
         newErrors.Repassword = "Passwords do not match";
       }
-    } else if (currentStep === 3) {
-      if (formData.otp.some((digit) => !digit))
-        newErrors.otp = "Please enter the complete OTP";
     }
     return newErrors;
   };
@@ -63,13 +61,24 @@ const Signup = () => {
       setErrors({});
       console.log("Form submitted:", formData);
       alert("Account successfully created!");
+      navigate("/dashboard");
     } else {
       setErrors(newErrors);
     }
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 to-black text-white flex items-center justify-center px-4 ">
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 to-black text-white flex items-center justify-center px-4 relative">
+      {showLoadingBox && (
+        <div className="fixed top-12 right-2 md:right-4 bg-[#131925] text-white p-3 rounded-lg shadow-lg w-64 md:w-72 font-semibold flex items-center justify-center z-50 border border-white/30 max-w-full">
+          <svg className="animate-spin h-5 w-5 mr-2 md:mr-3 text-green-500" viewBox="0 0 24 24">
+            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
+          </svg>
+          <span className="text-sm md:text-base">Creating Account...</span>
+        </div>
+      )}
+
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -83,6 +92,7 @@ const Signup = () => {
               setEmail={(email) => setFormData({ ...formData, email })}
               error={errors.email}
               handleNext={handleNext}
+              setShowLoadingBox={setShowLoadingBox} // Pass setShowLoadingBox to EmailStep
             />
           )}
           {currentStep === 2 && (
@@ -90,28 +100,20 @@ const Signup = () => {
               formData={formData}
               setFormData={setFormData}
               errors={errors}
-              handleNext={handleNext}
-              handlePrevious={handlePrevious}
-            />
-          )}
-          {currentStep === 3 && (
-            <OtpStep
-              formData={formData}
-              setFormData={setFormData}
-              errors={errors}
               handleSubmit={handleSubmit}
               handlePrevious={handlePrevious}
+              setShowLoadingBox={setShowLoadingBox} // Pass setShowLoadingBox to AccountStep
             />
           )}
         </AnimatePresence>
 
         {/* Step indicators */}
         <div className="mt-8 flex justify-center items-center space-x-2">
-          {[1, 2, 3].map((step) => (
+          {[1, 2].map((step) => (
             <div
               key={step}
-              className={`w-2 h-2 rounded-full ${
-                currentStep >= step ? "bg-purple-500" : "bg-gray-600"
+              className={`w-1.5 h-1.5 rounded-full ${
+                currentStep >= step ? "bg-white" : "bg-gray-600"
               }`}
             />
           ))}

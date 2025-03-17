@@ -15,7 +15,6 @@ import Dashboard from './Pages/Dashboard/Candidate/CandidateDash';
 import EditProfile from './Pages/Dashboard/Candidate/EditProfile';
 import DashboardPage from './Pages/Dashboard/Company/CompanyDash';
 import AccountStep from './Pages/CreateAccount/AccountStep';  
-import OtpStep from './Pages/CreateAccount/OtpStep';
 import EmailStep from './Pages/CreateAccount/Emailsteps';
 import AccountStepC from './Pages/CreateAccountCompany/AccountStep';  
 import OtpStepC from './Pages/CreateAccountCompany/OtpStep';
@@ -75,7 +74,6 @@ const App = () => {
           <Route path="/companyprofilepage" element={<CompanyProfilePage/>}/>
           <Route path="/startmock" element={<StartMock/>}/>
           <Route path="/create-account" element={<AccountStep />} />
-        <Route path="/create-account/otp" element={<OtpStep />} />
         <Route path="/create-account/email" element={<EmailStep />} />
         <Route path="/create-account-company" element={<AccountStepC />} />
         <Route path="/create-account-company/otp" element={<OtpStepC />} />

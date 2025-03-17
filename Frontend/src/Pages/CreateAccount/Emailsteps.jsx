@@ -22,12 +22,15 @@ const EmailStep = ({ email, setEmail, error, handleNext }) => {
   const [isHoveringGithub, setIsHoveringGithub] = useState(false);
   const [googleResponse, setGoogleResponse] = useState(null); // Add missing state initialization
   const [loading, setLoading] = useState(false); // Add loading state
+  const [errorMessage, setErrorMessage] = useState(""); // Add error message state
+  const [showLoadingBox, setShowLoadingBox] = useState(false); // Add state for loading box
   const navigate = useNavigate();
 
   const handleGoogleSuccess = (response) => {
     console.log("Google Token:", response.credential);
     setGoogleResponse(response); // Correct the function call
     setLoading(true); // Set loading to true
+    setShowLoadingBox(true); // Show loading box
 
     fetch("http://localhost:8000/auth/google", {
       method: "POST",
@@ -36,27 +39,32 @@ const EmailStep = ({ email, setEmail, error, handleNext }) => {
     })
       .then((res) => {
         if (!res.ok) {
-          throw new Error("Method Not Allowed");
+          return res.json().then((data) => {
+            throw new Error(data.detail);
+          });
         }
         return res.json();
       })
       .then((data) => {
         if (data.message === "Login successful") {
-          alert("Login successful! Welcome, " + data.user.name);
           localStorage.setItem("user", JSON.stringify({ name: data.user.name, email: data.user.email })); // Store user info in local storage
           window.dispatchEvent(new Event("storage")); // Trigger storage event to update navbar
+          alert("Successfully created an account"); // Add success message
           navigate("/dashboard"); // Redirect to dashboard
         }
+        setShowLoadingBox(false); // Hide loading box on success
       })
       .catch((err) => {
         console.error("Error:", err);
-        alert("An error occurred during login.");
+        setErrorMessage(err.message); // Set error message
         setLoading(false); // Set loading to false on error
+        setShowLoadingBox(false); // Hide loading box on error
       });
   };
 
   const handleGitHubLogin = (response) => {
     console.log("GitHub Token:", response.code);
+    setShowLoadingBox(true); // Show loading box
 
     fetch("http://localhost:8000/auth/github", {
       method: "POST",
@@ -65,20 +73,27 @@ const EmailStep = ({ email, setEmail, error, handleNext }) => {
     })
       .then((res) => {
         if (!res.ok) {
-          throw new Error("Method Not Allowed");
+          return res.json().then((data) => {
+            throw new Error(data.detail);
+          });
         }
         return res.json();
       })
       .then((data) => {
         if (data.message === "Login successful") {
-          alert("Login successful! Welcome, " + data.user.name);
+          localStorage.setItem("user", JSON.stringify({ name: data.user.name, email: data.user.email })); // Store user info in local storage
+          window.dispatchEvent(new Event("storage")); // Trigger storage event to update navbar
+          alert("Successfully created an account"); // Add success message
+          navigate("/dashboard"); // Redirect to dashboard
         } else {
           alert("Login failed. Please try again.");
         }
+        setShowLoadingBox(false); // Hide loading box on success
       })
       .catch((err) => {
         console.error("Error:", err);
         alert("An error occurred during login.");
+        setShowLoadingBox(false); // Hide loading box on error
       });
   };
 
@@ -155,6 +170,12 @@ const EmailStep = ({ email, setEmail, error, handleNext }) => {
             </div>
           </motion.div>
 
+          {errorMessage && (
+            <div className="text-center -mt-2">
+              <ErrorMessage message={errorMessage} />
+            </div>
+          )}
+
           <motion.div 
             className="w-full"
             onHoverStart={() => setIsHoveringGithub(true)}
@@ -177,7 +198,6 @@ const EmailStep = ({ email, setEmail, error, handleNext }) => {
             </div>
           </motion.div>
         </div>
-
 
         <div className="flex items-center gap-3 mb-6">
           <div className="h-px flex-1 bg-gray-600" />
