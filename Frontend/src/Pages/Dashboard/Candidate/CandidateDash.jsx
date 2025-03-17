@@ -78,7 +78,7 @@ const Dashboard = () => {
     <div className="flex min-h-screen text-white font-sans bg-[#0b0f1c]">
       {/* Include the Sidebar component */}
       <Sidebar userProfile={userProfile} />
-      <main className="flex-1 container mx-auto pt-36 pb-12 px-4 sm:px-6 lg:px-8">
+      <main className="flex-1 container mx-auto pt-[7.5rem] pb-12 px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center mb-10">
           <div>
             <h1 className="text-3xl font-bold text-white tracking-tight">
