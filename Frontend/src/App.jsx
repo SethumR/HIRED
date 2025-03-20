@@ -17,7 +17,7 @@ import DashboardPage from './Pages/Dashboard/Company/CompanyDash';
 import AccountStep from './Pages/CreateAccount/AccountStep';  
 import EmailStep from './Pages/CreateAccount/Emailsteps';
 import AccountStepC from './Pages/CreateAccountCompany/AccountStep';  
-import OtpStepC from './Pages/CreateAccountCompany/OtpStep';
+//import OtpStepC from './Pages/CreateAccountCompany/OtpStep';
 import EmailStepC from './Pages/CreateAccountCompany/Emailsteps';
 import SignupC from './Pages/CreateAccountCompany/SignupForm';
 import SignInCompany from './Pages/CreateAccountCompany/Signin';
@@ -76,7 +76,7 @@ const App = () => {
           <Route path="/create-account" element={<AccountStep />} />
         <Route path="/create-account/email" element={<EmailStep />} />
         <Route path="/create-account-company" element={<AccountStepC />} />
-        <Route path="/create-account-company/otp" element={<OtpStepC />} />
+        {/* <Route path="/create-account-company/otp" element={<OtpStepC />} /> */}
         <Route path="/create-account-company/email" element={<EmailStepC />} />
         <Route path="/interview-History" element={<InterviewHistory/>} />
           
