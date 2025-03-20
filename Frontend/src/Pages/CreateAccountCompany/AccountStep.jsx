@@ -39,18 +39,15 @@ const AccountStep = ({
     >
       <div className="flex items-center mb-10 justify-center">
         <motion.div
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={handlePrevious}
-            className="cursor-pointer p-2 rounded-full bg-gray-700 mr-4"
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.95 }}
+          onClick={handlePrevious}
+          className="cursor-pointer p-2 rounded-full bg-gray-700 mr-4"
         >
-            <FaArrowLeft className="text-slate-200 text-lg" />
+          <FaArrowLeft className="text-slate-200 text-lg" />
         </motion.div>
-        <h1 className="text-3xl font-bold text-center">
-            Create Account
-        </h1>
-        </div>
-
+        <h1 className="text-3xl font-bold text-center">Create Account</h1>
+      </div>
 
       <div className="grid grid-cols-1 gap-4">
         <div>
@@ -179,11 +176,11 @@ const AccountStep = ({
         <motion.button
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
-          type="button"
+          type="submit"
           onClick={handleNext}
           className={`${buttonClasses} bg-gradient-to-r from-purple-500 to-pink-500 `}
         >
-          Next
+          Submit
         </motion.button>
       </div>
     </motion.form>
