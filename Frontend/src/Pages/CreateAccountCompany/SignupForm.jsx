@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import EmailStep from "./Emailsteps";
 import AccountStep from "./AccountStep";
-import OtpStep from "./OtpStep";
 
 const Signup = () => {
   const [currentStep, setCurrentStep] = useState(1);
@@ -14,7 +13,6 @@ const Signup = () => {
     username: "",
     password: "",
     Repassword: "",
-    otp: ["", "", "", "", "", ""],
   });
   const [errors, setErrors] = useState({});
 
@@ -35,9 +33,6 @@ const Signup = () => {
       if (formData.password !== formData.Repassword) {
         newErrors.Repassword = "Passwords do not match";
       }
-    } else if (currentStep === 3) {
-      if (formData.otp.some((digit) => !digit))
-        newErrors.otp = "Please enter the complete OTP";
     }
     return newErrors;
   };
@@ -46,7 +41,12 @@ const Signup = () => {
     const newErrors = validateStep();
     if (Object.keys(newErrors).length === 0) {
       setErrors({});
-      setCurrentStep((prev) => prev + 1);
+      if (currentStep === 2) {
+        alert("Account successfully created!");
+        console.log("Form submitted:", formData);
+      } else {
+        setCurrentStep((prev) => prev + 1);
+      }
     } else {
       setErrors(newErrors);
     }
@@ -54,18 +54,6 @@ const Signup = () => {
 
   const handlePrevious = () => {
     setCurrentStep((prev) => prev - 1);
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const newErrors = validateStep();
-    if (Object.keys(newErrors).length === 0) {
-      setErrors({});
-      console.log("Form submitted:", formData);
-      alert("Account successfully created!");
-    } else {
-      setErrors(newErrors);
-    }
   };
 
   return (
@@ -94,20 +82,10 @@ const Signup = () => {
               handlePrevious={handlePrevious}
             />
           )}
-          {currentStep === 3 && (
-            <OtpStep
-              formData={formData}
-              setFormData={setFormData}
-              errors={errors}
-              handleSubmit={handleSubmit}
-              handlePrevious={handlePrevious}
-            />
-          )}
         </AnimatePresence>
-
         {/* Step indicators */}
         <div className="mt-8 flex justify-center items-center space-x-2">
-          {[1, 2, 3].map((step) => (
+          {[1, 2].map((step) => (
             <div
               key={step}
               className={`w-2 h-2 rounded-full ${
