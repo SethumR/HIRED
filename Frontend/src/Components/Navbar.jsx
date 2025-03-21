@@ -144,14 +144,14 @@ const Navbar = () => {
 
         {/* Dark Mode Toggle + Sign Up/User Profile - Right Aligned */}
         <div className="hidden md:flex items-center space-x-6">
-          {/* Dark Mode Toggle */}
+          {/* Dark Mode Toggle
           <button
             onClick={toggleDarkMode}
             className={`p-2 rounded-full transition duration-200 focus:outline-none flex items-center justify-center 
               ${isDarkMode ? "bg-gray-600 hover:bg-gray-700" : "bg-gray-700 hover:bg-gray-600"}
             `}>
             {isDarkMode ? <MdLightMode className="h-5 w-5 text-white" /> : <MdDarkMode className="h-5 w-5 text-white" />}
-          </button>
+          </button> */}
 
           {/* User Profile or Sign Up */}
           {user ? (
