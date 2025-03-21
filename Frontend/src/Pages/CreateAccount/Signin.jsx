@@ -20,14 +20,12 @@ const ErrorMessage = ({ message }) => (
 const EmailStep = ({ email, setEmail, error, handleNext }) => {
   const [isHoveringGoogle, setIsHoveringGoogle] = useState(false);
   const [isHoveringGithub, setIsHoveringGithub] = useState(false);
-  const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
   // Function to handle email check
   const handleEmailCheck = () => {
-    setLoading(true);
     setErrorMessage("");
 
     // Trim and validate email format
@@ -35,7 +33,6 @@ const EmailStep = ({ email, setEmail, error, handleNext }) => {
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     if (!emailRegex.test(trimmedEmail)) {
       setErrorMessage("Please enter a valid email address.");
-      setLoading(false);
       return;
     }
 
@@ -71,15 +68,11 @@ const EmailStep = ({ email, setEmail, error, handleNext }) => {
       .catch((err) => {
         console.error("Error in handleEmailCheck:", err);
         setErrorMessage(err.message);
-      })
-      .finally(() => {
-        setLoading(false);
       });
   };
 
   // Function to handle manual login
   const handleManualLogin = () => {
-    setLoading(true);
     setErrorMessage("");
 
     const payload = { email: email.trim(), password };
@@ -114,16 +107,12 @@ const EmailStep = ({ email, setEmail, error, handleNext }) => {
       .catch((err) => {
         console.error("Error in handleManualLogin:", err);
         setErrorMessage(err.message);
-      })
-      .finally(() => {
-        setLoading(false);
       });
   };
 
   // Function to handle Google login
   const handleGoogleSuccess = (response) => {
     console.log("Google Token:", response.credential);
-    setLoading(true);
 
     fetch("http://localhost:8000/auth/google", {
       method: "POST",
@@ -154,16 +143,12 @@ const EmailStep = ({ email, setEmail, error, handleNext }) => {
       .catch((err) => {
         console.error("Error in handleGoogleSuccess:", err);
         setErrorMessage(err.message);
-      })
-      .finally(() => {
-        setLoading(false);
       });
   };
 
   // Function to handle GitHub login
   const handleGitHubLogin = (response) => {
     console.log("GitHub Token:", response.code);
-    setLoading(true);
 
     fetch("http://localhost:8000/auth/github", {
       method: "POST",
@@ -194,15 +179,12 @@ const EmailStep = ({ email, setEmail, error, handleNext }) => {
       .catch((err) => {
         console.error("Error in handleGitHubLogin:", err);
         setErrorMessage(err.message);
-      })
-      .finally(() => {
-        setLoading(false);
       });
   };
 
   return (
     <GoogleOAuthProvider clientId="398939151341-4ag0pbfsmaqnseclup9ntm9dhs2m2isa.apps.googleusercontent.com">
-      <div className="min-h-screen bg-gradient-to-br from-gray-900 to-black text-white flex items-center justify-center px-4">
+      <div className="min-h-screen bg-gradient-to-br from-gray-900 to-black text-white flex items-center justify-center px-4 ">
         <motion.div
           key="step1"
           initial={{ opacity: 0, x: 50 }}
@@ -211,12 +193,6 @@ const EmailStep = ({ email, setEmail, error, handleNext }) => {
           transition={{ duration: 0.3 }}
           className="w-full max-w-sm bg-gray-800/30 backdrop-blur-xl p-8 rounded-2xl shadow-2xl border border-gray-700/50"
         >
-          {loading && (
-            <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-              <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-purple-500"></div>
-            </div>
-          )}
-
           <h1 className="text-2xl font-bold text-center mb-6">Unlock Your Access</h1>
 
           <div className="mb-4">
@@ -254,7 +230,7 @@ const EmailStep = ({ email, setEmail, error, handleNext }) => {
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.97 }}
             onClick={handleEmailCheck}
-            className="w-full py-2 bg-gradient-to-r from-purple-500 to-pink-500 font-bold rounded-lg mb-4 hover:from-pink-500 hover:to-purple-500 transition-all duration-300 ease-in-out shadow-lg text-white"
+            className="w-full py-2 bg-gradient-to-r from-purple-500 to-pink-500 font-bold rounded-lg mb-4 hover:from-pink-500 hover:to-purple-500 transition-all duration-300 ease-in-out shadow-lg text-white mt-2"
           >
             Next
           </motion.button>
@@ -306,7 +282,7 @@ const EmailStep = ({ email, setEmail, error, handleNext }) => {
                   onSuccess={handleGitHubLogin}
                   onFailure={(error) => console.error(error)}
                   redirectUri="http://localhost:8000/auth/github"
-                  className="w-full py-2 px-4 flex items-center justify-center relative bg-white border border-gray-200 rounded-lg text-gray-800 font-medium text-sm shadow-sm hover:shadow-md transition-all duration-300"
+                  className="w-full py-2 px-4 flex items-center justify-center relative bg-white border border-gray-200 rounded-lg text-gray-800 font-medium text-sm shadow-sm hover:shadow-md transition-all duration-300 mt-0.5"
                 >
                   <FaGithub className="absolute left-3 w-5 h-5" />
                   <span className="mx-auto pl-7">Continue with GitHub</span>
