@@ -102,7 +102,7 @@ const actionsData = [
   {
     title: "View Reports",
     description: "Analyze candidate performance",
-    link: "/reportperformancepage",
+    link: "/candidateperformancepage",
     icon: <FileText className="h-5 w-5 text-white" />,
     buttonText: "Open"
   },
@@ -159,18 +159,18 @@ export default function DashboardPage() {
                 <div className="py-1" role="none">
                   {[{
                     title: "Settings and Terms",
-                    icon: <Settings className="h-5 w-5 text-purple-400" />,
-                    link: "/settings"
+                    icon: <Settings className="h-5 w-5 text-white" />,
+                    link: ""
                   },
                   {
                     title: "Profile",
-                    icon: <Users className="h-5 w-5 text-purple-400" />,
+                    icon: <Users className="h-5 w-5 white" />,
                     link: "/CompanyProfilePage"
                   }].map((item, index) => (
                     <Link
                       key={index}
                       to={item.link}
-                      className="flex items-center gap-3 px-4 py-3 text-sm text-gray-300 hover:bg-gray-800/50 hover:text-purple-400 transition-colors"
+                      className="flex items-center gap-3 px-4 py-3 text-sm text-gray-300 hover:bg-gray-800/50 "
                       role="menuitem"
                     >
                       {item.icon}
@@ -221,7 +221,7 @@ export default function DashboardPage() {
             <h2 className="text-xl font-bold text-white tracking-tight">
               Recent Candidate Submissions
             </h2>
-            <Link to="/candidates" className="text-white hover:text-purple-300 text-sm font-medium transition-colors">
+            <Link to="" className="text-white hover:text-purple-300 text-sm font-medium transition-colors">
               View all candidates
             </Link>
           </div>
@@ -265,7 +265,7 @@ export default function DashboardPage() {
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-base font-medium">
                         <Link
-                          to="/reportperformancepage"
+                          to="/CandidatePerformancePage"
                           className="text-white hover:text-purple-300 transition-colors flex items-center gap-1"
                         >
                           View Report
@@ -281,7 +281,7 @@ export default function DashboardPage() {
         </div>
 
         {/* Action Buttons */}
-        <div className="mt-16 grid gap-6 md:grid-cols-2">
+        <div className="mt-16 mb-20 grid gap-6 md:grid-cols-2">
           {actionsData.map((action, index) => (
             <div
               key={index}
@@ -290,7 +290,7 @@ export default function DashboardPage() {
               <div className="flex flex-col h-full justify-between">
                 <div>
                   <div className="flex items-center gap-4 mb-4">
-                    <div className="p-3 rounded-lg bg-gradient-to-r from-purple-600 to-pink-500">
+                    <div className="p-3 rounded-lg bg-gradient-to-r ">
                       {action.icon}
                     </div>
                     <h3 className="text-lg font-bold text-white tracking-tight">{action.title}</h3>
@@ -299,7 +299,7 @@ export default function DashboardPage() {
                 </div>
                 <Link to={action.link} className="mt-6 inline-block">
                   <button 
-                    className="w-full px-5 py-3 bg-gradient-to-r from-purple-600 to-pink-500 text-white rounded-lg font-medium transition-transform duration-300 group-hover:scale-105 shadow-lg"
+                    className="w-full px-5 py-3 bg-gradient-to-r from-white to-white text-black rounded-lg font-medium transition-transform duration-300 group-hover:scale-105 shadow-lg"
                   >
                     {action.buttonText}
                   </button>

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { FiArrowLeft, FiDownload, FiPlay, FiPause } from "react-icons/fi";
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, LineChart, Line } from "recharts";
+import { BarChart4, TrendingUp } from "lucide-react";
 
 // Mock data for demonstration
 const candidates = [
@@ -99,6 +100,14 @@ export default function CandidatePerformancePage() {
     }
   };
 
+  // Data for the bar graph
+  const barData = [
+    { name: "Technical", score: selectedCandidate.technicalScore, fill: "#34200e" },
+    { name: "Communication", score: selectedCandidate.communicationScore, fill: "#102826" },
+    { name: "Confidence", score: selectedCandidate.confidenceScore, fill: "#0c202e" },
+    { name: "Problem Solving", score: selectedCandidate.problemSolvingScore, fill: "#1f1533" },
+  ];
+
   return (
     <div className="flex flex-col min-h-screen bg-[#0b0f1c]">
       <main className="flex-1 container pt-36 pb-12 px-4 sm:px-6 lg:px-8">
@@ -116,7 +125,7 @@ export default function CandidatePerformancePage() {
                 </option>
               ))}
             </select>
-            <button className="flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-lg hover:from-pink-500 hover:to-purple-500">
+            <button className="flex items-center space-x-2 px-4 py-2 bg-violet-900/30 border border-violet-500/30 text-white rounded-lg hover:from-pink-500 hover:to-purple-500">
               <FiDownload className="h-4 w-4" />
               <span>Export Report</span>
             </button>
@@ -130,80 +139,80 @@ export default function CandidatePerformancePage() {
           </div>
         </div>
 
-        {/* Candidate Details and Performance Chart */}
-        <div className="grid gap-6 md:grid-cols-2">
-          <div className="bg-[#161a26] rounded-lg shadow p-6 border border-gray-800">
-            <h2 className="text-2xl font-bold mb-4 text-white">{selectedCandidate.name}</h2>
-            <p className="text-gray-300 mb-4">
-              {selectedCandidate.role} | Interview Date: {selectedCandidate.date}
-            </p>
-            <div className="flex items-center space-x-4 mb-6">
-              <span className="text-4xl font-bold text-white">{selectedCandidate.overallScore}%</span>
-              <span className="text-gray-300">Overall Score</span>
+        {/* Bar Graph and Line Graph Section */}
+        <div className="flex flex-col lg:flex-row gap-6 mt-10">
+          {/* Bar Graph - Candidate Performance */}
+          <section className="flex-1 bg-gray-900/80 backdrop-blur-sm rounded-xl shadow-lg p-6 border border-purple-500/20 mb-6 lg:mb-0">
+            <div className="flex items-center gap-4 mb-4">
+              <div className="p-2 rounded-lg bg-purple-900/30">
+                <BarChart4 className="h-5 w-5 text-purple-400" />
+              </div>
+              <h2 className="text-lg font-bold text-white tracking-tight">Candidate Performance</h2>
             </div>
-            <div className="space-y-4">
-              <div className="flex justify-between text-gray-300">
-                <span>Technical</span>
-                <span>{selectedCandidate.technicalScore}%</span>
-              </div>
-              <div className="h-2 bg-gray-800 rounded-full">
-                <div
-                  className="h-2 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full"
-                  style={{ width: `${selectedCandidate.technicalScore}%` }}
-                ></div>
-              </div>
-              <div className="flex justify-between text-gray-300">
-                <span>Communication</span>
-                <span>{selectedCandidate.communicationScore}%</span>
-              </div>
-              <div className="h-2 bg-gray-800 rounded-full">
-                <div
-                  className="h-2 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full"
-                  style={{ width: `${selectedCandidate.communicationScore}%` }}
-                ></div>
-              </div>
-              <div className="flex justify-between text-gray-300">
-                <span>Confidence</span>
-                <span>{selectedCandidate.confidenceScore}%</span>
-              </div>
-              <div className="h-2 bg-gray-800 rounded-full">
-                <div
-                  className="h-2 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full"
-                  style={{ width: `${selectedCandidate.confidenceScore}%` }}
-                ></div>
-              </div>
-              <div className="flex justify-between text-gray-300">
-                <span>Problem Solving</span>
-                <span>{selectedCandidate.problemSolvingScore}%</span>
-              </div>
-              <div className="h-2 bg-gray-800 rounded-full">
-                <div
-                  className="h-2 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full"
-                  style={{ width: `${selectedCandidate.problemSolvingScore}%` }}
-                ></div>
-              </div>
-            </div>
-          </div>
-          <div className="bg-[#161a26] rounded-lg shadow p-6 border border-gray-800">
-            <h2 className="text-2xl font-bold mb-4 text-white">Performance Comparison</h2>
             <div className="h-64">
               <ResponsiveContainer width="100%" height="100%">
-                <LineChart data={performanceData}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="#333" />
-                  <XAxis dataKey="name" stroke="#999" />
-                  <YAxis stroke="#999" />
-                  <Tooltip contentStyle={{ backgroundColor: "#161a26", border: "1px solid rgba(255, 255, 255, 0.2)" }} />
+                <BarChart data={barData} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
+                  <CartesianGrid strokeDasharray="3 3" stroke="rgba(255, 255, 255, 0.1)" />
+                  <XAxis dataKey="name" stroke="#9ca3af" />
+                  <YAxis stroke="#9ca3af" />
+
+                  <Bar
+                    dataKey="score"
+                    fill="#07ed7a"
+                    barSize={80}
+                    radius={[5, 5, 0, 0]}
+                  />
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
+          </section>
+
+          {/* Line Graph - Performance Comparison */}
+          <section className="flex-1 bg-gray-900/80 backdrop-blur-sm rounded-xl shadow-lg p-6 border border-purple-500/20">
+            <div className="flex items-center gap-4 mb-4">
+              <div className="p-2 rounded-lg bg-purple-900/30">
+                <TrendingUp className="h-5 w-5 text-purple-400" />
+              </div>
+              <h2 className="text-lg font-bold text-white tracking-tight">Performance Comparison</h2>
+            </div>
+            <div className="h-64">
+              <ResponsiveContainer width="100%" height="100%">
+                <LineChart data={performanceData} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
+                  <CartesianGrid strokeDasharray="3 3" stroke="rgba(255, 255, 255, 0.1)" />
+                  <XAxis dataKey="name" stroke="#9ca3af" />
+                  <YAxis stroke="#9ca3af" />
+                  <Tooltip
+                    contentStyle={{
+                      backgroundColor: "#1f2937",
+                      border: "1px solid rgba(147, 51, 234, 0.2)",
+                      borderRadius: "0.5rem",
+                    }}
+                  />
                   <Legend />
-                  <Line type="monotone" dataKey="John" stroke="#a855f7" />
-                  <Line type="monotone" dataKey="Jane" stroke="#ec4899" />
+                  <Line
+                    type="monotone"
+                    dataKey="John"
+                    stroke="#a855f7"
+                    strokeWidth={2}
+                    dot={{ fill: "#a855f7", strokeWidth: 0 }}
+                    activeDot={{ r: 6, fill: "#a855f7" }}
+                  />
+                  <Line
+                    type="monotone"
+                    dataKey="Jane"
+                    stroke="#ec4899"
+                    strokeWidth={2}
+                    dot={{ fill: "#ec4899", strokeWidth: 0 }}
+                    activeDot={{ r: 6, fill: "#ec4899" }}
+                  />
                 </LineChart>
               </ResponsiveContainer>
             </div>
-          </div>
+          </section>
         </div>
 
         {/* Detailed Question Review */}
-        <div className="bg-[#161a26] rounded-lg shadow p-6 mt-6 border border-gray-800">
+        <div className="bg-gray-900/80 backdrop-blur-sm rounded-lg shadow p-6 mt-6 border border-purple-500/20">
           <h2 className="text-2xl font-bold mb-4 text-white">Detailed Question Review</h2>
           <div className="space-y-4">
             {selectedCandidate.questions.map((q, index) => (
@@ -213,14 +222,14 @@ export default function CandidatePerformancePage() {
                 </div>
                 <div className="space-y-4">
                   <div className="bg-[#0b0f1c] p-4 rounded-lg">
-                    <h3 className="font-semibold text-purple-400">Question:</h3>
+                    <h3 className="font-semibold text-white">Question:</h3>
                     <p className="text-gray-300">{q.question}</p>
                   </div>
                   <div className="bg-[#0b0f1c] p-4 rounded-lg">
-                    <h3 className="font-semibold mb-2 text-purple-400">Candidate's Answer:</h3>
+                    <h3 className="font-semibold mb-2 text-white">Candidate's Answer:</h3>
                     <div className="flex items-center space-x-4 mb-2">
                       <button
-                        className="flex items-center space-x-2 px-3 py-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-lg hover:from-pink-500 hover:to-purple-500"
+                        className="flex items-center space-x-2 px-3 py-2 bg-violet-900/30 border border-violet-500/30 text-white rounded-lg hover:from-pink-500 hover:to-purple-500"
                         onClick={handleAudioPlayback}
                       >
                         {isPlaying ? <FiPause className="h-4 w-4" /> : <FiPlay className="h-4 w-4" />}
@@ -238,7 +247,7 @@ export default function CandidatePerformancePage() {
                     <p className="text-gray-300">{q.answer}</p>
                   </div>
                   <div className="bg-[#0b0f1c] p-4 rounded-lg">
-                    <h3 className="font-semibold mb-2 text-purple-400">AI Feedback:</h3>
+                    <h3 className="font-semibold mb-2 text-white">AI Feedback:</h3>
                     <p className="text-gray-300">{q.feedback}</p>
                     <div className="mt-2 flex items-center space-x-4">
                       <div className="flex items-center space-x-2">
@@ -260,7 +269,7 @@ export default function CandidatePerformancePage() {
         </div>
 
         {/* Shortlisting Panel */}
-        <div className="bg-[#161a26] rounded-lg shadow p-6 mt-6 border border-gray-800">
+        <div className="bg-gray-900/80 backdrop-blur-sm rounded-lg shadow p-6 mt-6 border border-purple-500/20">
           <h2 className="text-2xl font-bold mb-4 text-white">Shortlisting Panel</h2>
           <div className="overflow-x-auto">
             <table className="w-full">
