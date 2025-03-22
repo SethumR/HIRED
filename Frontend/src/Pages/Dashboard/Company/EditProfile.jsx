@@ -10,7 +10,9 @@ import {
   FaInfoCircle, 
   FaUpload,
   FaSave,
-  FaExclamationTriangle
+  FaExclamationTriangle,
+  FaCalendar,
+  FaUsers
 } from "react-icons/fa";
 
 export default function CompanyProfilePage() {
@@ -78,6 +80,18 @@ export default function CompanyProfilePage() {
       newErrors.companyDescription = "Description should be at least 50 characters";
     }
 
+    if (!formData.companyIndustry.trim()) {
+      newErrors.companyIndustry = "Industry is required";
+    }
+
+    if (!formData.companySize.trim()) {
+      newErrors.companySize = "Company size is required";
+    }
+
+    if (formData.companyFounded && (formData.companyFounded < 1900 || formData.companyFounded > new Date().getFullYear())) {
+      newErrors.companyFounded = "Please enter a valid year";
+    }
+
     return newErrors;
   }
 
@@ -111,7 +125,7 @@ export default function CompanyProfilePage() {
         <div className="flex items-center justify-between mb-8">
           <div className="flex items-center">
             <Link to="/companydashboard" className="flex items-center mr-4 bg-[#161a26] text-purple-400 p-2 rounded-lg hover:text-purple-300 border border-gray-800 transition-colors">
-              <FaArrowLeft className="h-5 w-5" />
+              <FaArrowLeft className="h-5 w-5 text-white" />
             </Link>
             <h1 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r text-white">Company Profile</h1>
           </div>
@@ -120,7 +134,7 @@ export default function CompanyProfilePage() {
         {showSuccessMessage && (
           <div className="mb-6 p-4 rounded-lg bg-gradient-to-r from-purple-500/20 to-pink-500/20 border border-purple-500/50 text-white">
             <div className="flex items-center">
-              <FaInfoCircle className="text-purple-400 mr-2" />
+              <FaInfoCircle className="text-purple-400 mr-2 text-white" />
               <p>Company profile successfully updated!</p>
             </div>
           </div>
@@ -129,7 +143,7 @@ export default function CompanyProfilePage() {
         {Object.keys(errors).length > 0 && (
           <div className="mb-6 p-4 rounded-lg bg-red-500/10 border border-red-500/50">
             <div className="flex items-center mb-2">
-              <FaExclamationTriangle className="text-red-400 mr-2" />
+              <FaExclamationTriangle className="text-red-400 mr-2 text-white" />
               <p className="font-medium text-red-400">Please correct the following errors:</p>
             </div>
             <ul className="list-disc pl-10 text-red-400 text-sm">
@@ -140,7 +154,7 @@ export default function CompanyProfilePage() {
           </div>
         )}
 
-        <div className="bg-[#161a26] rounded-2xl p-8 border border-gray-800 shadow-lg">
+        <div className="bg-gray-900/80 backdrop-blur-sm border border-purple-500/20 rounded-2xl p-8 border border-gray-800 shadow-lg">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
             <div className="md:col-span-1 flex flex-col items-center justify-center">
               <div className="w-40 h-40 rounded-full bg-[#0b0f1c] border-2 border-dashed border-gray-700 flex items-center justify-center mb-4 overflow-hidden">
@@ -170,7 +184,7 @@ export default function CompanyProfilePage() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-medium text-white mb-1">
-                    <FaBuilding className="inline mr-2 text-purple-400" /> Company Name*
+                    <FaBuilding className="inline mr-2 text-white" /> Company Name*
                   </label>
                   <input
                     type="text"
@@ -187,7 +201,7 @@ export default function CompanyProfilePage() {
                 
                 <div>
                   <label className="block text-sm font-medium text-white mb-1">
-                    <FaEnvelope className="inline mr-2 text-purple-400" /> Company Email*
+                    <FaEnvelope className="inline mr-2 text-white" /> Company Email*
                   </label>
                   <input
                     type="email"
@@ -209,7 +223,7 @@ export default function CompanyProfilePage() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <label className="block text-sm font-medium text-white mb-1">
-                  <FaGlobe className="inline mr-2 text-purple-400" /> Company Website*
+                  <FaGlobe className="inline mr-2 text-white" /> Company Website*
                 </label>
                 <input
                   type="url"
@@ -226,7 +240,7 @@ export default function CompanyProfilePage() {
 
               <div>
                 <label className="block text-sm font-medium text-white mb-1">
-                  <FaIndustry className="inline mr-2 text-purple-400" /> Industry*
+                  <FaIndustry className="inline mr-2 text-white" /> Industry*
                 </label>
                 <select
                   name="companyIndustry"
@@ -243,7 +257,7 @@ export default function CompanyProfilePage() {
 
               <div>
                 <label className="block text-sm font-medium text-white mb-1">
-                  <FaMapMarkerAlt className="inline mr-2 text-purple-400" /> Location
+                  <FaMapMarkerAlt className="inline mr-2 text-white" /> Location
                 </label>
                 <input
                   type="text"
@@ -257,7 +271,7 @@ export default function CompanyProfilePage() {
 
               <div>
                 <label className="block text-sm font-medium text-white mb-1">
-                  <FaUsers className="inline mr-2 text-purple-400" /> Company Size
+                  <FaUsers className="inline mr-2 text-white" /> Company Size
                 </label>
                 <select
                   name="companySize"
@@ -274,7 +288,7 @@ export default function CompanyProfilePage() {
 
               <div>
                 <label className="block text-sm font-medium text-white mb-1">
-                  <FaCalendar className="inline mr-2 text-purple-400" /> Founded Year
+                  <FaCalendar className="inline mr-2 text-white" /> Founded Year
                 </label>
                 <input
                   type="number"
@@ -290,7 +304,7 @@ export default function CompanyProfilePage() {
 
               <div className="md:col-span-2">
                 <label className="block text-sm font-medium text-white mb-1">
-                  <FaInfoCircle className="inline mr-2 text-purple-400" /> Company Description*
+                  <FaInfoCircle className="inline mr-2 text-white" /> Company Description*
                 </label>
                 <textarea
                   name="companyDescription"
@@ -322,7 +336,7 @@ export default function CompanyProfilePage() {
               <button 
                 type="submit" 
                 disabled={isSubmitting}
-                className={`bg-gradient-to-r from-purple-500 to-pink-500 hover:from-pink-500 hover:to-purple-500 text-white px-6 py-2 rounded-lg shadow-lg hover:shadow-purple-500/20 transition-all flex items-center ${isSubmitting ? 'opacity-70 cursor-not-allowed' : ''}`}
+                className={`bg-violet-900/30 border border-violet-500/30 text-white px-6 py-2 rounded-lg shadow-lg hover:shadow-purple-500/20 transition-all flex items-center ${isSubmitting ? 'opacity-70 cursor-not-allowed' : ''}`}
               >
                 {isSubmitting ? (
                   <>
@@ -334,7 +348,7 @@ export default function CompanyProfilePage() {
                   </>
                 ) : (
                   <>
-                    <FaSave className="mr-2" />
+                    <FaSave className="mr-2 text-white" />
                     Save Company Profile
                   </>
                 )}
@@ -344,23 +358,5 @@ export default function CompanyProfilePage() {
         </div>
       </main>
     </div>
-  );
-}
-
-// Missing FaCalendar and FaUsers imports
-// We're using the same icons as before, just adding these two
-function FaCalendar(props) {
-  return (
-    <svg stroke="currentColor" fill="currentColor" strokeWidth="0" viewBox="0 0 448 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" {...props}>
-      <path d="M12 192h424c6.6 0 12 5.4 12 12v260c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V204c0-6.6 5.4-12 12-12zm436-44v-36c0-26.5-21.5-48-48-48h-48V12c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v52H160V12c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v52H48C21.5 64 0 85.5 0 112v36c0 6.6 5.4 12 12 12h424c6.6 0 12-5.4 12-12z"></path>
-    </svg>
-  );
-}
-
-function FaUsers(props) {
-  return (
-    <svg stroke="currentColor" fill="currentColor" strokeWidth="0" viewBox="0 0 640 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" {...props}>
-      <path d="M96 224c35.3 0 64-28.7 64-64s-28.7-64-64-64-64 28.7-64 64 28.7 64 64 64zm448 0c35.3 0 64-28.7 64-64s-28.7-64-64-64-64 28.7-64 64 28.7 64 64 64zm32 32h-64c-17.6 0-33.5 7.1-45.1 18.6 40.3 22.1 68.9 62 75.1 109.4h66c17.7 0 32-14.3 32-32v-32c0-35.3-28.7-64-64-64zm-256 0c61.9 0 112-50.1 112-112S381.9 32 320 32 208 82.1 208 144s50.1 112 112 112zm76.8 32h-8.3c-20.8 10-43.9 16-68.5 16s-47.6-6-68.5-16h-8.3C179.6 288 128 339.6 128 403.2V432c0 26.5 21.5 48 48 48h288c26.5 0 48-21.5 48-48v-28.8c0-63.6-51.6-115.2-115.2-115.2zm-223.7-13.4C161.5 263.1 145.6 256 128 256H64c-35.3 0-64 28.7-64 64v32c0 17.7 14.3 32 32 32h65.9c6.3-47.4 34.9-87.3 75.2-109.4z"></path>
-    </svg>
   );
 }
