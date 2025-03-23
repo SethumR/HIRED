@@ -15,6 +15,7 @@ import { motion } from "framer-motion";
 import { TypeAnimation } from "react-type-animation";
 import { UserPlus, Calendar, MessageSquare, Award } from "lucide-react"
 import { FaYoutube, FaInstagram, FaLinkedin } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 // Animated Stat Component
 function AnimatedStat({ endValue, label, suffix = "+" }) {
@@ -59,6 +60,7 @@ function AnimatedStat({ endValue, label, suffix = "+" }) {
 }
 
 export default function HomePage() {
+  const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState("candidates"); // Manage active tab
 
   useEffect(() => {
@@ -213,16 +215,25 @@ export default function HomePage() {
   const features =
     activeTab === "candidates" ? candidateFeatures : companyFeatures;
     
+  const handleButtonClick = () => {
+    const isAuthenticated = !!localStorage.getItem("authToken"); // Example check for authentication
+    if (isAuthenticated) {
+      navigate("/dashboard"); // Redirect to dashboard
+    } else {
+      navigate("/signup"); // Redirect to signup page
+    }
+  };
 
   return (
     <div className="min-h-screen bg-[#0b0f1c] text-white">
       {/* Hero Section */}
       <section id="home">
-      <div className="container mx-auto px-6 pt-30 lg:pt-56 lg:pb-48 ">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* Text Section */}
+      <div className="container mx-auto px-6 pt-40 lg:pt-52 lg:pb-48">
+        <div className="grid lg:grid-cols-2 gap-20 items-center">
+          
+          {/* Text and Animation PNG Section */}
           <div className="space-y-8">
-            <h1 className="text-4xl lg:text-[55px] font-bold leading-tight text-white tracking-wide ">
+            <h1 className="text-4xl lg:text-[55px] font-bold leading-tight text-white tracking-wide">
               Are You Looking{" "}
               <span className="block">
                 <TypeAnimation
@@ -231,8 +242,6 @@ export default function HomePage() {
                     1000,
                     "To Land Your Job?",
                     1000,
-                    // 'To Ace Your Interviews?',
-                    // 1000,
                   ]}
                   wrapper="span"
                   speed={50}
@@ -243,125 +252,69 @@ export default function HomePage() {
             </h1>
             <div className="space-y-6 text-gray-400 leading-relaxed tracking-wide">
               <p className="text-[16px] sm:text-lg">
-                Prepare for interviews with AI-powered mock sessions to gain
-                confidence, overcome anxiety, and excel in any role or industry.
-                Get detailed feedback and suggestions to improve your responses,
-                ensuring you're ready to land your dream job.
+                Prepare for interviews with AI-powered mock sessions to gain confidence, overcome anxiety, and excel in any role or industry. Get detailed feedback and suggestions to improve your responses, ensuring you're ready to land your dream job.
               </p>
             </div>
             <div data-aos="fade">
-              <button className="bg-gradient-to-r from-purple-600 to-pink-500 hover:from-pink-500 hover:to-purple-600 text-white px-5 py-3 text-lg font-semibold rounded-xl transition duration-300 ease-in-out transform hover:scale-105 shadow-lg">
+              <button
+                onClick={handleButtonClick}
+                className="bg-gradient-to-r from-purple-600 to-pink-500 hover:from-pink-500 hover:to-purple-600 text-white px-5 py-3 text-lg font-semibold rounded-xl transition duration-300 ease-in-out transform hover:scale-105 shadow-lg"
+              >
                 Try a Free Mock Interview
               </button>
+            </div>
+
+            {/* Animation PNG */}
+            <div data-aos="fade">
+              <div className="max-w-xs sm:max-w-lg overflow-hidden mx-auto ml-1  bg-[#0d1221] shadow-lg shadow-cyan-500/20 h-20 sm:h-24 rounded-xl sm:mb-1 mb-24">
+                <motion.div
+                  className="flex space-x-8 justify-center"
+                  animate={{ x: ["0%", "-100%"] }}
+                  transition={{
+                    duration: 15,
+                    repeat: Infinity,
+                    ease: "linear",
+                  }}
+                >
+                  {/* Add your logos here */}
+                  <img src="Google.png" alt="Google" className="w-28 h-24 object-contain" />
+                  <img src="Meta.png" alt="Meta" className="w-28 h-24 object-contain" />
+                  <img src="Amazon.png" alt="Amazon" className="w-28 h-24 object-contain" />
+                  <img src="Netflix.png" alt="Netflix" className="w-28 h-24 object-contain" />
+                  <img src="Mic.png" alt="Microsoft" className="w-28 h-24 object-contain" />
+                  <img src="Airbnb.png" alt="Airbnb" className="w-28 h-24 object-contain" />
+                  <img src="Op.png" alt="Op" className="w-28 h-24 object-contain" />
+                  <img src="Google.png" alt="Google" className="w-28 h-24 object-contain" />
+                  <img src="Meta.png" alt="Meta" className="w-28 h-24 object-contain" />
+                  <img src="Amazon.png" alt="Amazon" className="w-28 h-24 object-contain" />
+                  <img src="Netflix.png" alt="Netflix" className="w-28 h-24 object-contain" />
+                  <img src="Mic.png" alt="Microsoft" className="w-28 h-24 object-contain" />
+                  <img src="Airbnb.png" alt="Airbnb" className="w-28 h-24 object-contain" />
+                  <img src="Op.png" alt="Op" className="w-28 h-24 object-contain" />
+                </motion.div>
+              </div>
             </div>
           </div>
 
           {/* Image Section */}
-          <div className="relative flex justify-center">
-            <div className="relative w-full max-w-[500px] sm:max-w-[400px] xs:max-w-[300px]">
+          <div className="relative flex justify-center mb-32 sm:mb-0">
+            <div className="relative -mt-36"> 
               <img
-                src="animated_robot.png"
-                alt="AI Interview Assistant"
-                className="w-full transform transition duration-700 hover:scale-105"
-                data-aos="zoom-in"
+                src="animated_robot.png"  
+                alt="Your Image Description"
+                className="w-full h-[400px] sm:h-[700px] "
               />
-              <div className="absolute -z-10 inset-0 bg-purple-500 blur-[80px] sm:blur-[60px] opacity-30"></div>
             </div>
           </div>
 
-          <div data-aos="fade">
-            <div className="max-w-xs sm:max-w-lg overflow-hidden mx-auto ml-1 -mt-2 bg-[#0d1221] shadow-lg shadow-cyan-500/20 h-20 sm:h-24 rounded-xl sm:mb-1 mb-28">
-              <motion.div
-                className="flex space-x-8 justify-center"
-                animate={{ x: ["0%", "-100%"] }}
-                transition={{
-                  duration: 15,
-                  repeat: Infinity,
-                  ease: "linear",
-                }}
-              >
-                <img
-                  src="Google.png"
-                  alt="Google"
-                  className="w-28 h-24 object-contain"
-                />{" "}
-                {/* Reduced image size */}
-                <img
-                  src="Meta.png"
-                  alt="Meta"
-                  className="w-28 h-24 object-contain"
-                />
-                <img
-                  src="Amazon.png"
-                  alt="Amazon"
-                  className="w-28 h-24 object-contain"
-                />
-                <img
-                  src="Netflix.png"
-                  alt="Netfix"
-                  className="w-28 h-24 object-contain"
-                />
-                <img
-                  src="Mic.png"
-                  alt="Microsoft"
-                  className="w-28 h-24 object-contain"
-                />
-                <img
-                  src="Airbnb.png"
-                  alt="Microsoft"
-                  className="w-28 h-24 object-contain"
-                />
-                <img
-                  src="Op.png"
-                  alt="Microsoft"
-                  className="w-28 h-24 object-contain"
-                />
-                {/* Duplicate the images to make the animation seamless */}
-                <img
-                  src="Google.png"
-                  alt="Google"
-                  className="w-28 h-24 object-contain"
-                />
-                <img
-                  src="Meta.png"
-                  alt="Meta"
-                  className="w-28 h-24 object-contain"
-                />
-                <img
-                  src="Amazon.png"
-                  alt="Amazon"
-                  className="w-28 h-24 object-contain"
-                />
-                <img
-                  src="Netflix.png"
-                  alt="Netfix"
-                  className="w-28 h-24 object-contain"
-                />
-                <img
-                  src="Mic.png"
-                  alt="Microsoft"
-                  className="w-28 h-24 object-contain"
-                />
-                <img
-                  src="Airbnb.png"
-                  alt="Microsoft"
-                  className="w-28 h-24 object-contain"
-                />
-                <img
-                  src="Op.png"
-                  alt="Microsoft"
-                  className="w-28 h-24 object-contain"
-                />
-              </motion.div>
-            </div>
-          </div>
         </div>
       </div>
     </section>
 
+
     <section id="features">       
       <div
-        className="flex flex-row justify-center -space-x-1 sm:space-x-4 mb-16 text-center"
+        className="flex flex-row justify-center -space-x-1 sm:space-x-4 mb-16 text-center -mt-6"
         data-aos="fade"
       >
         <button
@@ -423,44 +376,34 @@ export default function HomePage() {
       </div>
     </section>     
 
-      {/* Animated Stats Section
-      <div className="container mx-auto px-4 py-16 mb-28">
-        <div className="shadow-lg rounded-lg p-10 bg-[#0d1221] shadow-cyan-500/10 border border-gray-900">
-          <div className="flex flex-col space-y-8">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-2">
-              <AnimatedStat
-                endValue={150000}
-                label="Interviews Conducted in 2023"
-              />
-              <AnimatedStat
-                endValue={120000}
-                label="Candidates Passed Interviews"
-              />
-              <AnimatedStat endValue={30000} label="Candidates Rejected" />
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-              <AnimatedStat endValue={85} label="Success Rate" suffix="%" />
-              <AnimatedStat
-                endValue={50}
-                label="Average Interviews Taken per Candidate"
-              />
-            </div>
-          </div>
-        </div>
-      </div> */}
-
-      <div data-aos="fade" className="px-4 sm:px-6 lg:px-8">
-        <h1 className="text-center text-2xl sm:text-3xl md:text-[40px] font-semibold mb-6 sm:mb-8 md:mb-12">
+    <div data-aos="fade" className="px-4 sm:px-6 lg:px-8">
+        <h1 className="text-center text-2xl sm:text-3xl md:text-[40px] font-semibold mb-6 sm:mb-8 md:mb-1">
           Try an Interactive Demo
         </h1>
-        <div className="w-full max-w-5xl mx-auto border border-gray-700 p-4 sm:p-6 md:p-12 lg:p-20 rounded-lg mb-12 sm:mb-20 md:mb-40 h-auto sm:h-96 md:h-[500px] lg:h-[560px] shadow-slate-700 shadow-sm">
-          <img
-            src=""
-            alt="Demo Screenshot"
-            className="w-full h-full object-cover rounded-lg"
+        <div style={{ position: 'relative', paddingBottom: 'calc(54.02777777777777% + 41px)', height: 0, width: '100%' }} className="mb-20 sm:mb-24">
+          <iframe
+            src="https://demo.arcade.software/7QEYz1oYuWRkkPCEQKoH?embed&embed_mobile=inline&embed_desktop=inline&show_copy_link=true"
+            title="Unlock Interview Success with AI-Powered Mock Sessions"
+            frameBorder="0"
+            loading="lazy"
+            allowFullScreen
+            allow="clipboard-write"
+            className="absolute inset-0 w-full h-full"
+            style={{
+              position: 'absolute',
+              top: '50%', 
+              left: '50%', 
+              width: '85%',
+              height: '85%', 
+              transform: 'translate(-50%, -50%)', // Offset by 50% of iframe's own size to truly center it
+              colorScheme: 'light',
+              border: '1.5px solid rgba(255, 255, 255, 0.6)',
+              borderRadius: '10px', 
+              
+            }}   
           />
         </div>
-      </div>
+      </div> 
 
 
       {/* Interview */}

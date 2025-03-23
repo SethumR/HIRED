@@ -28,7 +28,6 @@ import CandidatePerformancePage from'./Pages/Dashboard/Company/CandidatePerforma
 import CompanyProfilePage from'./Pages/Dashboard/Company/EditProfile';
 import StartMock from './Pages/Dashboard/Candidate/Startmock';
 import InterviewHistory from './Pages/Dashboard/Candidate/InterviewHistory';
-import GenerateScript from './Pages/Dashboard/Candidate/GenerateScript';
 
 
 const Layout = ({ children }) => {
@@ -37,7 +36,7 @@ const Layout = ({ children }) => {
   // Convert pathname to lowercase to avoid case sensitivity issues
   const currentPath = location.pathname.toLowerCase();
 
-  const hideHeaderFooter = ["/signin","/interview", "/signup","/create-account","/create-account/email","/create-account-company","/create-account/otp", "/create-account-company/email","/signincompany","/create-account-company/otp", "/signupcompany", "/generate-script"].includes(currentPath);
+  const hideHeaderFooter = ["/signin", "/signup","/create-account","/create-account/email","/create-account-company","/create-account/otp", "/create-account-company/email","/signincompany","/create-account-company/otp", "/signupcompany"].includes(currentPath);
 
   return (
     <div className="bg-[#0a0b14] min-h-screen">
@@ -73,7 +72,6 @@ const App = () => {
           <Route path="/reportperformancepage" element={<ReportsPerformancePage/>}/>
           <Route path="/candidateperformancepage" element={<CandidatePerformancePage/>}/>
           <Route path="/companyprofilepage" element={<CompanyProfilePage/>}/>
-          <Route path="/candidate/startmock" element={<StartMock/>}/>
           <Route path="/startmock" element={<StartMock/>}/>
           <Route path="/create-account" element={<AccountStep />} />
         <Route path="/create-account/email" element={<EmailStep />} />
@@ -81,7 +79,6 @@ const App = () => {
         {/* <Route path="/create-account-company/otp" element={<OtpStepC />} /> */}
         <Route path="/create-account-company/email" element={<EmailStepC />} />
         <Route path="/interview-History" element={<InterviewHistory/>} />
-        <Route path="/generate-script" element={<GenerateScript/>} />
           
         </Routes>
       </Layout>

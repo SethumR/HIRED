@@ -14,9 +14,8 @@ function Upgrade() {
       annual: "Free",
       icon: Shield,
       popular: false,
-      color: "from-blue-500/10 to-blue-600/10",
-      hoverColor: "hover:from-blue-500/10 hover:to-blue-600/10",
-      glowColor: "group-hover:shadow-blue-500/20",
+      color: "#101827",
+      hoverColor: "#101827",
       iconColor: "text-blue-400",
       borderColor: "border-blue-900/40",
       features: [
@@ -34,9 +33,8 @@ function Upgrade() {
       annual: "$100",
       icon: Zap,
       popular: true,
-      color: "from-blue-500/10 to-blue-600/10",
-      hoverColor: "hover:from-blue-500/10 hover:to-blue-600/10",
-      glowColor: "group-hover:shadow-purple-500/20",
+      color: "#101827",
+      iconColor: "text-blue-400",
       iconColor: "text-purple-400",
       borderColor: "border-blue-900/40",
       features: [
@@ -57,9 +55,8 @@ function Upgrade() {
       annual: "$150",
       icon: Crown,
       popular: false,
-      color: "from-blue-500/10 to-blue-600/10",
-      hoverColor: "hover:from-blue-500/10 hover:to-blue-600/10",
-      glowColor: "group-hover:shadow-amber-500/20",
+      color: "#101827",
+      iconColor: "text-blue-400",
       iconColor: "text-amber-400",
       borderColor: "border-blue-900/40",
       features: [
@@ -147,7 +144,8 @@ function Upgrade() {
   const plans = isCompany ? companyPlans : candidatePlans
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-[#0b0f1c] p-6 relative overflow-hidden py-28">
+    <div className="flex items-center justify-center min-h-screen bg-[#0b0f1c] p-6 relative overflow-hidden py-28 mb-6">
+      <div id="upgrade">
       <div className="w-full max-w-6xl relative z-10">
         <div className="text-center mb-8 relative">
           <div className="inline-block mb-3 px-4 py-1.5 rounded-full bg-gray-900/80 border border-gray-800 backdrop-blur-xl">
@@ -156,7 +154,7 @@ function Upgrade() {
               <span className="text-sm font-medium text-gray-300">Elevate your interview skills</span>
             </div>
           </div>
-          <h2 className="text-4xl font-extrabold text-white mb-4 leading-tight">Upgrade Your Experience</h2>
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-white mb-4 leading-tight">Upgrade Your Experience</h2>
           <p className="text-gray-300 text-lg max-w-3xl mx-auto mb-10 ">
             Unlock exclusive features and take your interview preparation to the next level.
           </p>
@@ -250,12 +248,23 @@ function Upgrade() {
             Need a custom plan for your team?{" "}
             <a
               href="#"
+              onClick={(e) => {
+                e.preventDefault();
+                const contactSection = document.getElementById("contact");
+                if (contactSection) {
+                  const offset = 100; // Adjust this value to stop scrolling a bit earlier
+                  const contactPosition = contactSection.getBoundingClientRect().top + window.scrollY - offset;
+                  window.scrollTo({ top: contactPosition, behavior: "smooth" });
+                }
+              }}
               className="bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent hover:text-purple-300 underline"
             >
               Contact us
             </a>
+
           </p>
         </div>
+      </div>
       </div>
     </div>
   )
