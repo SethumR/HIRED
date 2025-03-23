@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+  frontend:
+    image: ${DOCKER_USERNAME}/hired-frontend:${TAG:-latest}
+    build:
+      context: ./HIRED_NEW/Frontend
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    environment:
+      - NODE_ENV=production
+    networks:
+      - hired-network
+
+  backend:
+    image: ${DOCKER_USERNAME}/hired-backend:${TAG:-latest}
+    build:
+      context: ./HIRED_NEW/Backend/Candidate
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+    volumes:
+      - ./HIRED_NEW/Backend/Candidate/uploads:/app/uploads
+    networks:
+      - hired-network
+
+networks:
+  hired-network:
+    driver: bridge 
