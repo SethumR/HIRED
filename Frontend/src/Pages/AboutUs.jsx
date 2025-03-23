@@ -42,7 +42,7 @@ export default function AboutUs() {
       name: "Nehan Karunarathna",
       position: "Co-founder",
       description: "2nd year undergraduate student at University of Westminster",
-      linkedin: "https://www.linkedin.com/in/nehan-karunarathna-6b19b8357/",
+      linkedin: "https://www.linkedin.com/in/nehan-karunarathna-b80061301/",
       github: "https://github.com/nehan-karunarathna",
       image: "nehan.jpg",
     },

@@ -248,10 +248,10 @@ export default function CVUpload() {
       <Sidebar userProfile={userProfile}/>
       {/* Main Content */}
       <main className="flex-1">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
           {/* Hero Section */}
           <div className="text-center mb-16">
-            <h1 className="text-3xl sm:text-4xl font-bold mb-5 mt-20 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400">
+            <h1 className="text-3xl sm:text-3xl font-bold mb-5 mt-20 bg-clip-text text-white">
               AI-Powered Introduction Generator
             </h1>
             <p className="text-gray-400 text-lg max-w-3xl mx-auto -mb-5">

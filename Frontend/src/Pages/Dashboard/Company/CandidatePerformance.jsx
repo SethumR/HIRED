@@ -102,21 +102,23 @@ export default function CandidatePerformancePage() {
 
   // Data for the bar graph
   const barData = [
-    { name: "Technical", score: selectedCandidate.technicalScore, fill: "#34200e" },
-    { name: "Communication", score: selectedCandidate.communicationScore, fill: "#102826" },
-    { name: "Confidence", score: selectedCandidate.confidenceScore, fill: "#0c202e" },
-    { name: "Problem Solving", score: selectedCandidate.problemSolvingScore, fill: "#1f1533" },
+    { name: "Technical", score: selectedCandidate.technicalScore, fill: "#87552d" },
+    { name: "Communication", score: selectedCandidate.communicationScore, fill: "#38736f" },
+    { name: "Confidence", score: selectedCandidate.confidenceScore, fill: "#30638a" },
+    { name: "Problem Solving", score: selectedCandidate.problemSolvingScore, fill: "#442f6e"},
   ];
 
   return (
-    <div className="flex flex-col min-h-screen bg-[#0b0f1c]">
-      <main className="flex-1 container pt-36 pb-12 px-4 sm:px-6 lg:px-8">
+    <div className="flex flex-col min-h-screen bg-[#0b0f1c] items-center justify-center p-4 sm:p-6 lg:p-8 ">
+      <main className="w-full rounded-xl shadow-lg p-4 sm:p-6 lg:p-8 my-20 max-w-7xl">
         {/* Page Title and Navigation Buttons */}
-        <div className="flex justify-between items-center mb-6">
-          <h1 className="text-3xl font-bold text-white">Candidate Performance & Reports</h1>
-          <div className="flex items-center space-x-4">
+        <div className="flex flex-col md:flex-row justify-between items-center mb-6 space-y-4 md:space-y-0">
+          <h1 className="text-xl sm:text-2xl md:text-2xl font-bold text-white text-center md:text-left">
+            Candidate Performance & Reports
+          </h1>
+          <div className="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-4">
             <select
-              className="px-4 py-2 border border-gray-800 rounded-lg bg-[#161a26] text-white focus:outline-none focus:ring-2 focus:ring-purple-500"
+              className="w-full sm:w-auto px-4 py-2 border border-gray-800 rounded-lg bg-[#161a26] text-white focus:outline-none focus:ring-2 focus:ring-purple-500"
               onChange={(e) => handleCandidateChange(e.target.value)}
             >
               {candidates.map((candidate) => (
@@ -125,12 +127,12 @@ export default function CandidatePerformancePage() {
                 </option>
               ))}
             </select>
-            <button className="flex items-center space-x-2 px-4 py-2 bg-violet-900/30 border border-violet-500/30 text-white rounded-lg hover:from-pink-500 hover:to-purple-500">
+            <button className="w-full sm:w-auto flex items-center justify-center space-x-2 px-4 py-2  border border-violet-500/30 text-white rounded-lg hover:from-pink-500 hover:to-purple-500">
               <FiDownload className="h-4 w-4" />
               <span>Export Report</span>
             </button>
             <button
-              className="flex items-center space-x-2 px-4 py-2 bg-[#161a26] text-gray-300 rounded-lg hover:bg-gray-800 border border-gray-800"
+              className="w-full sm:w-auto flex items-center justify-center space-x-2 px-4 py-2 bg-[#161a26] text-gray-300 rounded-lg hover:bg-gray-800 border border-gray-800"
               onClick={() => window.history.back()}
             >
               <FiArrowLeft className="h-4 w-4" />
@@ -142,20 +144,19 @@ export default function CandidatePerformancePage() {
         {/* Bar Graph and Line Graph Section */}
         <div className="flex flex-col lg:flex-row gap-6 mt-10">
           {/* Bar Graph - Candidate Performance */}
-          <section className="flex-1 bg-gray-900/80 backdrop-blur-sm rounded-xl shadow-lg p-6 border border-purple-500/20 mb-6 lg:mb-0">
+          <section className="flex-1 bg-gray-900/80 backdrop-blur-sm rounded-xl shadow-lg p-4 sm:p-6 border border-purple-500/20 mb-6 lg:mb-0">
             <div className="flex items-center gap-4 mb-4">
               <div className="p-2 rounded-lg bg-purple-900/30">
                 <BarChart4 className="h-5 w-5 text-purple-400" />
               </div>
               <h2 className="text-lg font-bold text-white tracking-tight">Candidate Performance</h2>
             </div>
-            <div className="h-64">
+            <div className="h-48 sm:h-72">
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={barData} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
                   <CartesianGrid strokeDasharray="3 3" stroke="rgba(255, 255, 255, 0.1)" />
                   <XAxis dataKey="name" stroke="#9ca3af" />
                   <YAxis stroke="#9ca3af" />
-
                   <Bar
                     dataKey="score"
                     fill="#07ed7a"
@@ -168,14 +169,14 @@ export default function CandidatePerformancePage() {
           </section>
 
           {/* Line Graph - Performance Comparison */}
-          <section className="flex-1 bg-gray-900/80 backdrop-blur-sm rounded-xl shadow-lg p-6 border border-purple-500/20">
+          <section className="flex-1 bg-gray-900/80 backdrop-blur-sm rounded-xl shadow-lg p-4 sm:p-6 border border-purple-500/20">
             <div className="flex items-center gap-4 mb-4">
               <div className="p-2 rounded-lg bg-purple-900/30">
                 <TrendingUp className="h-5 w-5 text-purple-400" />
               </div>
               <h2 className="text-lg font-bold text-white tracking-tight">Performance Comparison</h2>
             </div>
-            <div className="h-64">
+            <div className="h-48 sm:h-72">
               <ResponsiveContainer width="100%" height="100%">
                 <LineChart data={performanceData} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
                   <CartesianGrid strokeDasharray="3 3" stroke="rgba(255, 255, 255, 0.1)" />
@@ -212,24 +213,24 @@ export default function CandidatePerformancePage() {
         </div>
 
         {/* Detailed Question Review */}
-        <div className="bg-gray-900/80 backdrop-blur-sm rounded-lg shadow p-6 mt-6 border border-purple-500/20">
-          <h2 className="text-2xl font-bold mb-4 text-white">Detailed Question Review</h2>
+        <div className="bg-gray-900/80 backdrop-blur-sm rounded-lg shadow p-4 sm:p-6 mt-6 border border-purple-500/20">
+          <h2 className="text-xl sm:text-2xl font-bold mb-4 text-white">Detailed Question Review</h2>
           <div className="space-y-4">
             {selectedCandidate.questions.map((q, index) => (
-              <div key={index} className="border border-gray-800 rounded-lg p-4">
+              <div key={index} className="rounded-lg p-4">
                 <div className="flex justify-between items-center mb-4">
                   <span className="text-gray-300">Question {index + 1}</span>
                 </div>
                 <div className="space-y-4">
-                  <div className="bg-[#0b0f1c] p-4 rounded-lg">
+                  <div className="bg-[#0d111f] p-4 rounded-lg">
                     <h3 className="font-semibold text-white">Question:</h3>
-                    <p className="text-gray-300">{q.question}</p>
+                    <p className="text-gray-300 text-sm sm:text-base">{q.question}</p>
                   </div>
-                  <div className="bg-[#0b0f1c] p-4 rounded-lg">
+                  <div className="bg-[#0d111f] p-4 rounded-lg">
                     <h3 className="font-semibold mb-2 text-white">Candidate's Answer:</h3>
-                    <div className="flex items-center space-x-4 mb-2">
+                    <div className="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-4 mb-2">
                       <button
-                        className="flex items-center space-x-2 px-3 py-2 bg-violet-900/30 border border-violet-500/30 text-white rounded-lg hover:from-pink-500 hover:to-purple-500"
+                        className="w-full sm:w-auto flex items-center justify-center space-x-2 px-3 py-2 bg-violet-900/30 border border-violet-500/30 text-white rounded-lg hover:from-pink-500 hover:to-purple-500"
                         onClick={handleAudioPlayback}
                       >
                         {isPlaying ? <FiPause className="h-4 w-4" /> : <FiPlay className="h-4 w-4" />}
@@ -244,12 +245,12 @@ export default function CandidatePerformancePage() {
                         disabled
                       />
                     </div>
-                    <p className="text-gray-300">{q.answer}</p>
+                    <p className="text-gray-300 text-sm sm:text-base">{q.answer}</p>
                   </div>
-                  <div className="bg-[#0b0f1c] p-4 rounded-lg">
+                  <div className="bg-[#0d111f] p-4 rounded-lg">
                     <h3 className="font-semibold mb-2 text-white">AI Feedback:</h3>
-                    <p className="text-gray-300">{q.feedback}</p>
-                    <div className="mt-2 flex items-center space-x-4">
+                    <p className="text-gray-300 text-sm sm:text-base">{q.feedback}</p>
+                    <div className="mt-2 flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-4">
                       <div className="flex items-center space-x-2">
                         <span className="font-semibold text-gray-300">Score:</span>
                         <div className="h-2 bg-gray-800 rounded-full">
@@ -269,8 +270,8 @@ export default function CandidatePerformancePage() {
         </div>
 
         {/* Shortlisting Panel */}
-        <div className="bg-gray-900/80 backdrop-blur-sm rounded-lg shadow p-6 mt-6 border border-purple-500/20">
-          <h2 className="text-2xl font-bold mb-4 text-white">Shortlisting Panel</h2>
+        <div className="bg-gray-900/80 backdrop-blur-sm rounded-lg shadow p-4 sm:p-6 mt-6 border border-purple-500/20">
+          <h2 className="text-xl sm:text-2xl font-bold mb-6 text-white">Shortlisting Panel</h2>
           <div className="overflow-x-auto">
             <table className="w-full">
               <thead>
@@ -294,7 +295,7 @@ export default function CandidatePerformancePage() {
                     <td className="py-3 px-4 text-white">{candidate.confidenceScore}%</td>
                     <td className="py-3 px-4 text-white">{candidate.problemSolvingScore}%</td>
                     <td className="py-3 px-4">
-                      <div className="flex space-x-2">
+                      <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2">
                         <button className="px-3 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600">
                           Shortlist
                         </button>

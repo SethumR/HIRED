@@ -36,7 +36,7 @@ const Layout = ({ children }) => {
   // Convert pathname to lowercase to avoid case sensitivity issues
   const currentPath = location.pathname.toLowerCase();
 
-  const hideHeaderFooter = ["/signin","/interview", "/signup","/create-account","/create-account/email","/create-account-company","/create-account/otp", "/create-account-company/email","/signincompany","/create-account-company/otp", "/signupcompany"].includes(currentPath);
+  const hideHeaderFooter = ["/signin", "/signup","/create-account","/create-account/email","/create-account-company","/create-account/otp", "/create-account-company/email","/signincompany","/create-account-company/otp", "/signupcompany"].includes(currentPath);
 
   return (
     <div className="bg-[#0a0b14] min-h-screen">

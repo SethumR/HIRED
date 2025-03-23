@@ -289,17 +289,17 @@ export default function DashboardPage() {
             >
               <div className="flex flex-col h-full justify-between">
                 <div>
-                  <div className="flex items-center gap-4 mb-4">
-                    <div className="p-3 rounded-lg bg-gradient-to-r ">
+                  <div className="flex items-center gap-4 mb-2">
+                    <div className="p-3 rounded-full border border-white/30 bg-gradient-to-r flex items-center justify-center">
                       {action.icon}
                     </div>
                     <h3 className="text-lg font-bold text-white tracking-tight">{action.title}</h3>
                   </div>
-                  <p className="text-gray-400 text-sm leading-relaxed">{action.description}</p>
+                  <p className="text-gray-400 text-base leading-relaxed">{action.description}</p>
                 </div>
                 <Link to={action.link} className="mt-6 inline-block">
                   <button 
-                    className="w-full px-5 py-3 bg-gradient-to-r from-white to-white text-black rounded-lg font-medium transition-transform duration-300 group-hover:scale-105 shadow-lg"
+                    className="w-full px-5 py-3 bg-white/80 text-black rounded-lg font-medium transition-transform duration-300 group-hover:scale-105 shadow-lg"
                   >
                     {action.buttonText}
                   </button>

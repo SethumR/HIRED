@@ -98,7 +98,7 @@ export default function EditProfile() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Left Column - Basic Info with Profile Image */}
           <div className="space-y-6">
-            <div className="space-y-4 bg-[#101827] p-6 rounded-lg border border-gray-800">
+            <div className="space-y-4 bg-gray-900/50 p-6 rounded-lg border border-gray-800">
               <h3 className="text-lg font-semibold text-white mb-4 pb-2 border-b border-gray-700">Basic Information</h3>
 
               {/* Profile Image */}
@@ -152,7 +152,7 @@ export default function EditProfile() {
 
           {/* Right Column - Contact Info, Resume, and Skills */}
           <div className="md:col-span-2 space-y-6">
-            <div className="bg-[#101827] p-6 rounded-lg border border-gray-800">
+            <div className="bg-gray-900/50 p-6 rounded-lg border border-gray-800">
               <h3 className="text-lg font-semibold text-white mb-4 pb-2 border-b border-gray-700">
                 Contact Information
               </h3>
@@ -176,7 +176,7 @@ export default function EditProfile() {
               </div>
             </div>
 
-            <div className="bg-[#101827] p-6 rounded-lg border border-gray-800">
+            <div className="bg-gray-900/50 p-6 rounded-lg border border-gray-800">
               <h3 className="text-lg font-semibold text-white mb-4 pb-2 border-b border-gray-700">
                 Professional Summary
               </h3>
@@ -189,7 +189,7 @@ export default function EditProfile() {
               </div>
             </div>
 
-            <div className="bg-[#101827] p-6 rounded-lg border border-gray-800">
+            <div className="bg-gray-900/50 p-6 rounded-lg border border-gray-800">
               <h3 className="text-lg font-semibold text-white mb-4 pb-2 border-b border-gray-700">Skills</h3>
               <div className="flex flex-wrap gap-2 mb-4">
                 {profileData.skills.map((skill) => (
@@ -219,7 +219,7 @@ export default function EditProfile() {
               </div>
             </div>
 
-            <div className="bg-[#101827] p-6 rounded-lg border border-gray-800">
+            <div className="bg-gray-900/50 p-6 rounded-lg border border-gray-800">
               <h3 className="text-lg font-semibold text-white mb-4 pb-2 border-b border-gray-700">Resume</h3>
               <div className="mt-2 border-2 border-dashed border-gray-700 rounded-lg p-8 text-center bg-[#0b0f1c]">
                 <input

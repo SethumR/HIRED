@@ -376,44 +376,34 @@ export default function HomePage() {
       </div>
     </section>     
 
-      {/* Animated Stats Section
-      <div className="container mx-auto px-4 py-16 mb-28">
-        <div className="shadow-lg rounded-lg p-10 bg-[#0d1221] shadow-cyan-500/10 border border-gray-900">
-          <div className="flex flex-col space-y-8">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-2">
-              <AnimatedStat
-                endValue={150000}
-                label="Interviews Conducted in 2023"
-              />
-              <AnimatedStat
-                endValue={120000}
-                label="Candidates Passed Interviews"
-              />
-              <AnimatedStat endValue={30000} label="Candidates Rejected" />
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-              <AnimatedStat endValue={85} label="Success Rate" suffix="%" />
-              <AnimatedStat
-                endValue={50}
-                label="Average Interviews Taken per Candidate"
-              />
-            </div>
-          </div>
-        </div>
-      </div> */}
-
-      <div data-aos="fade" className="px-4 sm:px-6 lg:px-8">
-        <h1 className="text-center text-2xl sm:text-3xl md:text-[40px] font-semibold mb-6 sm:mb-8 md:mb-12">
+    <div data-aos="fade" className="px-4 sm:px-6 lg:px-8">
+        <h1 className="text-center text-2xl sm:text-3xl md:text-[40px] font-semibold mb-6 sm:mb-8 md:mb-1">
           Try an Interactive Demo
         </h1>
-        <div className="w-full max-w-5xl mx-auto border border-gray-700 p-4 sm:p-6 md:p-12 lg:p-20 rounded-lg mb-12 sm:mb-20 md:mb-40 h-auto sm:h-96 md:h-[500px] lg:h-[560px] shadow-slate-700 shadow-sm">
-          <img
-            src=""
-            alt="Demo Screenshot"
-            className="w-full h-full object-cover rounded-lg"
+        <div style={{ position: 'relative', paddingBottom: 'calc(54.02777777777777% + 41px)', height: 0, width: '100%' }} className="mb-20 sm:mb-24">
+          <iframe
+            src="https://demo.arcade.software/7QEYz1oYuWRkkPCEQKoH?embed&embed_mobile=inline&embed_desktop=inline&show_copy_link=true"
+            title="Unlock Interview Success with AI-Powered Mock Sessions"
+            frameBorder="0"
+            loading="lazy"
+            allowFullScreen
+            allow="clipboard-write"
+            className="absolute inset-0 w-full h-full"
+            style={{
+              position: 'absolute',
+              top: '50%', 
+              left: '50%', 
+              width: '85%',
+              height: '85%', 
+              transform: 'translate(-50%, -50%)', // Offset by 50% of iframe's own size to truly center it
+              colorScheme: 'light',
+              border: '1.5px solid rgba(255, 255, 255, 0.6)',
+              borderRadius: '10px', 
+              
+            }}   
           />
         </div>
-      </div>
+      </div> 
 
 
       {/* Interview */}
